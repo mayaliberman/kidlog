@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const bodyParser = require("body-parser");
-const Post = require("../models/posts");
+const Post = require("../models/post");
 
-const jsonParser = bodyParser.json();
+
 
 //get all posts
 router.get("/", async (req, res) => {
@@ -16,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 //get a single post
-router.get("/single/:id", jsonParser, async (req, res) => {
+router.get("/single/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (post === null) {
@@ -29,11 +28,13 @@ router.get("/single/:id", jsonParser, async (req, res) => {
 });
 
 // create a new post
-router.post("/", jsonParser, async (req, res) => {
+router.post("/", async (req, res) => {
   const post = new Post({
     desc: req.body.desc,
     lessonNum: req.body.lessonNum,
     ratings: req.body.ratings,
+    childId: req.body.childId,
+    userId: req.body.userId
   });
 
   try {
@@ -45,9 +46,19 @@ router.post("/", jsonParser, async (req, res) => {
 });
 
 //update a post
-router.put("/single/:id", jsonParser, async (req, res) => {
-try {
-    const post = await Post.updateOne({ _id: req.params.id }, {$set: {desc: req.body.desc, lessonNum: req.body.lessonNum, ratings: req.body.ratings}});
+router.put("/single/:id", async (req, res) => {
+  try {
+    const post = await Post.updateOne(
+      { _id: req.params.id },
+      {
+        $set: {
+          desc: req.body.desc,
+          lessonNum: req.body.lessonNum,
+          ratings: req.body.ratings,
+          childId: req.body.childId
+        },
+      }
+    );
     if (post === null) {
       return res.status(404).json({ message: "Cant find subscriber" });
     }
@@ -55,21 +66,19 @@ try {
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-   
 });
 
 //delete a post
-router.delete("/single/:id", jsonParser, async (req, res) => {
-    try {
-        const post = await Post.findOneAndDelete({ _id: req.params.id });
-        if (post === null) {
+router.delete("/single/:id", async (req, res) => {
+  try {
+    const post = await Post.findOneAndDelete({ _id: req.params.id });
+    if (post === null) {
       return res.status(404).json({ message: "Cant find subscriber" });
     }
-            res.status(204).json({message: "post deleted successfully"});
-
-    } catch (err) {
-        return res.status(500).json({ message: err.message }); 
-    }
+    res.status(204).json({ message: "post deleted successfully" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
 });
 
 module.exports = router;
