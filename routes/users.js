@@ -32,9 +32,12 @@ router.post("/add-user", async (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
+    children: req.body.children
+    
   });
-
+  
   try {
+    console.log(req.body, 'request body')
     console.log(user);
     const newUser = await user.save();
 
@@ -51,6 +54,7 @@ router.put("/:id", async (req, res) => {
     firstName,
     lastName,
     email,
+    children
   };
   if (password) {
     updatedFields.password = password;

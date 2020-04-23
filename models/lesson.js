@@ -4,4 +4,4 @@ const lessonSchema = new mongoose.Schema({
   tag: String
 });
 
-module.exports = mongoose.model("Child", childSchema);
+module.exports = mongoose.model("Child", lessonSchema);

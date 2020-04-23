@@ -15,7 +15,7 @@ morganBody(app);
 
 app.use("/posts", postsRouter);
 app.use("/users", usersRouter);
-app.use('/children', childrenRouter);
+// app.use('/users', childrenRouter);
 
 const mongoose = require("mongoose");
 mongoose.set("useUnifiedTopology", true);
