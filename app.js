@@ -1,42 +1,32 @@
-require("dotenv").config();
+require('dotenv').config();
 const morganBody = require('morgan-body');
-const express = require("express");
+const express = require('express');
+const http = require('http');
 const app = express();
+const server = http.createServer(app);
 
+const postsRouter = require('./api/routes/posts');
+const usersRouter = require('./api/routes/users');
+const childrenRouter = require('./api/routes/children');
 
-const postsRouter = require("./routes/posts");
-const usersRouter = require("./routes/users");
-const childrenRouter = require('./routes/children');
-
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 morganBody(app);
 
-app.use("/posts", postsRouter);
-app.use("/users", usersRouter);
-// app.use('/users', childrenRouter);
+const mongoConnection = require('./api/services/mongo.service');
+mongoConnection.db;
 
-const mongoose = require("mongoose");
-mongoose.set("useUnifiedTopology", true);
+app.use('/api/posts', postsRouter);
+app.use('/api/users', usersRouter);
 
-const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("connected to database"));
-
-
-
-app.use(express.json());
-
-app.use((req, res, next) => {
-  res.status(404).send("page not found");
+app.use('*', (req, res, next) => {
+	res.status(404).send('page not found');
 });
 
-mongoose.connect(
-  process.env.DATABASE_URL,
-  { useNewUrlParser: true },
+const PORT = process.env.PORT || 3003;
 
-  () => {
-    app.listen(3003, () => console.log("server started"));
-  }
-);
+server.listen(PORT);
+server.on('listening', function() {
+	console.log(`server started on address:${server.address().address} ,port:${server.address().port}`);
+});

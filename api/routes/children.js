@@ -1,13 +1,13 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const Child = require("../models/child");
+const Child = require('../models/child');
 
 //get a single child
-router.get("/children/:id", async (req, res) => {
+router.get('/children/:id', async(req, res) => {
   try {
     const child = await Child.findById(req.params.id);
     if (child === null) {
-      return res.status(404).json({ message: "Cant find Child" });
+      return res.status(404).json({ message: 'Cant find Child' });
     }
     res.status(200).send(child);
   } catch (err) {
@@ -16,14 +16,11 @@ router.get("/children/:id", async (req, res) => {
 });
 
 // create a new user
-router.post("/:id/add-child", async (req, res) => {
-  
+router.post('/:id/add-child', async(req, res) => {
   const child = new Child({
     firstName: req.body.firstName,
-      birthDate: req.body.birthDate,
+    birthDate: req.body.birthDate,
     gender: req.body.gender,
-    
-    
   });
 
   try {
@@ -37,31 +34,27 @@ router.post("/:id/add-child", async (req, res) => {
 });
 
 //update a user
-router.put("/:id", async (req, res) => {
+router.put('/:id', async(req, res) => {
   // { 'pdfs.pdf_id': pdf_id },
   //     { $set: {
   //         'pdfs.$.title': title,
   //         'pdfs.$.description': description
   //     }
   try {
-    const user = await User.updateOne(
-      { _id: req.params.id },
-      {
-        $set: {
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          email: req.body.email,
-          password: req.body.password,
-          
-            "children.$.name": req.body.children.name,
-            "children.$.gender": req.body.children.gender,
-            "children.$.age": req.body.children.age,
- 
-        },
-      }
-    );
+    const user = await User.updateOne({ _id: req.params.id }, {
+      $set: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+
+        'children.$.name': req.body.children.name,
+        'children.$.gender': req.body.children.gender,
+        'children.$.age': req.body.children.age,
+      },
+    }, );
     if (user === null) {
-      return res.status(404).json({ message: "Cant find subscriber" });
+      return res.status(404).json({ message: 'Cant find subscriber' });
     }
     res.status(200).send(user);
   } catch (err) {
@@ -70,17 +63,16 @@ router.put("/:id", async (req, res) => {
 });
 
 //delete a user
-router.delete("/delete-child/:id", async (req, res) => {
+router.delete('/delete-child/:id', async(req, res) => {
   try {
     const user = await User.findOneAndDelete({ _id: req.params.id });
     if (user === null) {
-      return res.status(404).json({ message: "Cant find user" });
+      return res.status(404).json({ message: 'Cant find user' });
     }
-    res.status(204).send({ message: "user deleted successfully" });
+    res.status(204).send({ message: 'user deleted successfully' });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 });
 
 module.exports = router;
-
