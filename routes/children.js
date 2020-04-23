@@ -3,7 +3,7 @@ const router = express.Router();
 const Child = require("../models/child");
 
 //get a single child
-router.get("/:id", async (req, res) => {
+router.get("/children/:id", async (req, res) => {
   try {
     const child = await Child.findById(req.params.id);
     if (child === null) {
@@ -16,12 +16,13 @@ router.get("/:id", async (req, res) => {
 });
 
 // create a new user
-router.post("/add-child", async (req, res) => {
+router.post("/:id/add-child", async (req, res) => {
   
   const child = new Child({
     firstName: req.body.firstName,
       birthDate: req.body.birthDate,
-    gender: req.body.gender
+    gender: req.body.gender,
+    
     
   });
 
