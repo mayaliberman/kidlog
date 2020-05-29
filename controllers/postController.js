@@ -78,7 +78,7 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
   }
 
   const lesson = await Lesson.findOne({ lessonNum: req.body.lessonNum });
-    if (req.body.lessonNum) req.body.lessonId = lesson.id;
+  if (req.body.lessonNum) req.body.lessonId = lesson.id;
   const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
