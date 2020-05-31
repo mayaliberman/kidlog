@@ -55,7 +55,6 @@ exports.createChild = asyncHandler(async (req, res) => {
 });
 
 exports.updateChild = asyncHandler(async (req, res, next) => {
-  
   const { name, birthYear, gender } = req.body;
   const updatedFields = {
     'children.$.name': name,

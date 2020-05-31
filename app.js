@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cors = require('cors');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController.js');
 const postsRouter = require('./routes/posts');
@@ -12,6 +13,10 @@ const usersRouter = require('./routes/users');
 const childrenRouter = require('./routes/children');
 
 const app = express();
+
+
+//CORS support cross-origin resource sharing or CORS
+app.use(cors());
 
 //**GLOBAL MIDDLEWARES */
 //Set security HTTP Header
@@ -54,8 +59,7 @@ app.use(
   // }
 );
 
-//CORS support cross-origin resource sharing or CORS
-// app.use(cors());
+
 
 //Serving static files - add this then building the client
 // app.use(express.static(path.join(__dirname, '../client/build')));
