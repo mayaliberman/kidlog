@@ -1,57 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import './App.scss';
+import  Welcome  from './components/welcome/welcome';
 
-function App ()  {
-const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
+class App extends Component {
+  
+    state = {
+      error: null,
+      isLoaded: false,
+      items: []
+    };
+  
 
-  // Note: the empty deps array [] means
-  // this useEffect will run once
-  // similar to componentDidMount()
-  useEffect(() => {
-    fetch("https://api.example.com/items")
-      .then(res => res.json())
+  componentDidMount() {
+    fetch("http://localhost:5000")
+      .then((res) => res.json())
       .then(
         (result) => {
-          setIsLoaded(true);
-          setItems(result.items);
+          this.setState({
+            isLoaded: true,
+            items: result,
+          });
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
         (error) => {
-          setIsLoaded(true);
-          setError(error);
+          this.setState({
+            isLoaded: true,
+            error,
+          });
         }
-      )
-  }, [])
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
-  } else {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      );
+  }
+  render() {
+    console.log(this.state.items)
+    const { error, isLoaded, items } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <div>
+          <h1>{this.state.items.message}</h1>
+          <h2><Welcome></Welcome></h2>
+        </div>
+      );
+    }
+  }
 }
 
- 
-  export default App;
+export default App;
