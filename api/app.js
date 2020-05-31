@@ -10,7 +10,6 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController.js');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
-const childrenRouter = require('./routes/children');
 
 const app = express();
 
