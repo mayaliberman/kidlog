@@ -13,7 +13,7 @@ const style = {
     margin: "30px"
 };
 
-function Welcome() {
+function Home() {
   return (
     <div >
       <div >
@@ -29,4 +29,4 @@ function Welcome() {
   );
 }
 
-export default Welcome;
+export default Home;

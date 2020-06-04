@@ -1,8 +1,8 @@
 import React from 'react';
 import PostCard from './PostCard';
 
-const Content = () => {
+const PostsGallery = () => {
     return <PostCard />
 };
 
-export default Content;
+export default PostsGallery;
