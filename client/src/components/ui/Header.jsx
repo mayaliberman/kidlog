@@ -67,7 +67,7 @@ const Header = () => {
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      <div style={{ marginTop: "60px"}}>
+      <div style={{ marginTop: "60px" }}>
         {/* <Box>
           <Typography variant="h6">Hello there</Typography>
         </Box> */}

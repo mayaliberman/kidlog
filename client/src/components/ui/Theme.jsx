@@ -1,15 +1,6 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import green from "@material-ui/core/colors/green";
 
-const kidlogBlue = "#504de5";
-const kidlogPruple = '#7c79FF';
-const prupleDisabled = "#8c8ae4";
-const greyLight = "rgba(192, 209, 224, 0.5);";
-const greyPlaceholsder = "#C0D1E0";
-const textColorDark = "#6F8BA4";
-const textColorLight = "#3B566E";
-const redWarning = "#E26453";
-
 const theme = createMuiTheme({
   palette: {
     common: {
@@ -28,12 +19,13 @@ const theme = createMuiTheme({
     bakcground: {
       default: "#FCFBFB",
     },
+    // error: {
+    //   main: {
+    //     main: `#E26453`,
+    //   },
+    // },
   },
-  status: {
-    danger: {
-      main: `${redWarning}`,
-    },
-  },
+
   typography: {
     h1: {
       fontSize: "2.4rem",
@@ -84,10 +76,12 @@ const theme = createMuiTheme({
   shape: {
     borderRadius: 25,
   },
-  shadows: {
-    0: "0px 0px 1px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 6px 24px rgba(0, 0, 0, 0.06);",
-    1: " 0px 0px 4px rgba(0, 0, 0, 0.25)",
-  },
+  shadows: [
+    {
+      25: "0px 0px 1px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 6px 24px rgba(0, 0, 0, 0.06);",
+    },
+    { 26: " 0px 0px 4px rgba(0, 0, 0, 0.25)" },
+  ],
 });
 
 export default theme;

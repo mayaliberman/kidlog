@@ -26,14 +26,14 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: `1px solid ${theme.palette.common.white}`,
     whiteSpace: "nowrap",
     width: "80%",
-    "&:hover": {
-      // borderBottom: `1px solid red`,
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'yellow',
-      }
-    },
+    // "&:hover": {
+    //   // borderBottom: `1px solid red`,
+    // },
+    // "& .MuiOutlinedInput-root": {
+    //   "& fieldset": {
+    //     borderColor: "yellow",
+    //   },
+    // },
   },
 }));
 
@@ -105,7 +105,6 @@ function SignIn() {
       </Box>
     </React.Fragment>
   );
- 
 }
 
 export default SignIn;
