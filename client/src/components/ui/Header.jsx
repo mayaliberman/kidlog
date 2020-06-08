@@ -60,14 +60,14 @@ const Header = () => {
                 ></Avatar>
                 Maya
               </Button>
-              <Button>
+              <Button className={classes.button}>
                 <ExitToAppIcon className={classes.logout} />
               </Button>
             </div>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      <div style={{ marginTop: "120px" }}>
+      <div style={{ marginTop: "60px"}}>
         {/* <Box>
           <Typography variant="h6">Hello there</Typography>
         </Box> */}
