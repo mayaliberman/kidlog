@@ -40,7 +40,7 @@ function Home() {
             variant="contained"
             color="primary"
             buttonStyle={"shape"}
-            style={{ padding: "15px 80px", margin: "30px", textTransform: 'uppercase' }}
+            style={{ padding: "15px 80px", marginTop: '30px', textTransform: 'uppercase' }}
             component={Link}
             to="/sign-in"
           >

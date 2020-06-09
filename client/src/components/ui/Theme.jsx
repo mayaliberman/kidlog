@@ -1,7 +1,6 @@
-import { createMuiTheme } from "@material-ui/core/styles";
-import green from "@material-ui/core/colors/green";
+import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   palette: {
     common: {
       grey: `#DFE8F`,
@@ -19,27 +18,21 @@ const theme = createMuiTheme({
     bakcground: {
       default: "#FCFBFB",
     },
-    // error: {
-    //   main: {
-    //     main: `#E26453`,
-    //   },
-    // },
+   
   },
 
   typography: {
     h1: {
-      fontSize: "2.4rem",
+      fontSize: 36,
       lineHeight: 2,
       fontWeight: 400,
     },
     h2: {
-      fontSize: "24px",
+      fontSize: 36,
       lineHeight: 1.5,
       fontWeight: 700,
-      letterSpacing: "0.32px",
-      "@media (min-width:600px)": {
-        fontSize: "2.5rem",
-      },
+      letterSpacing: "0.32px"
+      
     },
     h3: {
       fontSize: 22,
@@ -47,15 +40,10 @@ const theme = createMuiTheme({
       fontWeight: 400,
     },
     h4: {
-      fontSize: "1.4rem",
+      fontSize: 18,
       lineHeight: 1.5,
-      fontWeight: 400,
-      "@media (max-width:769px)": {
-        fontSize: "1.3rem",
-      },
-      "@media (max-width:481px)": {
-        fontSize: "1.2rem",
-      },
+      fontWeight: 400
+     
     },
     h5: {
       fontSize: 14,
@@ -63,7 +51,7 @@ const theme = createMuiTheme({
       fontWeight: 400,
     },
     body1: {
-      fontSize: "1.5rem",
+      fontSize: 16,
       lineHeight: 1.5,
       fontWeight: 400,
     },
@@ -84,4 +72,5 @@ const theme = createMuiTheme({
   ],
 });
 
+theme = responsiveFontSizes(theme);
 export default theme;

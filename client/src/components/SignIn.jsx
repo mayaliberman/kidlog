@@ -1,7 +1,11 @@
 import React from "react";
 import { Button, Typography } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  withStyles,
+  
+} from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,10 +13,14 @@ import Image from "../assets/welcome-bg.png";
 import { Link } from "react-router-dom";
 import logo from "../assets/Logo_white_splash.svg";
 
+
 const useStyles = makeStyles((theme) => ({
+  
   root: {
-    color: theme.palette.common.white,
-    padding: theme.spacing(1),
+  },
+  margin: {
+   
+    margin: theme.spacing(1),
   },
   container: {
     backgroundImage: `url(${Image})`,
@@ -25,17 +33,26 @@ const useStyles = makeStyles((theme) => ({
   input: {
     borderBottom: `1px solid ${theme.palette.common.white}`,
     whiteSpace: "nowrap",
-    width: "80%",
-    // "&:hover": {
-    //   // borderBottom: `1px solid red`,
-    // },
-    // "& .MuiOutlinedInput-root": {
-    //   "& fieldset": {
-    //     borderColor: "yellow",
-    //   },
-    // },
+    width: "100%",
   },
 }));
+
+const CssTextField = withStyles({
+  root: {
+    marginBottom: "15px",
+    "& .MuiInput-underline-37": {
+      borderBottom: "1px solid trasparent",
+    },
+    "& .MuiInput-underline-37:before": {
+      borderBottom: "1px solid white",
+    },
+    "& .MuiInput-underline-37:hover:not(.Mui-disabled):before": {
+      borderBottom: "1px solid white",
+    },
+    
+  },
+})(TextField);
+
 
 function SignIn() {
   const classes = useStyles();
@@ -46,11 +63,11 @@ function SignIn() {
       <Box className={classes.container}>
         <Container style={{ textAlign: "center", maxWidth: "500px" }}>
           <img alt="company logo" src={logo} />
-          <form noValidate autoComplete="off" className={classes.root}>
-            <TextField
-              className={classes.input}
-              id="standard-basic"
+          <form noValidate autoComplete="off" >
+            <CssTextField
               label="Email"
+              id="custom-css-outlined-input"
+              className={classes.input}
               InputLabelProps={{
                 style: {
                   whiteSpace: "nowrap",
@@ -58,8 +75,8 @@ function SignIn() {
                   fontSize: "18px",
                 },
               }}
-            ></TextField>
-            <TextField
+            ></CssTextField>
+            <CssTextField
               id="standard-basic"
               label="Password"
               type="password"
@@ -71,10 +88,12 @@ function SignIn() {
                   fontSize: "18px",
                 },
               }}
-            ></TextField>
+            ></CssTextField>
+            
             <Typography
               variant="body2"
-              className={classes.root}
+              // className={classes.root}
+              style={{ textAlign: "right",  color: "white", marginTop: '15px' }}
               // component={Link}
               // to="/sign-up"
             >
@@ -83,10 +102,9 @@ function SignIn() {
             <Button
               variant="contained"
               color="primary"
-              buttonStyle={"shape"}
               style={{
                 padding: "15px 80px",
-                margin: "30px",
+                marginTop: "30px",
                 textTransform: "uppercase",
               }}
             >
@@ -95,7 +113,7 @@ function SignIn() {
           </form>
           <Typography
             variant="body2"
-            className={classes.root}
+            style={{ marginTop: "20px", textAlign: 'center', color: 'white' }}
             // component={Link}
             // to="/sign-up"
           >
