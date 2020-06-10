@@ -15,16 +15,37 @@ const useStyles = makeStyles(() => ({
   headerStyles: {
     display: "flex",
     justifyContent: "space-between",
+    "@media (max-width:480px)": {
+      fontSize: "0.7rem",
+    },
   },
   logo: { height: "1.7em" },
-  button: { color: "white", textTransform: "none" },
+  button: { color: "white", textTransform: "none", marginRight: "-20px" },
   avatar: {
     backgroundColor: "white",
     marginRight: "15px",
     height: "30px",
     width: "30px",
+    "@media (max-width:480px)": {
+      width: "18px",
+      height: "auto",
+      marginRight: "5px",
+    },
   },
-  logout: { color: "white" },
+  logout: {
+    color: "white",
+    "@media (max-width:480px)": {
+      width: "18px",
+      height: "auto",
+      marginRight: "-5px",
+    },
+  },
+
+  title: {
+    "@media (max-width:480px)": {
+      fontSize: "1rem",
+    },
+  },
 }));
 
 function ElevationScroll(props) {
@@ -44,10 +65,10 @@ const Header = () => {
   return (
     <React.Fragment>
       <ElevationScroll>
-        <AppBar position="static">
+        <AppBar position="sticky">
           <Toolbar className={classes.headerStyles}>
             <img alt="company logo" className={classes.logo} src={logo} />
-            <Typography variant="h6" color="common">
+            <Typography variant="h6" color="common" className={classes.title}>
               My Posts
             </Typography>
 
@@ -68,9 +89,7 @@ const Header = () => {
         </AppBar>
       </ElevationScroll>
       <div style={{ marginTop: "60px" }}>
-        {/* <Box>
-          <Typography variant="h6">Hello there</Typography>
-        </Box> */}
+        
       </div>
     </React.Fragment>
   );
