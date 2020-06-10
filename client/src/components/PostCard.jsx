@@ -15,35 +15,43 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Image from "../assets/welcome-bg.png";
 import Box from "@material-ui/core/Box";
 
-
 const useStyles = makeStyles({
   root: {
-    minWidth: 600,
-    // margin: "15px",
+    width: "40%",
     boxShadow: "0px 2px 14px rgba(0, 0, 0, 0.16)",
+    "@media (max-width:1024px)": {
+      width: "60%",
+    },
     borderRadius: "10px",
     "@media (max-width:768px)": {
-      maxWidth: 275,
+      width: "80%",
+    },
+    "@media (max-width:480px)": {
+      width: "98%",
     },
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
+
   title: {
     fontSize: 14,
+    "@media (max-width:768px)": {
+      width: "95%",
+    },
   },
   pos: {
     marginBottom: 12,
   },
   media: {
-    height: 321,
-    width: 580,
-    margin: '15px',
-    borderRadius: '15px'
-    // width: '50%'
-    // paddingTop: "56.25%", // 16:9
+   
+    height: 400,
+    width: "95%",
+    margin: "auto",
+    borderRadius: "15px",
+    "@media (max-width:768px)": {
+      height: 350,
+    },
+    "@media (max-width:480px)": {
+      height: 321,
+    },
   },
 });
 
@@ -52,7 +60,10 @@ export default function PostCard() {
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Box component="div" style={{display: 'flex', justifyContent: 'center', margin: '10px'}}>
+    <Box
+      component="div"
+      style={{ display: "flex", justifyContent: "center", margin: "10px" }}
+    >
       <Card className={classes.root}>
         <CardHeader
           avatar={
@@ -74,14 +85,21 @@ export default function PostCard() {
           title="Paella dish"
         />
         <CardContent>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
-            Word of the Day
-          </Typography>
-          <Typography variant="h5" component="h2">
+          <Box>
+            <Typography
+              paragraph
+              className={classes.title}
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              gutterBottom
+            >
+              Word of the Day Word of the Day Word of the Day Word of the Day
+              Word of the Day Word of the Day Word of the Day Word of the Day
+              Word of the Day
+            </Typography>
+          </Box>
+          {/* <Typography variant="h5" component="h2">
             be{bull}nev{bull}o{bull}lent
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
@@ -91,7 +109,7 @@ export default function PostCard() {
             well meaning and kindly.
             <br />
             {'"a benevolent smile"'}
-          </Typography>
+          </Typography> */}
         </CardContent>
       </Card>
     </Box>

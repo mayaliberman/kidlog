@@ -33,13 +33,19 @@ const useStyles = makeStyles((theme) => ({
   input: {
     borderBottom: `1px solid ${theme.palette.common.white}`,
     whiteSpace: "nowrap",
-    width: "100%",
+    width: "100%"
+     
   },
+  
 }));
 
 const CssTextField = withStyles({
   root: {
     marginBottom: "15px",
+    "& .MuiInputBase-input-53": {
+      color: 'white',
+      fontSize: '25px'
+    },
     "& .MuiInput-underline-37": {
       borderBottom: "1px solid trasparent",
     },
@@ -49,7 +55,6 @@ const CssTextField = withStyles({
     "& .MuiInput-underline-37:hover:not(.Mui-disabled):before": {
       borderBottom: "1px solid white",
     },
-    
   },
 })(TextField);
 
@@ -63,7 +68,7 @@ function SignIn() {
       <Box className={classes.container}>
         <Container style={{ textAlign: "center", maxWidth: "500px" }}>
           <img alt="company logo" src={logo} />
-          <form noValidate autoComplete="off" >
+          <form noValidate autoComplete="off">
             <CssTextField
               label="Email"
               id="custom-css-outlined-input"
@@ -89,13 +94,11 @@ function SignIn() {
                 },
               }}
             ></CssTextField>
-            
+
             <Typography
               variant="body2"
               // className={classes.root}
-              style={{ textAlign: "right",  color: "white", marginTop: '15px' }}
-              // component={Link}
-              // to="/sign-up"
+              style={{ textAlign: "right", color: "white", marginTop: "15px" }}
             >
               Forgot password?
             </Typography>
@@ -113,7 +116,9 @@ function SignIn() {
           </form>
           <Typography
             variant="body2"
-            style={{ marginTop: "20px", textAlign: 'center', color: 'white' }}
+            style={{ marginTop: "20px", textAlign: "center", color: "white" }}
+            component={Link}
+            to="/sign-up"
             // component={Link}
             // to="/sign-up"
           >

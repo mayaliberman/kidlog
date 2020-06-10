@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter , Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import SignIn from "./SignIn";
+import SignUp from './SignUp';
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./ui/Theme";
 import Header from './ui/Header';
@@ -48,7 +49,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/sign-in" component={SignIn} />
-            <Route exact path="/sign-up" component={() => <div>Sign Up</div>} />
+            <Route exact path="/sign-up" component={SignUp} />
             <Route exact path="/posts" component={PostsGallery} />
             <Route
               exact
