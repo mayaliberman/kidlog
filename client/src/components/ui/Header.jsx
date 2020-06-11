@@ -1,14 +1,10 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/styles";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import logo from "../../assets/Logo_white_splash.svg";
 import profileIcon from "../../assets/image-4.svg";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { Avatar, Tab, Tabs } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const useStyles = makeStyles(() => ({
@@ -20,7 +16,12 @@ const useStyles = makeStyles(() => ({
     },
   },
   logo: { height: "1.7em" },
-  button: { color: "white", textTransform: "none", marginRight: "-20px" },
+  button: {
+    color: "white",
+    textTransform: "none",
+    marginRight: "-10px",
+    paddingRight: "0px",
+  },
   avatar: {
     backgroundColor: "white",
     marginRight: "15px",
@@ -33,6 +34,7 @@ const useStyles = makeStyles(() => ({
     },
   },
   logout: {
+    
     color: "white",
     "@media (max-width:480px)": {
       width: "18px",
@@ -88,9 +90,9 @@ const Header = () => {
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      <div style={{ marginTop: "60px" }}>
+      {/* <div style={{ marginTop: "60px" }}>
         
-      </div>
+      </div> */}
     </React.Fragment>
   );
 };

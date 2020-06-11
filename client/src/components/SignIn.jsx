@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   input: {
-    borderBottom: `1px solid ${theme.palette.common.white}`,
+    borderBottom: `1px solid white`,
     whiteSpace: "nowrap",
     width: "100%"
      
@@ -44,7 +44,7 @@ const CssTextField = withStyles({
     marginBottom: "15px",
     "& .MuiInputBase-input-53": {
       color: 'white',
-      fontSize: '25px'
+      fontSize: ''
     },
     "& .MuiInput-underline-37": {
       borderBottom: "1px solid trasparent",
@@ -68,7 +68,7 @@ function SignIn() {
       <Box className={classes.container}>
         <Container style={{ textAlign: "center", maxWidth: "500px" }}>
           <img alt="company logo" src={logo} />
-          <form noValidate autoComplete="off">
+          <form noValidate autoComplete="off" >
             <CssTextField
               label="Email"
               id="custom-css-outlined-input"
@@ -94,11 +94,12 @@ function SignIn() {
                 },
               }}
             ></CssTextField>
-
+            
             <Typography
               variant="body2"
-              // className={classes.root}
-              style={{ textAlign: "right", color: "white", marginTop: "15px" }}
+              className={classes.root}
+              style={{ textAlign: "right",  color: "white", marginTop: '15px' }}
+             
             >
               Forgot password?
             </Typography>
@@ -114,16 +115,15 @@ function SignIn() {
               Sign In
             </Button>
           </form>
-          <Typography
+          <Button
             variant="body2"
-            style={{ marginTop: "20px", textAlign: "center", color: "white" }}
+            style={{ marginTop: "40px", textAlign: 'center', color: 'white', textTransform: 'none' }}
             component={Link}
             to="/sign-up"
-            // component={Link}
-            // to="/sign-up"
           >
             Don't have an accout? Sign up
-          </Typography>
+             
+          </Button>
         </Container>
       </Box>
     </React.Fragment>

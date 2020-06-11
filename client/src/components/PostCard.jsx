@@ -5,34 +5,30 @@ import {
   CardHeader,
   CardMedia,
   CardContent,
-  CardActions,
-  Button,
   Typography,
   IconButton,
   Avatar,
+  Box
 } from "@material-ui/core";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Image from "../assets/welcome-bg.png";
-import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles({
   root: {
-    width: "40%",
+    width: "60%",
     boxShadow: "0px 2px 14px rgba(0, 0, 0, 0.16)",
     "@media (max-width:1024px)": {
-      width: "60%",
+      width: "80%",
     },
     borderRadius: "10px",
     "@media (max-width:768px)": {
-      width: "80%",
-    },
-    "@media (max-width:480px)": {
       width: "98%",
     },
   },
-
+  header: { textAlign: "left"},
   title: {
     fontSize: 14,
+    textAlign: "left",
     "@media (max-width:768px)": {
       width: "95%",
     },
@@ -41,7 +37,6 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
   media: {
-   
     height: 400,
     width: "95%",
     margin: "auto",
@@ -53,22 +48,33 @@ const useStyles = makeStyles({
       height: 321,
     },
   },
+  subheader: {
+    color: 'red'
+  }
 });
 
-export default function PostCard() {
+export default function PostCard(props) {
+
+
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <Box
       component="div"
-      style={{ display: "flex", justifyContent: "center", margin: "10px" }}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        paddingLeft: "0px",
+        paddingRight: "0px",
+        marginBottom: "10px",
+      }}
     >
       <Card className={classes.root}>
         <CardHeader
+          className={classes.header}
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
-              R
+              RL
             </Avatar>
           }
           action={
@@ -78,6 +84,7 @@ export default function PostCard() {
           }
           title="Karate with Ashley"
           subheader="September 14, 2016 | Lesson 84"
+                   
         />
         <CardMedia
           className={classes.media}
@@ -94,22 +101,9 @@ export default function PostCard() {
               component="p"
               gutterBottom
             >
-              Word of the Day Word of the Day Word of the Day Word of the Day
-              Word of the Day Word of the Day Word of the Day Word of the Day
-              Word of the Day
+             {props.desc}
             </Typography>
           </Box>
-          {/* <Typography variant="h5" component="h2">
-            be{bull}nev{bull}o{bull}lent
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            adjective
-          </Typography>
-          <Typography variant="body2" component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography> */}
         </CardContent>
       </Card>
     </Box>

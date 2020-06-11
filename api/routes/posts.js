@@ -13,7 +13,7 @@ const {
 } = require('../controllers/postController');
 
 //***ROUTES */
-
+router.get('/', getPosts);
 //USER ROUTES
 router.use(protect);
 //get all user posts posts
@@ -30,7 +30,7 @@ router.patch('/:id', updatePost);
 
 //delete a post
 router.delete('/:id', deletePost);
-
-router.get('/', restrictTo('admin'), getPosts);
+//Return when posts are ready in client
+// router.get('/', restrictTo('admin'), getPosts);
 
 module.exports = router;
