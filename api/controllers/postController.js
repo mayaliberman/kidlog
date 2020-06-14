@@ -49,14 +49,15 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 });
 
 exports.createPost = asyncHandler(async (req, res, next) => {
-  const { desc, childId, ratings } = req.body;
+  const { desc,  ratings } = req.body;
   const userId = req.user.id;
   const lesson = await Lesson.findOne({ lessonNum: req.body.lessonNum });
+  const child = await Child.findById(req.body.childId)
   const newPost = {
     desc,
     lessonId: lesson._id,
     userId,
-    childId,
+    childId: child._id,
     ratings,
   };
   const post = await Post.create(newPost);

@@ -25,7 +25,8 @@ exports.getAllUsers = asyncHandler(async (req, res) => {
 });
 
 exports.getUser = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
+  let user = await User.findById(req.params.id).populate({ path: 'children' });
+  
   if (!user) {
     return next(new AppError(`No user with the ID ${req.originalUrl}`, 404));
   }

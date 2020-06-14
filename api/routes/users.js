@@ -24,7 +24,6 @@ const {
 
 //****ROUTES  */
 
-router.use('/:id/children/', childrenRouter);
 //Authentication ROUTES
 
 router.post('/signup', signup);
@@ -40,6 +39,7 @@ router.get('/me', getMe, getUser);
 router.patch('/updateMe', updateMe);
 router.patch('/updateMyPassword', updatePassword);
 router.delete('/deleteMe', deleteMe);
+router.use('/:id/children/',  childrenRouter);
 
 //Admin routes Don't forger to put restictTo and protect in production
 router.get('/:id', getUser);

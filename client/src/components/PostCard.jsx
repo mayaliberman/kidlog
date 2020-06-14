@@ -54,8 +54,33 @@ const useStyles = makeStyles({
 });
 
 export default function PostCard(props) {
+  const postDate = new Date(props.date);
+  const year = postDate.getFullYear();
+  const day = postDate.getDate();
+  const monthIndex = postDate.getMonth();
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const monthName = months[monthIndex];
+  const lessonNum = `${monthName} ${day} , ${year} | Lesson ${props.lessonNum}`;
 
-
+  const tags = props.lessonTags
+    .map((tag) => tag.charAt(0).toUpperCase() + tag.substr(1))
+    .join(', ');
+  console.log( props.childId,  props.children[0]._id)
+  const child = props.children.filter(child => child._id = props.childId)
+  console.log(child)
   const classes = useStyles();
 
   return (
@@ -82,8 +107,8 @@ export default function PostCard(props) {
               <MoreHorizIcon />
             </IconButton>
           }
-          title="Karate with Ashley"
-          subheader="September 14, 2016 | Lesson 84"
+          title={tags }
+          subheader={lessonNum}
                    
         />
         <CardMedia

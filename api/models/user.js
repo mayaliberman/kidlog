@@ -3,19 +3,6 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
-const childSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    birthYear: { type: Number, required: true },
-    gender: { type: String, required: true },
-    active: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  { timestamps: true }
-);
-
 const userSchema = new mongoose.Schema(
   {
     firstName: {
@@ -55,7 +42,6 @@ const userSchema = new mongoose.Schema(
       },
     },
 
-    children: [childSchema],
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
@@ -65,9 +51,18 @@ const userSchema = new mongoose.Schema(
       select: false,
     },
   },
-
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  },
   { timestamps: true }
 );
+
+userSchema.virtual('children', {
+  ref: 'Child',
+  foreignField: 'user',
+  localField: '_id',
+});
 
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
@@ -87,9 +82,11 @@ userSchema.pre(/^find/, async function (next) {
   this.find({ active: { $ne: false } });
   next();
 });
-userSchema.pre('init', function (doc) {
-  doc.children = doc.children.filter((c) => c.active);
-});
+// userSchema.pre('init', function (doc) {
+//   doc.children = doc.children.filter((c) => c.active);
+// });
+
+
 
 userSchema.methods.correctPassword = async function (
   candidatePassword,
