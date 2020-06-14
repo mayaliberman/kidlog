@@ -78,55 +78,53 @@ export default function PostCard(props) {
   const tags = props.lessonTags
     .map((tag) => tag.charAt(0).toUpperCase() + tag.substr(1))
     .join(', ');
-  console.log( props.childId,  props.children[0]._id)
-  const child = props.children.filter(child => child._id = props.childId)
-  console.log(child)
+  console.log( props.childId,)
+  const postChild = `${tags} with ${props.childName}`;
   const classes = useStyles();
 
   return (
     <Box
-      component="div"
+      component='div'
       style={{
-        display: "flex",
-        justifyContent: "center",
-        paddingLeft: "0px",
-        paddingRight: "0px",
-        marginBottom: "10px",
+        display: 'flex',
+        justifyContent: 'center',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        marginBottom: '10px',
       }}
     >
       <Card className={classes.root}>
         <CardHeader
           className={classes.header}
           avatar={
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              RL
+            <Avatar aria-label='recipe' className={classes.avatar}>
+              {props.childName.charAt(0)}
             </Avatar>
           }
           action={
-            <IconButton aria-label="settings">
+            <IconButton aria-label='settings'>
               <MoreHorizIcon />
             </IconButton>
           }
-          title={tags }
+          title={postChild}
           subheader={lessonNum}
-                   
         />
         <CardMedia
           className={classes.media}
           image={Image}
-          title="Paella dish"
+          title='Paella dish'
         />
         <CardContent>
           <Box>
             <Typography
               paragraph
               className={classes.title}
-              variant="body2"
-              color="textSecondary"
-              component="p"
+              variant='body2'
+              color='textSecondary'
+              component='p'
               gutterBottom
             >
-             {props.desc}
+              {props.desc}
             </Typography>
           </Box>
         </CardContent>

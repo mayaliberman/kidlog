@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const Lesson = require('../models/lesson');
+const Child = require('../models/child');
 const AppError = require('../utils/appError');
 const { asyncHandler } = require('../utils/asyncHanlder');
 

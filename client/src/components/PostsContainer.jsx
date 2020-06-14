@@ -27,8 +27,9 @@ class PostsContainer extends Component {
                 lessonNum={post.lessonId.lessonNum}
                 date={post.createdAt}
                 lessonTags={post.lessonId.tags}
-                childId={post.childId}
-                children={post.userId.children}
+                childId={post.childId._id}
+                childName={post.childId.name}
+                
               />
             );
           })}

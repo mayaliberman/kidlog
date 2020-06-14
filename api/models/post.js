@@ -33,7 +33,7 @@ const postSchema = new mongoose.Schema(
 );
 
 postSchema.pre(/^find/, function (next) {
-  this.populate({ path: 'userId', select: '-active' }).populate({
+  this.populate({
     path: 'lessonId',
   }).populate({path: 'childId'});
   next();
