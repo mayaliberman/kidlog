@@ -11,7 +11,7 @@ import {
   Box
 } from "@material-ui/core";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import Image from "../assets/welcome-bg.png";
+
 
 const useStyles = makeStyles({
   root: {
@@ -111,7 +111,7 @@ export default function PostCard(props) {
         />
         <CardMedia
           className={classes.media}
-          image={Image}
+          image={props.defaultPhoto}
           title='Paella dish'
         />
         <CardContent>

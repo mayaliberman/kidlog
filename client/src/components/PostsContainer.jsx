@@ -3,7 +3,7 @@ import PostCard from './PostCard';
 import axios from 'axios';
 import Unsplash, { toJson } from 'unsplash-js';
 import { UNSPLASH_ACESS_KEY, UNSPLAH_SECRET_KEY } from '../config';
-
+import Image from '../assets/welcome-bg.png';
 
 const unsplash = new Unsplash({
   accessKey: UNSPLASH_ACESS_KEY,
@@ -40,8 +40,7 @@ class PostsContainer extends Component {
   render() {
     const { posts } = this.state;
     const { results } = this.state.photos;
-    
-    console.log(results)
+   
     if (this.state.loading) {
       return <div>Loading...</div>;
     } else {
@@ -57,7 +56,7 @@ class PostsContainer extends Component {
                 lessonTags={post.lessonId.tags}
                 childId={post.childId._id}
                 childName={post.childId.name}
-                defaultPhoto={results}
+                defaultPhoto={results ? results[index].urls.regular : Image}
               />
             );
           })}
