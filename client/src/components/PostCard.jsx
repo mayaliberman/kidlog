@@ -78,7 +78,7 @@ export default function PostCard(props) {
   const tags = props.lessonTags
     .map((tag) => tag.charAt(0).toUpperCase() + tag.substr(1))
     .join(', ');
-  console.log( props.childId,)
+ 
   const postChild = `${tags} with ${props.childName}`;
   const classes = useStyles();
 
