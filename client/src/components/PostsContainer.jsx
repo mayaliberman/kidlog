@@ -40,7 +40,7 @@ class PostsContainer extends Component {
   render() {
     const { posts } = this.state;
     const { results } = this.state.photos;
-   
+   console.log(results)
     if (this.state.loading) {
       return <div>Loading...</div>;
     } else {
@@ -57,6 +57,7 @@ class PostsContainer extends Component {
                 childId={post.childId._id}
                 childName={post.childId.name}
                 defaultPhoto={results ? results[index].urls.regular : Image}
+                photoTitle={results ? results[index].alt_description : null}
               />
             );
           })}

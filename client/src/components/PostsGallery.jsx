@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '30px',
     paddingBottom: '30px',
     '&:hover': { backgroundColor: 'transparent' },
+    
   },
 }));
 
@@ -37,7 +38,7 @@ const PostsGallery = () => {
     <Container
       style={{ textAlign: 'center', paddingRight: '5px', paddingLeft: '5px' }}
     >
-      <Button className={classes.button}>
+      <Button className={classes.button} disableRipple>
         <Typography style={{ textTransform: 'none' }} color='secondary'>
           + Add an experience with your kids
         </Typography>

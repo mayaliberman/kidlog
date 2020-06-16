@@ -7,18 +7,20 @@ let theme = createMuiTheme({
     },
     primary: {
       dark: `#9694EF`,
-      main: "#504DE5",
-      light: "#D5D4F9",
+      main: '#504DE5',
+      light: '#D5D4F9',
     },
     secondary: {
       main: `#6F8BA4`,
-      dark: "#3B566E",
-      light: "#C0D1E1",
+      dark: '#3B566E',
+      light: '#C0D1E1',
+    },
+    error: {
+      main: '#E26453',
     },
     bakcground: {
-      default: "#FCFBFB",
+      default: '#FCFBFB',
     },
-   
   },
 
   typography: {
@@ -31,8 +33,7 @@ let theme = createMuiTheme({
       fontSize: 36,
       lineHeight: 1.5,
       fontWeight: 700,
-      letterSpacing: "0.32px"
-      
+      letterSpacing: '0.32px',
     },
     h3: {
       fontSize: 22,
@@ -42,8 +43,7 @@ let theme = createMuiTheme({
     h4: {
       fontSize: 18,
       lineHeight: 1.5,
-      fontWeight: 400
-     
+      fontWeight: 400,
     },
     h5: {
       fontSize: 14,
@@ -66,9 +66,9 @@ let theme = createMuiTheme({
   },
   shadows: [
     {
-      25: "0px 0px 1px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 6px 24px rgba(0, 0, 0, 0.06);",
+      25: '0px 0px 1px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 6px 24px rgba(0, 0, 0, 0.06);',
     },
-    { 26: " 0px 0px 4px rgba(0, 0, 0, 0.25)" },
+    { 26: ' 0px 0px 4px rgba(0, 0, 0, 0.25)' },
   ],
 });
 
