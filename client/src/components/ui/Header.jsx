@@ -9,43 +9,43 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const useStyles = makeStyles(() => ({
   headerStyles: {
-    display: "flex",
-    justifyContent: "space-between",
-    "@media (max-width:480px)": {
-      fontSize: "0.7rem",
+    display: 'flex',
+    justifyContent: 'space-between',
+    '@media (max-width:480px)': {
+      fontSize: '0.7rem',
     },
   },
-  logo: { height: "1.7em" },
+  logo: { height: '1.7em' },
   button: {
-    color: "white",
-    textTransform: "none",
-    marginRight: "-10px",
-    paddingRight: "0px",
+    color: 'white',
+    textTransform: 'none',
+    marginRight: '-10px',
+    paddingRight: '0px',
+    '&:hover': { backgroundColor: 'transparent' },
   },
   avatar: {
-    backgroundColor: "white",
-    marginRight: "15px",
-    height: "30px",
-    width: "30px",
-    "@media (max-width:480px)": {
-      width: "18px",
-      height: "auto",
-      marginRight: "5px",
+    backgroundColor: 'white',
+    marginRight: '15px',
+    height: '30px',
+    width: '30px',
+    '@media (max-width:480px)': {
+      width: '18px',
+      height: 'auto',
+      marginRight: '5px',
     },
   },
   logout: {
-    
-    color: "white",
-    "@media (max-width:480px)": {
-      width: "18px",
-      height: "auto",
-      marginRight: "-5px",
+    color: 'white',
+    '@media (max-width:480px)': {
+      width: '18px',
+      height: 'auto',
+      marginRight: '-5px',
     },
   },
 
   title: {
-    "@media (max-width:480px)": {
-      fontSize: "1rem",
+    '@media (max-width:480px)': {
+      fontSize: '1rem',
     },
   },
 }));
@@ -67,23 +67,23 @@ const Header = () => {
   return (
     <React.Fragment>
       <ElevationScroll>
-        <AppBar position="sticky">
+        <AppBar position='sticky'>
           <Toolbar className={classes.headerStyles}>
-            <img alt="company logo" className={classes.logo} src={logo} />
-            <Typography variant="h6" color="common" className={classes.title}>
+            <img alt='company logo' className={classes.logo} src={logo} />
+            <Typography variant='h6' color='common' className={classes.title}>
               My Posts
             </Typography>
 
             <div>
-              <Button className={classes.button}>
+              <Button className={classes.button} disableRipple>
                 <Avatar
-                  alt="user avatar"
+                  alt='user avatar'
                   src={profileIcon}
                   className={classes.avatar}
                 ></Avatar>
                 Maya
               </Button>
-              <Button className={classes.button}>
+              <Button className={classes.button} disableRipple>
                 <ExitToAppIcon className={classes.logout} />
               </Button>
             </div>

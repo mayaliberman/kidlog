@@ -4,6 +4,7 @@ let theme = createMuiTheme({
   palette: {
     common: {
       grey: `#DFE8F`,
+      light: '#fcfbfb',
     },
     primary: {
       dark: `#9694EF`,

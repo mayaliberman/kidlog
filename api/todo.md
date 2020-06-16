@@ -1,5 +1,6 @@
 
 API Todos
+TODO save jwt on cookie and not on local host
 
 TODO Refactor 403, 404 in 
 

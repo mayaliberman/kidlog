@@ -6,11 +6,10 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  IconButton,
   Avatar,
   Box,
 } from '@material-ui/core';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+
 import PostMenu from './PostMenu';
 
 const useStyles = makeStyles((theme) => ({
@@ -114,7 +113,7 @@ export default function PostCard(props) {
           subheaderTypographyProps={{
             style: {
               color: 'rgba(111, 139, 164, 0.7)',
-              fontSize: '12px'
+              fontSize: '12px',
             },
           }}
         />

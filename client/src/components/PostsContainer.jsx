@@ -24,7 +24,7 @@ class PostsContainer extends Component {
       loading: false,
     });
     await unsplash.search
-      .photos('forest', 1, this.state.posts.length, { orientation: 'portrait' })
+      .photos('children', 1, this.state.posts.length, { orientation: 'portrait' })
       .then(toJson)
       .then((json) => {
        
