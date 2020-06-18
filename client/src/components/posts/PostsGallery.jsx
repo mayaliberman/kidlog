@@ -4,9 +4,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Container, Button } from '@material-ui/core';
-
-
+import { Container } from '@material-ui/core';
+import AddPostButton from './AddPostButton';
+import AddPost from './AddPost';
 const useStyles = makeStyles((theme) => ({
   fab: {
     position: 'sticky',
@@ -23,12 +23,7 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(3),
   },
 
-  button: {
-    paddingTop: '30px',
-    paddingBottom: '30px',
-    '&:hover': { backgroundColor: 'transparent' },
-    
-  },
+ 
 }));
 
 const PostsGallery = () => {
@@ -38,11 +33,8 @@ const PostsGallery = () => {
     <Container
       style={{ textAlign: 'center', paddingRight: '5px', paddingLeft: '5px' }}
     >
-      <Button className={classes.button} disableRipple>
-        <Typography style={{ textTransform: 'none' }} color='secondary'>
-          + Add an experience with your kids
-        </Typography>
-      </Button>
+      <AddPostButton />
+      <AddPost />
       <PostsContainer />
       <Tooltip title='Add' aria-label='add'>
         <Fab color='primary' className={classes.fab} size='large'>

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PostCard from './PostCard';
 import axios from 'axios';
 import Unsplash, { toJson } from 'unsplash-js';
-import { UNSPLASH_ACESS_KEY, UNSPLAH_SECRET_KEY } from '../config';
-import Image from '../assets/welcome-bg.png';
-
+import { UNSPLASH_ACESS_KEY, UNSPLAH_SECRET_KEY } from '../../config';
+import Image from '../../assets/welcome-bg.png';
+import {  Typography } from '@material-ui/core';
+import Spinner from '../../components/ui/Spinner'
 const unsplash = new Unsplash({
   accessKey: UNSPLASH_ACESS_KEY,
   secret: UNSPLAH_SECRET_KEY,
@@ -42,7 +43,21 @@ class PostsContainer extends Component {
     const { results } = this.state.photos;
    console.log(results)
     if (this.state.loading) {
-      return <div>Loading...</div>;
+      return (
+        <div>
+          <Spinner />
+          {/* <Typography
+            variant='h3'
+            style={{
+              color: '#3B566E',
+              lingHeight: '26px',
+              padding: '20px 0px',
+            }}
+          >
+            Loading...
+          </Typography> */}
+        </div>
+      );
     } else {
       return (
         <div>

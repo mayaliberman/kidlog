@@ -50,6 +50,7 @@ let theme = createMuiTheme({
       fontSize: 14,
       lineHeight: 1.5,
       fontWeight: 400,
+      color: '#3B566E',
     },
     body1: {
       fontSize: 16,

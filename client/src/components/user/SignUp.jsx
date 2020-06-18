@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { Link } from 'react-router-dom';
-import logoPurple from '../assets/logo-purple.svg';
+import logoPurple from '../../assets/logo-purple.svg';
 const useStyles = makeStyles((theme) => ({
   root: {},
   margin: {
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
   input: {
-   
     paddingLeft: '15px',
     whiteSpace: 'nowrap',
     borderRadius: '10px',
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 const CssTextField = withStyles({
   root: {
     marginBottom: '15px',
-        
+
     '& .MuiInputBase-input-53': {
       fontSize: '14px',
       padding: '12px',
@@ -50,13 +49,12 @@ const CssTextField = withStyles({
     '& .MuiInputBase-input-83': {
       padding: '0px',
       color: '#6F8BA4',
-     
     },
     '& .MuiInput-underline-67:before': {
       borderBottom: '0px solid white',
     },
     '& .MuiInput-underline-67:after': {
-      borderBottom: '1px solid white',
+      borderBottom: '0px solid white',
     },
   },
 })(TextField);
@@ -148,8 +146,8 @@ function SignUp() {
                 padding: '15px 80px',
                 marginTop: '30px',
                 textTransform: 'uppercase',
-                  width: '100%',
-                fontSize: '15px'
+                width: '100%',
+                fontSize: '15px',
               }}
             >
               Continue

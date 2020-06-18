@@ -9,9 +9,9 @@ import {
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Image from "../assets/welcome-bg.png";
+import Image from "../../assets/welcome-bg.png";
 import { Link } from "react-router-dom";
-import logo from "../assets/Logo_white_splash.svg";
+import logo from "../../assets/Logo_white_splash.svg";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +46,7 @@ const CssTextField = withStyles({
       padding: '12px',
     },
     '& .MuiInput-underline-37': {
-      borderBottom: '0px solid trasparent',
+      borderBottom: '1px solid trasparent',
     },
     '& .MuiInput-underline-37:before': {
       borderBottom: '0px solid white',

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter , Route, Switch } from "react-router-dom";
 import Home from "./Home";
-import SignIn from "./SignIn";
-import SignUp from './SignUp';
+import SignIn from "./user/SignIn";
+import SignUp from './user/SignUp';
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./ui/Theme";
 import Header from './ui/Header';
-import PostsGallery from './PostsGallery';
+import PostsGallery from '../components/posts/PostsGallery';
 class App extends Component {
   state = {
     error: null,
