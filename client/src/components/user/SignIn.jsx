@@ -10,6 +10,7 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Image from "../../assets/welcome-bg.png";
+import ImageMobile from '../../assets/bg.png';
 import { Link } from "react-router-dom";
 import logo from "../../assets/Logo_white_splash.svg";
 
@@ -27,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    '@media (max-width:375px)': {
+      backgroundImage: `url(${ImageMobile})`,
+    },
   },
 
   input: {

@@ -122,7 +122,7 @@ export const AddPost = () => {
                 padding: '15px 80px',
                 margin: '30px auto',
                 textTransform: 'uppercase',
-                width: '60%',
+                width: '80%',
               }}
             >
               Add Post
