@@ -1,7 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { makeStyles} from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
@@ -9,13 +7,36 @@ import Image from "../assets/welcome-bg.png";
 import logo from "../assets/Logo_white_splash.svg";
 import { Link } from "react-router-dom";
 import ImageMobile from '../assets/bg.png';
+import PurpleButton from './ui/PurpleButton';
 
+
+function Home() {
+  const classes = useStyles();
+  return (
+    <React.Fragment>
+           <Box className={classes.box}>
+        <Container className={classes.container}>
+          <img alt='company logo' src={logo} />
+          <Typography variant='h2' className={classes.root}>
+            Every kid can become multi-talent
+          </Typography>
+          <Typography variant='h4' className={classes.root}>
+            Track your kid's progress and share your expericnes
+          </Typography>
+          <PurpleButton component={Link} to='/sign-in'>
+            Let's Start
+          </PurpleButton>
+        </Container>
+      </Box>
+    </React.Fragment>
+  );
+}
 const useStyles = makeStyles((theme) => ({
   root: {
     color: theme.palette.common.white,
     padding: theme.spacing(1),
   },
-  container: {
+  box: {
     backgroundImage: `url(${Image})`,
     height: '100vh',
     display: 'flex',
@@ -25,34 +46,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundImage: `url(${ImageMobile})`,
     },
   },
+  container: {
+    textAlign: 'center',
+  },
 }));
-function Home() {
-  const classes = useStyles();
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <Box className={classes.container}>
-        <Container style={{ textAlign: "center" }}>
-          <img alt="company logo" src={logo} />
-          <Typography variant="h2" className={classes.root}>
-            Every kid can become multi-talent
-          </Typography>
-          <Typography variant="h4" className={classes.root}>
-            Track your kid's progress and share your expericnes
-          </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ padding: "15px 80px", marginTop: '30px', textTransform: 'uppercase' }}
-            component={Link}
-            to="/sign-in"
-          >
-            Let's Start
-          </Button>
-        </Container>
-      </Box>
-    </React.Fragment>
-  );
-}
 
 export default Home;

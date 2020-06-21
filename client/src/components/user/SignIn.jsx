@@ -13,11 +13,12 @@ import Image from "../../assets/welcome-bg.png";
 import ImageMobile from '../../assets/bg.png';
 import { Link } from "react-router-dom";
 import logo from "../../assets/Logo_white_splash.svg";
-
+   import PurpleButton from '../ui/PurpleButton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginBottom: '15px',
+    
   },
   margin: {
     margin: theme.spacing(1),
@@ -41,28 +42,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CssTextField = withStyles({
+const CssTextField = withStyles((theme) => ({
   root: {
-    marginBottom: '15px',
-    '& .MuiInputBase-input-53': {
-      color: 'white',
-      fontSize: '14px',
-      padding: '12px',
+    width: '100%',
+
+    '& label.Mui-focused': {
+      color: theme.palette.common.white,
     },
-    '& .MuiInput-underline-37': {
-      borderBottom: '1px solid trasparent',
-    },
-    '& .MuiInput-underline-37:before': {
-      borderBottom: '0px solid white',
-    },
-    '& .MuiInput-underline-37:after': {
-      borderBottom: '0px solid white',
-    },
-    '& .MuiInput-underline-37:hover:not(.Mui-disabled):before': {
-      borderBottom: '0px solid white',
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'green',
     },
   },
-})(TextField);
+  //   marginBottom: '15px',
+  //   '& .MuiInputBase-input': {
+  //     color: 'white',
+  //     fontSize: '14px',
+  //     padding: '12px',
+  //   },
+  //   '& .MuiInput-underline': {
+  //     borderBottom: '1px solid trasparent',
+  //   },
+  //   '& .MuiInput-underline:before': {
+  //     borderBottom: '1px solid white',
+  //   },
+  //   '& .MuiInput-underline:after': {
+  //     borderBottom: '1px solid white',
+  //   },
+  //   '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+  //     borderBottom: '0px solid white',
+  //   },
+  // },
+}))(TextField);
 
 
 function SignIn() {
@@ -78,25 +88,26 @@ function SignIn() {
             <CssTextField
               label='Email'
               id='custom-css-outlined-input'
-              className={classes.input}
-              InputLabelProps={{
-                style: {
-                  whiteSpace: 'nowrap',
-                  color: 'white',
-                  fontSize: '18px',
-                  paddingTop: '5px',
-                },
-              }}
+              className={classes.root}
+              // InputLabelProps={{
+              //   style: {
+              //     whiteSpace: 'nowrap',
+              //     color: 'white',
+              //     fontSize: '18px',
+              //     paddingTop: '5px',
+              //   },
+              // }}
               inputProps={{
                 style: {
                   fontSize: '14px',
                   padding: '15px',
-                  // color: '#6F8BA4',
+                  color: 'white',
                 },
               }}
             ></CssTextField>
             <CssTextField
-              id='standard-basic'
+              id='custom-css-standard-input'
+              // id='standard-basic'
               label='Password'
               type='password'
               className={classes.input}
@@ -120,7 +131,6 @@ function SignIn() {
                 },
               }}
             ></CssTextField>
-
             <Typography
               variant='body2'
               className={classes.root}
@@ -128,18 +138,8 @@ function SignIn() {
             >
               Forgot password?
             </Typography>
-            <Button
-              variant='contained'
-              color='primary'
-              style={{
-                padding: '15px 80px',
-                marginTop: '30px',
-                textTransform: 'uppercase',
-                width: '100%',
-              }}
-            >
-              Sign In
-            </Button>
+
+            <PurpleButton style={{ width: '100%' }}> Sign In</PurpleButton>
           </form>
           <Button
             variant='body2'
