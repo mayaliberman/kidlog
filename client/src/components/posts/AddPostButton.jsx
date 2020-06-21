@@ -9,6 +9,7 @@ import {
   Button,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import PurpleButton from '../ui/PurpleButton';
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: '70px 0px 20px 0px',
@@ -67,7 +68,7 @@ export const AddPostButton = () => {
           <Typography variant='h3'>
             Hello Maya, ready to add today's activity with your kid?
           </Typography>
-          <Button variant='contained' color='primary'>
+          <Button>
             <AddIcon />
             <Typography> Add</Typography>
           </Button>
