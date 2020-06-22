@@ -24,32 +24,18 @@ export const AddPost = () => {
             style: { fontWeight: 'bold' },
           }}
         ></CardHeader>
-        <CardContent className={classes.cardContent}
-          
-        >
+        <CardContent className={classes.cardContent}>
           <Typography variant='h3'>
             Hello Maya, ready to add today's activity with your kid?
           </Typography>
-          <form
-            noValidate
-            autoComplete='off'
-            className={classes.formStyle}
-           
-          >
+          <form noValidate autoComplete='off' className={classes.formStyle}>
             <MultiLineTextField
               id='standard-multiline-static'
               label='Multiline'
               multiline
               rows={5}
               placeholder='Describe the activity with your kids'
-              inputProps={{
-                style: {
-                  fontSize: '14px',
-                  padding: '15px',
-                  color: '#6F8BA4',
-                },
-              }}
-            ></MultiLineTextField>
+              ></MultiLineTextField>
             <NumberInput />
             <PurpleButton type='submit' style={{ width: '50%' }}>
               Add Post
@@ -84,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   cardHeader: {
     textAlign: 'left',
     fontWeight: 'bold',
-    backgroundColor: '#F8F8F8',
+    backgroundColor: theme.palette.background.default,
   },
   formStyle: {
     width: '100%',
@@ -102,11 +88,11 @@ const useStyles = makeStyles((theme) => ({
 
 const MultiLineTextField = withStyles((theme) => ({
   root: {
-    color: theme.palette.secondary.light,
     fontSize: theme.typography.h5,
-    paddingTop: '5px',
+    paddingTop: '15px',
     width: '100%',
-      
+    padding: '15px',
+    color: theme.palette.secondary.main,
     'label + &': {
       marginTop: theme.spacing(3),
     },

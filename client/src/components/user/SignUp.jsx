@@ -5,7 +5,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
+import PurpleButton from '../ui/PurpleButton';
 import { Link } from 'react-router-dom';
 import logoPurple from '../../assets/logo-purple.svg';
 const useStyles = makeStyles((theme) => ({
@@ -33,28 +33,29 @@ const useStyles = makeStyles((theme) => ({
 
 const CssTextField = withStyles({
   root: {
+    color: 'red',
     marginBottom: '15px',
 
-    '& .MuiInputBase-input-53': {
+    '& .MuiInputBase-input': {
       fontSize: '14px',
       padding: '12px',
     },
-    '& .MuiInput-underline-67': {
-      borderBottom: '0px solid white',
+    '& .MuiInput-underline': {
+      borderBottom: 'none',
+    },
+    '& > .MuiInput-underline:before': {
+      borderBottom: 'none',
     },
 
-    '& .MuiInput-underline-67:hover:not(.Mui-disabled):before': {
-      borderBottom: '0px solid white',
+    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+      borderBottom: 'none',
     },
-    '& .MuiInputBase-input-83': {
+    '& .MuiInputBase-input': {
       padding: '0px',
       color: '#6F8BA4',
     },
-    '& .MuiInput-underline-67:before': {
-      borderBottom: '0px solid white',
-    },
-    '& .MuiInput-underline-67:after': {
-      borderBottom: '0px solid white',
+    '& .MuiInput-underline:after': {
+      borderBottom: 'none',
     },
   },
 })(TextField);
@@ -138,20 +139,10 @@ function SignUp() {
                 },
               }}
             ></CssTextField>
-
-            <Button
-              variant='contained'
-              color='primary'
-              style={{
-                padding: '15px 80px',
-                marginTop: '30px',
-                textTransform: 'uppercase',
-                width: '100%',
-                fontSize: '15px',
-              }}
-            >
+            <PurpleButton style={{ width: '100%' }} type='submit'>
               Continue
-            </Button>
+            </PurpleButton>
+           
           </form>
         </Container>
       </Box>
