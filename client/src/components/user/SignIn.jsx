@@ -27,30 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  input: {
-    borderBottom: `1px solid white`,
-    whiteSpace: 'nowrap',
-    width: '100%',
-    marginTop: '15px',
-    '& label': {
-      color: 'white',
-      whiteSpace: 'nowrap',
-      fontSize: '18px',
-      paddingTop: '5px',
-    },
-    '& input': {
-      fontSize: '20px',
-      color: 'white',
-      paddingBottom: '15px',
-     
-    },
-    '& input:after': {
-      borderBottom: 'none',
-    },
-    ' &.MuiInput-underline:after': {
-      broderBottom: 'none',
-    },
-  },
+ 
 }));
 
 function SignIn() {

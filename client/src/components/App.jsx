@@ -1,26 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter , Route, Switch } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core/styles";
 import Home from "./Home";
 import SignIn from "./user/SignIn";
 import SignUp from './user/SignUp';
-import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./ui/Theme";
 import Header from './ui/Header';
 import PostsGallery from '../components/posts/PostsGallery';
-class App extends Component {
-  state = {
-    error: null,
-    loading: false,
-    users: [],
-  };
-
-//  async componentDidMount() {
-//    this.setState({ loading: true });
-//    const res = await await axios.get(`http://localhost:5000/posts`);
-//    this.setState({ users: res.data, loading: false });
-//    console.log(this.state.users)
-//   }
-  render() {
+const App = () =>  {
+ 
     return (
       <ThemeProvider theme={theme}>
         <BrowserRouter>
@@ -44,7 +32,7 @@ class App extends Component {
         </BrowserRouter>
       </ThemeProvider>
     );
-  }
+ 
 }
 
 export default App;

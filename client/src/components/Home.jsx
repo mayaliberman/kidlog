@@ -10,7 +10,7 @@ import ImageMobile from '../assets/bg.png';
 import PurpleButton from './ui/PurpleButton';
 
 
-function Home() {
+const  Home = () => {
   const classes = useStyles();
   return (
     <React.Fragment>

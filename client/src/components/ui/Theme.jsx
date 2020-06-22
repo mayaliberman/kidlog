@@ -1,5 +1,5 @@
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
-
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import overrides from '../../MuiTheme/ui/overrides/index';
 let theme = createMuiTheme({
   palette: {
     common: {
@@ -71,8 +71,9 @@ let theme = createMuiTheme({
       25: '0px 0px 1px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 6px 24px rgba(0, 0, 0, 0.06);',
     },
     { 26: ' 0px 0px 4px rgba(0, 0, 0, 0.25)' },
-    {27: '0px 2px 14px rgba(0, 0, 0, 0.16)'}
+    { 27: '0px 2px 14px rgba(0, 0, 0, 0.16)' },
   ],
+  overrides,
 });
 
 theme = responsiveFontSizes(theme);
