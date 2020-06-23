@@ -19,7 +19,7 @@ export default {
   root: {
     fontSize: '20px',
     color: 'white',
-    paddingBottom: '5px',
+    // paddingBottom: '5px',
     borderBottom: `1px solid white`,
     whiteSpace: 'nowrap',
     width: '100%',
@@ -28,12 +28,12 @@ export default {
     '&:not(.Mui-disabled):hover::before': {
       borderColor: 'white',
     },
+    '& label.Mui-focused': {
+      color: 'green',
+    },
     '&$focused': {
       borderBottom: `1px solid white`,
     },
   },
-
-  focused: {
-    borderBottom: `1px solid white`,
-  },
+  
 };

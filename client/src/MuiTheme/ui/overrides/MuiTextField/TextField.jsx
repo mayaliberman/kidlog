@@ -7,8 +7,7 @@ export default {
     '& label': {
       color: 'white',
       whiteSpace: 'nowrap',
-      fontSize: '18px',
-      paddingTop: '5px',
+     
     },
   },
 };

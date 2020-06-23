@@ -1,17 +1,19 @@
 import React from 'react';
 import { Button, Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Image from '../../assets/welcome-bg.png';
 import ImageMobile from '../../assets/bg.png';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/Logo_white_splash.svg';
-import PurpleButton from '../ui/PurpleButton';
 const useStyles = makeStyles((theme) => ({
   root: {
     marginBottom: '15px',
+    textAlign: 'right',
+    color: 'white',
+    marginTop: '15px',
   },
   margin: {
     margin: theme.spacing(1),
@@ -27,7 +29,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
- 
+  button: {
+    marginTop: '40px',
+    textAlign: 'center',
+    color: 'white',
+    textTransform: 'none',
+    backgroundColor: 'transparent',
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
 }));
 
 function SignIn() {
@@ -39,42 +50,23 @@ function SignIn() {
         <Container style={{ textAlign: 'center', maxWidth: '500px' }}>
           <img alt='company logo' src={logo} />
           <form noValidate autoComplete='off'>
-            <TextField
-              label='Email'
-              id='custom-css-outlined-input'
-              className={classes.input}
-            ></TextField>
+            <TextField label='Email' id='custom-css-outlined-input'></TextField>
             <TextField
               id='standard-basic'
               label='Password'
               type='password'
-              className={classes.input}
             ></TextField>
-            <Typography
-              variant='body2'
-              className={classes.root}
-              style={{ textAlign: 'right', color: 'white', marginTop: '15px' }}
-            >
+            <Typography variant='body2' className={classes.root}>
               Forgot password?
             </Typography>
-            <PurpleButton
-              style={{
-                width: '100%',
-              }}
-            >
-              Sign In
-            </PurpleButton>
+            <Button>Sign In</Button>
           </form>
           <Button
             variant='body2'
-            style={{
-              marginTop: '40px',
-              textAlign: 'center',
-              color: 'white',
-              textTransform: 'none',
-            }}
+            className={classes.button}
             component={Link}
             to='/sign-up'
+            disableRipple
           >
             Don't have an accout? Sign up
           </Button>

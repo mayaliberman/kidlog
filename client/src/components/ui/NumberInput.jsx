@@ -16,10 +16,10 @@ const NumberInput = () => {
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
-    marginLeft: '15px',
+    margin: ' 30px 15px',
     'label + &': {
         marginTop: theme.spacing(3),
-        width: '40%'
+        // width: '40%'
     },
   },
 }))(InputBase);
@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   label: {
-    padding: '15px',
+    marginTop: '10px',
+    paddingRight: '20px',
     color: theme.palette.secondary.dark,
     fontSize: theme.typography.body1,
   },

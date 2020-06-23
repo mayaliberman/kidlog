@@ -4,16 +4,23 @@ import {
   Card,
   CardHeader,
   CardContent,
-  Typography,
   Box,
   InputBase,
+  Button,
 } from '@material-ui/core';
-
-import PurpleButton from '../ui/PurpleButton';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import NumberInput from '../ui/NumberInput';
 
 export const AddPost = () => {
   const classes = useStyles();
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
   return (
     <Box component='div' className={classes.box}>
       <Card className={classes.root}>
@@ -25,9 +32,6 @@ export const AddPost = () => {
           }}
         ></CardHeader>
         <CardContent className={classes.cardContent}>
-          <Typography variant='h3'>
-            Hello Maya, ready to add today's activity with your kid?
-          </Typography>
           <form noValidate autoComplete='off' className={classes.formStyle}>
             <MultiLineTextField
               id='standard-multiline-static'
@@ -35,11 +39,33 @@ export const AddPost = () => {
               multiline
               rows={5}
               placeholder='Describe the activity with your kids'
-              ></MultiLineTextField>
-            <NumberInput />
-            <PurpleButton type='submit' style={{ width: '50%' }}>
+            ></MultiLineTextField>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-start',
+                borderTop: '1px solid rgba(192, 209, 224, 0.4)',
+                margin: '30px 0',
+              }}
+            >
+              <NumberInput />
+              <FormControl className={classes.formControl}>
+                <InputLabel id='demo-simple-select-label'>Kid</InputLabel>
+                <Select
+                  labelId='demo-simple-select-label'
+                  id='demo-simple-select'
+                  value={age}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Michal</MenuItem>
+                  <MenuItem value={20}>Eyal</MenuItem>
+                  <MenuItem value={30}>Danielle</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <Button type='submit' className={classes.button}>
               Add Post
-            </PurpleButton>
+            </Button>
           </form>
         </CardContent>
       </Card>
@@ -83,6 +109,21 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-around',
     padding: '20px',
+  },
+
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    color: 'black',
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  button: {
+    '@media (min-width:768px)': {
+      width: '50%',
+    },
+    margin: '30px auto',
   },
 }));
 

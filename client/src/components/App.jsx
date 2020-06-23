@@ -1,16 +1,14 @@
 import React from "react";
 import { BrowserRouter , Route, Switch } from "react-router-dom";
-import { ThemeProvider } from "@material-ui/core/styles";
-import Home from "./Home";
+import Home from './Home/Home.jsx';
 import SignIn from "./user/SignIn";
 import SignUp from './user/SignUp';
-import theme from "./ui/Theme";
 import Header from './ui/Header';
 import PostsGallery from '../components/posts/PostsGallery';
 const App = () =>  {
  
     return (
-      <ThemeProvider theme={theme}>
+      
         <BrowserRouter>
           {window.location.pathname === "/" ||
           window.location.pathname === "/sign-up" ||
@@ -30,7 +28,7 @@ const App = () =>  {
             />
           </Switch>
         </BrowserRouter>
-      </ThemeProvider>
+     
     );
  
 }

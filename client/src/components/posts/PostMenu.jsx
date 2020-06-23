@@ -92,7 +92,7 @@ export default function PostMenu() {
         aria-haspopup='true'
         onClick={handleClick}
       >
-        <MoreHorizIcon fontSize='medium' className={classes.horizonIcon} />
+        <MoreHorizIcon fontSize='default' className={classes.horizonIcon} />
       </IconButton>
       <StyledMenu
         id='customized-menu'

@@ -5,8 +5,6 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import PurpleButton from '../ui/PurpleButton';
-import { Link } from 'react-router-dom';
 import logoPurple from '../../assets/logo-purple.svg';
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -26,38 +24,14 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     borderRadius: '10px',
     width: '100%',
+   
     boxShadow:
       ' 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 6px 24px rgba(0, 0, 0, 0.06);',
   },
 }));
 
 const CssTextField = withStyles({
-  root: {
-    color: 'red',
-    marginBottom: '15px',
-
-    '& .MuiInputBase-input': {
-      fontSize: '14px',
-      padding: '12px',
-    },
-    '& .MuiInput-underline': {
-      borderBottom: 'none',
-    },
-    '& > .MuiInput-underline:before': {
-      borderBottom: 'none',
-    },
-
-    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-      borderBottom: 'none',
-    },
-    '& .MuiInputBase-input': {
-      padding: '0px',
-      color: '#6F8BA4',
-    },
-    '& .MuiInput-underline:after': {
-      borderBottom: 'none',
-    },
-  },
+  
 })(TextField);
 
 
@@ -91,13 +65,13 @@ function SignUp() {
                   color: '#C0D1E0',
                   fontSize: '14px',
                   paddingLeft: '10px',
-                  paddingTop: '5px',
+                 
                 },
               }}
               inputProps={{
                 style: {
                   fontSize: '14px',
-                  padding: '15px',
+                  
                   color: '#6F8BA4',
                 },
               }}
@@ -112,12 +86,13 @@ function SignUp() {
                   color: '#C0D1E0',
                   fontSize: '14px',
                   paddingLeft: '10px',
-                  paddingTop: '5px',
+                  // paddingTop: '5px',
                 },
               }}
               inputProps={{
                 style: {
-                  fontSize: '40px',
+                  color: '#C0D1E0',
+                  // fontSize: '40px',
                 },
               }}
             ></CssTextField>
@@ -132,19 +107,19 @@ function SignUp() {
                   color: '#C0D1E0',
                   fontSize: '14px',
                   paddingLeft: '10px',
-                  paddingTop: '5px',
+                  // paddingTop: '5px',
                 },
               }}
               inputProps={{
                 style: {
-                  fontSize: '40px',
+                  color: '#C0D1E0',
+                  // fontSize: '40px',
                 },
               }}
             ></CssTextField>
-            <PurpleButton style={{ width: '100%' }} type='submit'>
+            <Button type='submit' style={{marginTop: '40px'}}>
               Continue
-            </PurpleButton>
-           
+            </Button>
           </form>
         </Container>
       </Box>

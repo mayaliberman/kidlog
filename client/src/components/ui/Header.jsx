@@ -20,8 +20,14 @@ const useStyles = makeStyles(() => ({
     color: 'white',
     textTransform: 'none',
     marginRight: '-10px',
-    paddingRight: '0px',
+    // paddingRight: '0px',
+    padding: '10px',
     '&:hover': { backgroundColor: 'transparent' },
+  },
+
+  account: {
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
   avatar: {
     backgroundColor: 'white',
@@ -34,15 +40,28 @@ const useStyles = makeStyles(() => ({
       marginRight: '5px',
     },
   },
+  accountLabel: {
+    backgroundColor: 'transparent',
+    '@media (max-width:480px)': {
+      paddingRight: '10px',
+    },
+   
+  },
   logout: {
     color: 'white',
+
     '@media (max-width:480px)': {
       width: '18px',
       height: 'auto',
       marginRight: '-5px',
     },
   },
+  logoutButton: {
+    paddingRight: '0px',
+    minWidth: '40px',
 
+    '&:hover': { backgroundColor: 'transparent' },
+  },
   title: {
     '@media (max-width:480px)': {
       fontSize: '1rem',
@@ -70,12 +89,15 @@ const Header = () => {
         <AppBar position='sticky'>
           <Toolbar className={classes.headerStyles}>
             <img alt='company logo' className={classes.logo} src={logo} />
-            <Typography variant='h6' color='common' className={classes.title}>
+            <Typography variant='h6'  className={classes.title}>
               My Posts
             </Typography>
 
-            <div>
-              <Button className={classes.button} disableRipple>
+            <div className={classes.account}>
+              <Button
+                className={(classes.acountLabel)}
+                disableRipple
+              >
                 <Avatar
                   alt='user avatar'
                   src={profileIcon}
@@ -83,7 +105,10 @@ const Header = () => {
                 ></Avatar>
                 Maya
               </Button>
-              <Button className={classes.button} disableRipple>
+              <Button
+                className={(classes.button, classes.logoutButton)}
+                disableRipple
+              >
                 <ExitToAppIcon className={classes.logout} />
               </Button>
             </div>
