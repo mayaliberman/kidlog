@@ -1,0 +1,47 @@
+.nav {
+   height: 60px;
+   position: fixed;
+   width: 100%;
+   z-index: 1000;
+  top: 0;
+   padding: 0px 10px;
+   background-color: #504DE5;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ @media (max-width: 375px) {
+         height: 80px;
+      }
+}
+
+.logoIcon {
+    height: 70%;
+    
+     @media (max-width: 375px) {
+         height: 50%;
+      }
+}
+
+.headerTitle {
+    color: white;
+    font-size: 16px;
+}
+
+.account {
+    color: white;
+    padding: 10px;
+    display: flex;
+     align-items: center;
+     justify-content:center;
+}
+.avatar {
+    padding: 14px;
+}
+
+.accountName {
+    padding-right: 10px;
+}
+
+.logoutIcon {
+    height: 50%;
+}

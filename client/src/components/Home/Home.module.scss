@@ -1,14 +1,14 @@
 body {
   font-family: 'roboto';
-  background-image: url('../../assets/welcome-bg.png');
-
-  @media (max-width: 375px) {
-    background-image: url('../../assets/bg.png');
-  }
-  color: white;
+  
 }
 
 .content {
+    @media (max-width: 375px) {
+        background-image: url('../../assets/bg.png');
+      }
+      color: white;
+    background-image: url('../../assets/welcome-bg.png');
   display: flex;
   flex-direction: column;
   justify-content: center;
