@@ -7,7 +7,7 @@ import {
   button,
   forgotPassword,
 } from './SignIn.module.scss';
-import logo from '../../assets/Logo_white_splash.svg';
+import logo from '../../../assets/Logo_white_splash.svg';
 import { Link } from 'react-router-dom';
 const sassClasses = {
     input, password

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PostCard from './PostCard';
+import PostCard from './PostCard/PostCard.jsx';
 import axios from 'axios';
 import Unsplash, { toJson } from 'unsplash-js';
 import { UNSPLASH_ACESS_KEY, UNSPLAH_SECRET_KEY } from '../../config';
@@ -17,21 +17,21 @@ const PostsContainer = () => {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
-     const fetchData = async () => {
-       const res = await axios.get(`http://localhost:5000/posts`);
-       await unsplash.search
-         .photos('children', 1, posts.length, {
-           orientation: 'portrait',
-         })
-         .then(toJson)
-         .then((json) => {
-           setPhotos(json);
-         });
-       setPosts(res.data.data);
-       setLoading(false);
-     };
+    const fetchData = async () => {
+      const res = await axios.get(`http://localhost:5000/posts`);
+      await unsplash.search
+        .photos('children', 1, posts.length, {
+          orientation: 'portrait',
+        })
+        .then(toJson)
+        .then((json) => {
+          setPhotos(json);
+        });
+      setPosts(res.data.data);
+      setLoading(false);
+    };
 
-     fetchData();
+    fetchData();
     //eslint-disable-next-line
   }, []);
 
@@ -58,8 +58,8 @@ const PostsContainer = () => {
               lessonTags={post.lessonId.tags}
               childId={post.childId._id}
               childName={post.childId.name}
-              defaultPhoto={results ? Image : results[index].urls.regular}
-              photoTitle={results ? null : results[index].alt_description}
+              defaultPhoto={results ? results[index].urls.regular : Image}
+              photoTitle={results ? results[index].alt_description : null}
             />
           );
         })}

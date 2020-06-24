@@ -11,8 +11,7 @@ const Header = () => {
         <div className={account}>
           <img alt='avatar' src={avatarIcon} className={avatar} />
           <p className={accountName}>Maya</p>
-          <p className={accountName}>Log Out</p>
-          {/* <img alt='logout' src={logout} className={logoutIcon} /> */}
+         <img alt='logout' src={logout} className={logoutIcon} />
         </div>
       </div>
     );

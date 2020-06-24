@@ -1,9 +1,8 @@
 import React from "react";
 import { BrowserRouter , Route, Switch } from "react-router-dom";
 import Home from './Home/Home.jsx';
-import SignIn from './SignIn/SignIn';
-import SignUp from './SignUp/SignUp';
-
+import SignIn from './user/SignIn/SignIn';
+import SignUp from './user/SignUp/SignUp';
 import Header from './Header/Header';
 import PostsGallery from '../components/posts/PostsGallery';
 const App = () =>  {
