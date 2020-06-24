@@ -45,6 +45,7 @@ exports.signup = asyncHandler(async (req, res, next) => {
 
 exports.signin = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(email, password);
 
   //Check if email and password exist
   if (!email || !password) {
@@ -103,7 +104,6 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
-
 
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   // 1) Get user based on POSTed email
