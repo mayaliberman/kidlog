@@ -13,12 +13,12 @@ const App = () => {
       window.location.pathname === '/sign-in' ? null : (
         <Header />
       )}
-
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/sign-in' component={SignIn} />
         <Route exact path='/sign-up' component={SignUp} />
         <Route exact path='/posts' component={PostsGallery} />
+
         <Route
           exact
           path='/my-acount'
