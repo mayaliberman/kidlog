@@ -84,7 +84,7 @@ const SignUp = (props) => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values) => {
           return signup(
             values.firstName,
             values.lastName,
@@ -105,6 +105,65 @@ const SignUp = (props) => {
           /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit} className={form}>
+            <div
+              className={errors}
+              style={{
+                display:
+                  errors.firstName && touched.firstName && errors.firstName
+                    ? 'block'
+                    : 'none',
+              }}
+            >
+              {errors.firstName && touched.firstName && errors.firstName}
+            </div>
+            <div
+              className={error}
+              style={{
+                display:
+                  errors.lastName && touched.lastName && errors.lastName
+                    ? 'block'
+                    : 'none',
+              }}
+            >
+              {errors.lastName && touched.lastName && errors.lastName}
+            </div>
+            <div
+              className={error}
+              style={{
+                display:
+                  errors.email && touched.email && errors.email
+                    ? 'block'
+                    : 'none',
+              }}
+            >
+              {errors.email && touched.email && errors.email}
+            </div>
+            <div
+              className={error}
+              style={{
+                display:
+                  errors.password && touched.password && errors.password
+                    ? 'block'
+                    : 'none',
+              }}
+            >
+              {errors.password && touched.password && errors.password}
+            </div>
+            <div
+              className={error}
+              style={{
+                display:
+                  errors.passwordConfirm &&
+                  touched.passwordConfirm &&
+                  errors.passwordConfirm
+                    ? 'block'
+                    : 'none',
+              }}
+            >
+              {errors.passwordConfirm &&
+                touched.passwordConfirm &&
+                errors.passwordConfirm}
+            </div>
             <input
               type='text'
               id='firstName'
@@ -115,9 +174,7 @@ const SignUp = (props) => {
               onBlur={handleBlur}
               value={values.firstName}
             />
-            <div className={error}>
-              {errors.firstName && touched.firstName && errors.firstName}
-            </div>
+
             <input
               type='text'
               id='lastName'
@@ -128,9 +185,7 @@ const SignUp = (props) => {
               onBlur={handleBlur}
               value={values.lastName}
             />
-            <div className={error}>
-              {errors.lastName && touched.lastName && errors.lastName}
-            </div>
+
             <input
               type='text'
               id='email'
@@ -141,9 +196,7 @@ const SignUp = (props) => {
               onBlur={handleBlur}
               value={values.email}
             />
-            <div className={error}>
-              {errors.email && touched.email && errors.email}
-            </div>
+
             <input
               type='password'
               id='password'
@@ -154,9 +207,7 @@ const SignUp = (props) => {
               onBlur={handleBlur}
               value={values.password}
             />
-            <div className={error}>
-              {errors.password && touched.password && errors.password}
-            </div>
+
             <input
               type='password'
               id='passwordConfirm'
@@ -167,11 +218,7 @@ const SignUp = (props) => {
               onBlur={handleBlur}
               value={values.passwordConfirm}
             />
-            <div className={error}>
-              {errors.passwordConfirm &&
-                touched.passwordConfirm &&
-                errors.passwordConfirm}
-            </div>
+
             <button type='submit' disabled={isSubmitting} className={button}>
               Submit
             </button>

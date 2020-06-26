@@ -1,0 +1,36 @@
+.content {
+  @media (max-width: 375px) {
+    background-image: url('../../assets/bg.png');
+  }
+  color: white;
+  background-image: url('../../assets/welcome-bg.png');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.25rem;
+  //   line-height: 1rem;
+}
+
+.button {
+  margin-top: 30px;
+  color: white;
+  text-decoration: none;
+  padding: 15px 80px;
+  border-color: transparent;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: #504de5;
+  &:hover {
+    background-color: #d5d4f9;
+    border-color: transparent;
+  }
+}

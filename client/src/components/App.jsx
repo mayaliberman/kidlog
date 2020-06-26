@@ -5,7 +5,7 @@ import SignIn from './user/SignIn/SignIn';
 import SignUp from './user/SignUp/SignUp';
 import Header from './Header/Header';
 import PostsGallery from '../components/posts/PostGallery/PostsGallery';
-
+import NotFound from '../components/NotFound/NotFound';
 const App = () => {
   return (
     <BrowserRouter>
@@ -26,6 +26,7 @@ const App = () => {
           path='/my-acount'
           component={() => <div>My Account</div>}
         />
+        <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
   );
