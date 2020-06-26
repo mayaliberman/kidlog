@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PostMenu from '../PostMenu/PostMenu';
 import {
   content,
@@ -14,6 +14,7 @@ import {
 } from './PostCard.module.scss';
 import avatarIcon from '../../../assets/image-4.svg';
 import moreInfo from '../../../assets/moreInfo.svg';
+
 const PostCard = ({
   desc,
   photoTitle,
@@ -23,6 +24,11 @@ const PostCard = ({
   childName,
   lessonNum,
 }) => {
+  const [toggleMenu, setToggleMenu] = useState(true);
+
+  const toggleHidden = () => {
+    setToggleMenu(!toggleMenu);
+  };
   const postDate = new Date(date);
   const year = postDate.getFullYear();
   const day = postDate.getDate();
@@ -60,8 +66,13 @@ const PostCard = ({
           </div>
         </div>
 
-        <img alt='more-info' src={moreInfo} className={more} />
-        <PostMenu />
+        <img
+          alt='more-info'
+          src={moreInfo}
+          className={more}
+          onClick={toggleHidden}
+        />
+        {!toggleMenu && <PostMenu />}
       </div>
       <div>
         <figure className={photoFigure}>

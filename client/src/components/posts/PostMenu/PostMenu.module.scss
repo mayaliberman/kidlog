@@ -21,20 +21,33 @@
 }
 
 .notificationList {
+  margin: 0px;
   list-style: none;
   padding-left: 0px;
   color: black;
   & li {
-    display: flex;
-    justify-content: space-between;
-    // height: 15px;
-    color: #6f8ba4;
-    font-size: 12px;
-    // padding: 5px 0;
+    // height: 18px;
+
+    padding: 10px 0;
   }
 
   & li:last-child {
+    color: #e26453;
     // padding: 5px 0;
     border-top: 1px solid rgba(192, 209, 224, 0.2);
   }
+}
+
+.editButton {
+  text-decoration: inherit;
+  //   padding: 10px;
+  color: #e26453;
+  font-size: 14px;
+}
+
+.deleteButton {
+  text-decoration: inherit;
+  //   padding: 10px;
+  color: #6f8ba4;
+  font-size: 14px;
 }
