@@ -1,10 +1,9 @@
+@import '../../../styles/style.scss';
+
 .content {
-  color: white;
-  background-color: #fcfbfb;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  color: $bg-paper;
+  background-color: $bg-default;
+  @include flexy($direction: column);
   height: 100vh;
   text-align: center;
 }
@@ -18,7 +17,7 @@
 
 .subtitle {
   font-size: 22px;
-  color: #3b566e;
+  color: $secondary-main;
   padding: 0 10px;
   margin-bottom: 0px;
   font-weight: normal;
@@ -34,27 +33,7 @@
 }
 
 .input {
-  margin-top: 20px;
-  color: #c0d1e0;
-  padding: 15px 20px;
-  background-color: white;
-  display: inline-block;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04),
-    0px 6px 24px rgba(0, 0, 0, 0.06);
-  font-size: 18px;
-  border-bottom: 1px solid white;
-  box-sizing: border-box;
-  &:focus {
-    outline: none;
-    border-bottom: 1px solid white;
-    color: #6f8ba4;
-  }
-  &::placeholder {
-    color: #6f8ba4;
-    font-size: 14px;
-  }
+  @include input-white;
 }
 .password {
   font-size: 18px;
@@ -62,27 +41,9 @@
 
 .error {
   padding: 10px;
-  color: #e26453;
+  color: $error;
   font-weight: bold;
 }
 .button {
-  margin-top: 30px;
-  color: white;
-  text-decoration: none;
-  padding: 15px 80px;
-  border-color: transparent;
-  border-radius: 25px;
-  font-weight: bold;
-  font-size: 15px;
-  cursor: pointer;
-  text-transform: uppercase;
-  background-color: #504de5;
-
-  &:hover {
-    background-color: #d5d4f9;
-    border-color: transparent;
-  }
-  &:focus {
-    outline: none;
-  }
+  @include button;
 }

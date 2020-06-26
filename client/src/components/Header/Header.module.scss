@@ -1,3 +1,5 @@
+@import '../../styles/style.scss';
+
 .nav {
   height: 60px;
   position: fixed;
@@ -5,10 +7,9 @@
   z-index: 1000;
   top: 0;
   padding: 0px 10px;
-  background-color: #504de5;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: $primary-main;
+  @include flexy($direction: row, $justify: space-between, $align: center);
+
   @media (max-width: 375px) {
     height: 80px;
   }
@@ -16,7 +17,7 @@
 
 .logoIcon {
   height: 70%;
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     height: 60%;
   }
   @media (max-width: 375px) {
@@ -25,12 +26,12 @@
 }
 
 .headerTitle {
-  color: white;
+  color: $bg-paper;
   font-size: 18px;
 }
 
 .account {
-  color: white;
+  color: $bg-paper;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -38,7 +39,7 @@
 }
 .avatar {
   margin-right: 10px;
-  background-color: white;
+  background-color: $bg-paper;
   border-radius: 50px;
 }
 

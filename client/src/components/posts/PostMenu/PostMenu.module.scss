@@ -1,10 +1,11 @@
+@import '../../../styles/style.scss';
+
 .box {
   display: none;
   position: absolute;
   background-color: #fff;
   right: 7%;
   width: 110px;
-  //   height: 40px;
   padding: 10px;
   box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.12);
   margin-top: 60px;
@@ -26,8 +27,6 @@
   padding-left: 0px;
   color: black;
   & li {
-    // height: 18px;
-
     padding: 10px 0;
   }
 
