@@ -8,9 +8,10 @@ import {
   password,
   button,
   forgotPassword,
+  error,
 } from './SignIn.module.scss';
 import logo from '../../../assets/Logo_white_splash.svg';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, Redirect } from 'react-router-dom';
 import cookies from 'react-cookies';
 
 const sassClasses = {
@@ -20,18 +21,22 @@ const sassClasses = {
 
 const SignIn = (props) => {
   const login = async (email, password) => {
-    const res = await axios.post(`http://localhost:5000/users/signin`, {
-      email,
-      password,
-    });
-    if (res) {
-      console.log(res.data.token);
-      cookies.save('auth', res.data.token, { path: '/' });
-      console.log(props.history);
-      props.history.push('/posts');
-      console.log(window.location.pathname);
+    try {
+      const res = await axios.post(`http://localhost:5000/users/signin`, {
+        email,
+        password,
+      });
+      if (res) {
+        console.log(res.data.token);
+        cookies.save('auth', res.data.token, { path: '/' });
+
+        props.history.push('/posts');
+        console.log(window.location.pathname);
+      }
+      console.log(res);
+    } catch (err) {
+      console.error(err);
     }
-    console.log(res);
   };
 
   return (
@@ -41,12 +46,18 @@ const SignIn = (props) => {
         initialValues={{ email: '', password: '' }}
         validate={(values) => {
           const errors = {};
+
           if (!values.email) {
-            errors.email = 'Required';
+            errors.email = '* Required';
           } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
-            errors.email = 'Invalid email address';
+            errors.email = '* Invalid email address';
+          }
+          if (!values.password) {
+            errors.password = '*Password is required!';
+          } else if (values.password.length < 6) {
+            errors.password = '*Password has to be longer than 6 characters';
           }
           return errors;
         }}
@@ -74,7 +85,9 @@ const SignIn = (props) => {
               value={values.email}
               className={input}
             />
-            {errors.email && touched.email && errors.email}
+            <div className={error}>
+              {errors.email && touched.email && errors.email}
+            </div>
             <input
               type='password'
               name='password'
@@ -84,7 +97,9 @@ const SignIn = (props) => {
               value={values.password}
               className={[input, password].join(' ')}
             />
-            {errors.password && touched.password && errors.password}
+            <div className={error}>
+              {errors.password && touched.password && errors.password}
+            </div>
             <Link to='/sign-in' className={forgotPassword}>
               Forgot Password?
             </Link>
@@ -94,26 +109,6 @@ const SignIn = (props) => {
           </form>
         )}
       </Formik>
-
-      {/* <form className={form}>
-          <input
-            type='text'
-            id='password'
-            name='Email'
-            placeholder='Email'
-            className={input}
-          />
-
-          <input
-            type='password'
-            id='password'
-            name='password'
-            placeholder='Password'
-            className={[input, password].join(' ')}
-          />
-
-          <input type='submit' value='Submit' className={button} />
-        </form> */}
     </div>
   );
 };

@@ -1,10 +1,11 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Switch, useLocation } from 'react-router-dom';
 import Home from './Home/Home.jsx';
 import SignIn from './user/SignIn/SignIn';
 import SignUp from './user/SignUp/SignUp';
 import Header from './Header/Header';
 import PostsGallery from '../components/posts/PostGallery/PostsGallery';
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ const App = () => {
       window.location.pathname === '/sign-in' ? null : (
         <Header />
       )}
+
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/sign-in' component={SignIn} />
