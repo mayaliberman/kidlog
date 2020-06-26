@@ -1,4 +1,5 @@
 import React from 'react';
+import PostMenu from '../PostMenu/PostMenu';
 import {
   content,
   avatar,
@@ -60,6 +61,7 @@ const PostCard = ({
         </div>
 
         <img alt='more-info' src={moreInfo} className={more} />
+        <PostMenu />
       </div>
       <div>
         <figure className={photoFigure}>
