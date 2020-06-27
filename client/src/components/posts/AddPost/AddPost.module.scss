@@ -1,0 +1,88 @@
+@import '../../../styles/style.scss';
+
+.content {
+  box-sizing: border-box;
+  margin: 15px auto;
+  background-color: $bg-paper;
+  border-radius: 15px;
+  width: 60%;
+  box-shadow: $bx-shadow-card;
+  @media (max-width: 1024px) {
+    width: 80%;
+  }
+  border-radius: 10px;
+  @media (max-width: 768px) {
+    width: 98%;
+  }
+}
+
+.header {
+  padding: 10px 15px;
+  @include flexy($justify: start);
+  height: 30px;
+  background-color: $card-header-bg;
+  color: $secondary-main;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.text {
+  padding: 15px;
+  @include flexy($justify: space-between);
+}
+
+.message {
+  flex-basis: 70%;
+  color: $secondary-main;
+}
+
+.button {
+  flex-basis: 20%;
+  @include button;
+}
+
+.hidden_elem {
+  display: none !important;
+}
+.ancore {
+  display: block;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 8px 6px;
+  width: 28px;
+}
+
+.addPhoto {
+  background-image: url('../../../assets/add-photo.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 30px;
+
+  //   background-position: -371px -77px;
+}
+
+label.filebutton {
+  background-image: url('../../../assets/add-photo.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+}
+
+label span input {
+  z-index: 999;
+  line-height: 0;
+  font-size: 50px;
+  position: absolute;
+  top: -2px;
+  left: -700px;
+  opacity: 0;
+  filter: alpha(opacity = 0);
+  -ms-filter: 'alpha(opacity=0)';
+  cursor: pointer;
+  _cursor: hand;
+  margin: 0;
+  padding: 0;
+}

@@ -62,7 +62,7 @@ const PostCard = ({
           <img alt='avatar' src={avatarIcon} className={avatar} />
           <div style={{ marginLeft: '10px' }}>
             <h4 className={tagsTitle}>{postChild}</h4>
-            <p className={lessonDesc}>{lessonDetails}</p>
+            <h6 className={lessonDesc}>{lessonDetails}</h6>
           </div>
         </div>
 

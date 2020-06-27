@@ -8,7 +8,7 @@
   top: 0;
   padding: 0px 10px;
   background-color: $primary-main;
-  @include flexy($direction: row, $justify: space-between, $align: center);
+  @include flexy($justify: space-between, $align: center);
 
   @media (max-width: 375px) {
     height: 80px;
@@ -33,9 +33,7 @@
 .account {
   color: $bg-paper;
   padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flexy($justify: space-between, $align: center, $wrap: nowrap);
 }
 .avatar {
   margin-right: 10px;

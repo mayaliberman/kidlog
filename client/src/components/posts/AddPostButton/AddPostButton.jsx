@@ -12,12 +12,12 @@ const AddPostButton = () => {
   return (
     <div className={content}>
       <div className={header}>
-        <p>New Activity</p>
+        <h6>New Activity</h6>
       </div>
       <div className={text}>
-        <p className={message}>
+        <h3 className={message}>
           Hello Maya, ready to add today's activity with your kid?
-        </p>
+        </h3>
         <div>
           <Link to='/sign-in' className={button}>
             <img src={addIcon} />
