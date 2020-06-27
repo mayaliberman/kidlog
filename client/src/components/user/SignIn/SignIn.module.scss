@@ -4,12 +4,9 @@
   @media (max-width: 375px) {
     background-image: url('../../../assets/bg.png');
   }
-  color: white;
+  color: $bg-paper;
   background-image: url('../../../assets/welcome-bg.png');
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include flexy($direction: column);
   height: 100vh;
   text-align: center;
 }
@@ -25,22 +22,21 @@
 }
 
 .input {
-  margin-top: 20px;
-  color: white;
+  margin-top: 40px;
+  color: $bg-paper;
   padding: 12px 0px;
   background-color: transparent;
-  //   margin: 20px 0;
   display: inline-block;
   border: none;
   font-size: 18px;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid $bg-paper;
   box-sizing: border-box;
   &:focus {
     outline: none;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid $bg-paper;
   }
   &::placeholder {
-    color: white;
+    color: $bg-paper;
     font-size: 18px;
   }
 }
@@ -52,36 +48,19 @@
 .forgotPassword {
   background-color: 'none';
   text-align: right;
-  color: white;
+  color: $bg-paper;
   margin-top: 20px;
   text-decoration: none;
 }
 
 .error {
+  margin-top: 10px;
+  background-color: $bg-paper;
+  text-align: left;
   padding: 10px;
-  color: #e26453;
+  color: $error;
   font-weight: bold;
 }
 .button {
-  margin-top: 30px;
-  color: white;
-  text-decoration: none;
-  padding: 15px 80px;
-  border-color: transparent;
-  border-radius: 25px;
-  font-weight: bold;
-  font-size: 15px;
-  cursor: pointer;
-  text-transform: uppercase;
-  background-color: #504de5;
-
-  &:hover {
-    background-color: #d5d4f9;
-    border-color: transparent;
-  }
-  &:focus {
-    outline: none;
-    // background-color: #d5d4f9;
-    // border-color: transparent;
-  }
+  @include button;
 }

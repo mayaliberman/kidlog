@@ -104,125 +104,129 @@ const SignUp = (props) => {
           isSubmitting,
           /* and other goodies */
         }) => (
-          <form onSubmit={handleSubmit} className={form}>
-            <div
-              className={errors}
-              style={{
-                display:
-                  errors.firstName && touched.firstName && errors.firstName
-                    ? 'block'
-                    : 'none',
-              }}
-            >
-              {errors.firstName && touched.firstName && errors.firstName}
-            </div>
-            <div
-              className={error}
-              style={{
-                display:
-                  errors.lastName && touched.lastName && errors.lastName
-                    ? 'block'
-                    : 'none',
-              }}
-            >
-              {errors.lastName && touched.lastName && errors.lastName}
-            </div>
-            <div
-              className={error}
-              style={{
-                display:
-                  errors.email && touched.email && errors.email
-                    ? 'block'
-                    : 'none',
-              }}
-            >
-              {errors.email && touched.email && errors.email}
-            </div>
-            <div
-              className={error}
-              style={{
-                display:
-                  errors.password && touched.password && errors.password
-                    ? 'block'
-                    : 'none',
-              }}
-            >
-              {errors.password && touched.password && errors.password}
-            </div>
-            <div
-              className={error}
-              style={{
-                display:
-                  errors.passwordConfirm &&
+          <>
+            <div>
+              <div
+                className={errors}
+                style={{
+                  display:
+                    errors.firstName && touched.firstName && errors.firstName
+                      ? 'block'
+                      : 'none',
+                }}
+              >
+                {errors.firstName && touched.firstName && errors.firstName}
+              </div>
+              <div
+                className={error}
+                style={{
+                  display:
+                    errors.lastName && touched.lastName && errors.lastName
+                      ? 'block'
+                      : 'none',
+                }}
+              >
+                {errors.lastName && touched.lastName && errors.lastName}
+              </div>
+              <div
+                className={error}
+                style={{
+                  display:
+                    errors.email && touched.email && errors.email
+                      ? 'block'
+                      : 'none',
+                }}
+              >
+                {errors.email && touched.email && errors.email}
+              </div>
+              <div
+                className={error}
+                style={{
+                  display:
+                    errors.password && touched.password && errors.password
+                      ? 'block'
+                      : 'none',
+                }}
+              >
+                {errors.password && touched.password && errors.password}
+              </div>
+              <div
+                className={error}
+                style={{
+                  display:
+                    errors.passwordConfirm &&
+                    touched.passwordConfirm &&
+                    errors.passwordConfirm
+                      ? 'block'
+                      : 'none',
+                }}
+              >
+                {errors.passwordConfirm &&
                   touched.passwordConfirm &&
-                  errors.passwordConfirm
-                    ? 'block'
-                    : 'none',
-              }}
-            >
-              {errors.passwordConfirm &&
-                touched.passwordConfirm &&
-                errors.passwordConfirm}
+                  errors.passwordConfirm}
+              </div>
             </div>
-            <input
-              type='text'
-              id='firstName'
-              name='firstName'
-              placeholder='First Name'
-              className={input}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.firstName}
-            />
+            <form onSubmit={handleSubmit} className={form}>
+              <input
+                type='text'
+                id='firstName'
+                name='firstName'
+                placeholder='First Name'
+                className={input}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.firstName}
+              />
 
-            <input
-              type='text'
-              id='lastName'
-              name='lastName'
-              placeholder='Last Name'
-              className={input}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.lastName}
-            />
+              <input
+                type='text'
+                id='lastName'
+                name='lastName'
+                placeholder='Last Name'
+                className={input}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.lastName}
+              />
 
-            <input
-              type='text'
-              id='email'
-              name='email'
-              placeholder='Email'
-              className={input}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
+              <input
+                type='text'
+                id='email'
+                name='email'
+                placeholder='Email'
+                className={input}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+              />
 
-            <input
-              type='password'
-              id='password'
-              name='password'
-              placeholder='Password'
-              className={[input, password].join(' ')}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
+              <input
+                type='password'
+                id='password'
+                name='password'
+                placeholder='Password'
+                className={[input, password].join(' ')}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+              />
 
-            <input
-              type='password'
-              id='passwordConfirm'
-              name='passwordConfirm'
-              placeholder='Confirm Password'
-              className={[input, password].join(' ')}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.passwordConfirm}
-            />
+              <input
+                type='password'
+                id='passwordConfirm'
+                name='passwordConfirm'
+                placeholder='Confirm Password'
+                className={[input, password].join(' ')}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.passwordConfirm}
+              />
 
-            <button type='submit' disabled={isSubmitting} className={button}>
-              Submit
-            </button>
-          </form>
+              <button type='submit' disabled={isSubmitting} className={button}>
+                Submit
+              </button>
+            </form>
+          </>
         )}
       </Formik>
     </div>

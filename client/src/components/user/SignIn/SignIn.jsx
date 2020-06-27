@@ -31,6 +31,7 @@ const SignIn = (props) => {
         cookies.save('auth', res.data.token, { path: '/' });
 
         props.history.push('/posts');
+
         console.log(window.location.pathname);
       }
       console.log(res);
@@ -85,7 +86,11 @@ const SignIn = (props) => {
               value={values.email}
               className={input}
             />
-            <div className={error}>
+            <div
+              className={
+                errors.email && touched.email && errors.email ? error : null
+              }
+            >
               {errors.email && touched.email && errors.email}
             </div>
             <input
@@ -97,9 +102,17 @@ const SignIn = (props) => {
               value={values.password}
               className={[input, password].join(' ')}
             />
-            <div className={error}>
+
+            <div
+              className={
+                errors.password && touched.password && errors.password
+                  ? error
+                  : null
+              }
+            >
               {errors.password && touched.password && errors.password}
             </div>
+
             <Link to='/sign-in' className={forgotPassword}>
               Forgot Password?
             </Link>
