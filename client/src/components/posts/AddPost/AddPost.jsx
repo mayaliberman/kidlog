@@ -17,6 +17,7 @@ const AddPost = () => {
     <div className={content}>
       <div className={header}>
         <h6>New Activity</h6>
+        <span>X</span>
       </div>
       <div className={text}>
         <form style={{ display: 'flex', flexDirection: 'column' }}>

@@ -13,5 +13,5 @@
 }
 
 .button {
-  @include button;
+  @include button($padding: 15px 80px);
 }

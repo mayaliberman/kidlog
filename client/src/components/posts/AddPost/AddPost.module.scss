@@ -18,12 +18,15 @@
 
 .header {
   padding: 10px 15px;
-  @include flexy($justify: start);
+  @include flexy($justify: space-between);
   height: 30px;
   background-color: $card-header-bg;
   color: $secondary-main;
   font-size: 12px;
   font-weight: bold;
+  & span {
+    color: black;
+  }
 }
 
 .text {
@@ -39,26 +42,6 @@
 .button {
   flex-basis: 20%;
   @include button;
-}
-
-.hidden_elem {
-  display: none !important;
-}
-.ancore {
-  display: block;
-  box-sizing: border-box;
-  height: 32px;
-  padding: 8px 6px;
-  width: 28px;
-}
-
-.addPhoto {
-  background-image: url('../../../assets/add-photo.svg');
-  background-repeat: no-repeat;
-  background-size: auto;
-  height: 30px;
-
-  //   background-position: -371px -77px;
 }
 
 label.filebutton {
