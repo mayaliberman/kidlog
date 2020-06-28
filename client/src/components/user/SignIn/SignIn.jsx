@@ -29,10 +29,7 @@ const SignIn = (props) => {
       if (res) {
         console.log(res.data.token);
         cookies.save('auth', res.data.token, { path: '/' });
-
         props.history.push('/posts');
-
-        console.log(window.location.pathname);
       }
       console.log(res);
     } catch (err) {
