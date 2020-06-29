@@ -12,7 +12,6 @@ import {
   error,
 } from './SignUp.module.scss';
 import logo from '../../../assets/logo-purple.svg';
-import { Link, useLocation, Redirect } from 'react-router-dom';
 import cookies from 'react-cookies';
 
 const SignUp = (props) => {

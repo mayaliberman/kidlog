@@ -11,13 +11,8 @@ import {
   error,
 } from './SignIn.module.scss';
 import logo from '../../../assets/Logo_white_splash.svg';
-import { Link, useLocation, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import cookies from 'react-cookies';
-
-const sassClasses = {
-  input,
-  password,
-};
 
 const SignIn = (props) => {
   const login = async (email, password) => {

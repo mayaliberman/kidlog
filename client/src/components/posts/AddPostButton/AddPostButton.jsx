@@ -20,7 +20,7 @@ const AddPostButton = () => {
         </h3>
         <div>
           <Link to='/sign-in' className={button}>
-            <img src={addIcon} />
+            <img src={addIcon} alt='add-icon' />
             Add
           </Link>
         </div>

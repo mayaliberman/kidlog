@@ -15,13 +15,21 @@ const PostMenu = () => {
       <ul className={notificationList}>
         <li>
           <Link className={deleteButton}>
-            <img src={editIcon} style={{ paddingRight: '10px' }} />
+            <img
+              src={editIcon}
+              style={{ paddingRight: '10px' }}
+              alt='edit-icon'
+            />
             Edit
           </Link>
         </li>
         <li>
           <Link className={editButton}>
-            <img src={deleteIcon} style={{ paddingRight: '10px' }} />
+            <img
+              src={deleteIcon}
+              style={{ paddingRight: '10px' }}
+              alt='delete-icon'
+            />
             Delete
           </Link>
         </li>

@@ -1,6 +1,5 @@
 {
     "colorize.exclude": [
-    
         "**/.git",
         "**/.svn",
         "**/.hg",
@@ -12,5 +11,5 @@
         "**/tmp",
         "**/dist",
         "**/tests"
-    ]
+    ],
 }

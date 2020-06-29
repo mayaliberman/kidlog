@@ -1,14 +1,16 @@
 import {
   content,
   header,
-  text,
-  message,
+  desc,
   button,
-  hidden_elem,
-  addPhoto,
-  ancore,
+  secondPartForm,
   filebutton,
+  postForm,
+  firstPartForm,
+  inputSecondPart,
+  customSelect,
 } from './AddPost.module.scss';
+import exitIcon from '../../../assets/Exit_icon.svg';
 
 import React from 'react';
 
@@ -17,23 +19,36 @@ const AddPost = () => {
     <div className={content}>
       <div className={header}>
         <h6>New Activity</h6>
-        <span>X</span>
+        <img src={exitIcon} alt='exit-icon' />
       </div>
-      <div className={text}>
-        <form style={{ display: 'flex', flexDirection: 'column' }}>
-          <input
-            type='text'
-            placeholder='Describe here the activity with your kid'
-          />
-
-          <label className={filebutton}>
-            <span>
-              <input type='file' id='myfile' name='myfile' />
-            </span>
-          </label>
+      <div>
+        <form className={postForm}>
+          <div className={firstPartForm}>
+            <textarea
+              className={desc}
+              placeholder='Describe here the activity with your kid'
+            />
+            <label className={filebutton}>
+              <span>
+                <input type='file' id='myfile' name='myfile' />
+              </span>
+            </label>
+          </div>
+          <div className={secondPartForm}>
+            <div className={inputSecondPart}>
+              <label>Kid</label>
+              <select className={customSelect} name='kid' id='kid'>
+                <option value='Eyal'>Eyal</option>
+                <option value='Daniel'>Danielle</option>
+              </select>
+            </div>
+            <div className={inputSecondPart}>
+              <label>Lesson</label>
+              <input type='number' />
+            </div>
+          </div>
           <input type='submit' className={button} />
         </form>
-        {/* <h3 className={message}>Describe here the activity with your kid</h3> */}
       </div>
     </div>
   );

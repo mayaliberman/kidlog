@@ -1,5 +1,5 @@
 import React from 'react';
-import { content, title, subtitle, button } from './Home.module.scss';
+import { content, title, button } from './Home.module.scss';
 import logo from '../../assets/Logo_white_splash.svg';
 import { Link } from 'react-router-dom';
 export const Home = () => {
