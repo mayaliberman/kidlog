@@ -44,6 +44,7 @@
   margin: 20px;
 }
 .desc {
+  padding: 0px;
   outline: none;
   resize: none;
   overflow: auto;
@@ -80,6 +81,8 @@
   margin-right: 40px;
   margin-top: 10px;
   & input {
+    font-size: 16px;
+    letter-spacing: 1px;
     outline: none;
     border: none;
     padding-top: 0.6em;
@@ -90,6 +93,7 @@
 .customSelect {
   display: block;
   font-size: 16px;
+  letter-spacing: 1px;
   font-family: sans-serif;
   color: $secondary-main;
   line-height: 19px;

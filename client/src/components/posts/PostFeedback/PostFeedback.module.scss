@@ -1,0 +1,101 @@
+@import '../../../styles/style.scss';
+
+.content {
+  box-sizing: border-box;
+  margin: 15px auto;
+  background-color: $bg-paper;
+  border-radius: 15px;
+  width: 60%;
+  box-shadow: $bx-shadow-card;
+  @media (max-width: 1024px) {
+    width: 80%;
+  }
+  border-radius: 10px;
+  @media (max-width: 768px) {
+    width: 98%;
+  }
+}
+
+.header {
+  padding: 10px 15px;
+  @include flexy($justify: space-between);
+  height: 30px;
+  background-color: $card-header-bg;
+  color: $secondary-main;
+  font-size: 12px;
+  font-weight: bold;
+  & span {
+    color: $black;
+  }
+}
+
+.text {
+  text-align: center;
+  padding: 15px;
+  @include flexy($justify: center, $direction: column);
+}
+
+.subtext {
+  font-weight: normal;
+  color: $secondary-dark;
+  font-size: 14px;
+}
+
+.message {
+  flex-basis: 70%;
+  color: $secondary-main;
+}
+
+.feedbackQuestion {
+  margin: 0;
+  font-size: 14px;
+  color: $secondary-main;
+}
+
+.iconList {
+  height: 60px;
+  padding-left: 0px;
+  list-style-type: none;
+  margin-bottom: 0px;
+
+  @include flexy($justify: center, $wrap: nowrap);
+  & li {
+    cursor: pointer;
+    margin: 0 15px 0px 15px;
+    @media (max-width: 480px) {
+      padding: 5px;
+      margin: 0 5px 0px 5px;
+    }
+  }
+}
+
+.iconText {
+  @include flexy($justify: space-between, $wrap: nowrap);
+  margin-top: 0px;
+  padding-left: 0px;
+  list-style-type: none;
+  font-size: 10px;
+  & li {
+    cursor: pointer;
+    margin: 0 10px 10px 15px;
+    @include flexy($justify: space-between, $direction: column);
+    @media (max-width: 480px) {
+      padding: 5px;
+      font-size: 8px;
+      margin: 0 5px 0px 5px;
+    }
+  }
+}
+.iconImage {
+  transition: all 1s;
+  transform-origin: 50% 50%;
+  &:hover {
+    transform: scale(1.5);
+    margin-bottom: 7px;
+  }
+}
+.button {
+  margin: 0 auto 30px;
+  @include button($padding: 15px 80px);
+  margin-top: 0;
+}

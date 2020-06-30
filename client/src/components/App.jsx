@@ -16,6 +16,7 @@ const App = () => {
         <Route exact path='/sign-in' component={SignIn} />
         <Route exact path='/sign-up' component={SignUp} />
         <Route exact path='/posts' component={PostsGallery} />
+
         <Route
           exact
           path='/my-acount'

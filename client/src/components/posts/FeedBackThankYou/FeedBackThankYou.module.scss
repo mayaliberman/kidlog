@@ -1,0 +1,44 @@
+@import '../../../styles/style.scss';
+
+.content {
+  box-sizing: border-box;
+  margin: 15px auto;
+  background-color: $bg-paper;
+  border-radius: 15px;
+  width: 60%;
+  box-shadow: $bx-shadow-card;
+  @media (max-width: 1024px) {
+    width: 80%;
+  }
+  border-radius: 10px;
+  @media (max-width: 768px) {
+    width: 98%;
+  }
+}
+
+.header {
+  padding: 10px 15px;
+  @include flexy($justify: space-between);
+  height: 30px;
+  background-color: $card-header-bg;
+  color: $secondary-main;
+  font-size: 12px;
+  font-weight: bold;
+  & span {
+    color: $black;
+  }
+}
+
+.text {
+  text-align: center;
+  padding: 15px;
+}
+
+.message {
+  font-weight: normal;
+  color: $secondary-main;
+}
+
+.subtext {
+  font-size: 18px;
+}
