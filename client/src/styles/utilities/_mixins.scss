@@ -30,6 +30,7 @@
   text-transform: uppercase;
   background-color: $primary-main;
   &:hover {
+    outline: none;
     background-color: $primary-light;
     border-color: transparent;
   }

@@ -16,13 +16,6 @@ import PostFeedback from '../PostFeedback/PostFeedback';
 import exitIcon from '../../../assets/Exit_icon.svg';
 
 const AddPost = (props) => {
-  const [submitPost, setSubmitPost] = useState(false);
-
-  const submit = (e) => {
-    e.preventDefault();
-    setSubmitPost(true);
-  };
-
   return (
     <div className={modal}>
       <div className={content}>
@@ -56,11 +49,12 @@ const AddPost = (props) => {
                 <input type='number' />
               </div>
             </div>
-            <input type='submit' className={button} onSubmit={submit} />
+            <button className={button} onClick={props.submit}>
+              Submit
+            </button>
           </form>
         </div>
       </div>
-      <div className={content}>{submitPost ? <PostFeedback /> : null}</div>
     </div>
   );
 };
