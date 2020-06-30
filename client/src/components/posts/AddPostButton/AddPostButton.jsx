@@ -8,7 +8,7 @@ import {
 } from './AddPostButton.module.scss';
 import { Link } from 'react-router-dom';
 import addIcon from '../../../assets/Add_Icon.svg';
-const AddPostButton = () => {
+const AddPostButton = (props) => {
   return (
     <div className={content}>
       <div className={header}>
@@ -19,10 +19,10 @@ const AddPostButton = () => {
           Hello Maya, ready to add today's activity with your kid?
         </h3>
         <div>
-          <Link to='/sign-in' className={button}>
+          <button onClick={props.togglePop} className={button}>
             <img src={addIcon} alt='add-icon' />
             Add
-          </Link>
+          </button>
         </div>
       </div>
     </div>

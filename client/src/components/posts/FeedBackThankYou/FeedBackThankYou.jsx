@@ -18,7 +18,7 @@ const FeedBackThankYou = () => {
       <div className={text}>
         <img src={thankYouIcon} alt='thank-you-icon' />
         <h1 className={message}>We got it!</h1>
-        <p className={subtext}>Thanks you for your feedback</p>
+        <p className={subtext}>Thank you for your feedback</p>
       </div>
     </div>
   );
