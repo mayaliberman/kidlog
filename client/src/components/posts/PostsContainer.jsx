@@ -1,48 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PostCard from './PostCard/PostCard.jsx';
-import axios from 'axios';
-import Unsplash, { toJson } from 'unsplash-js';
-import { UNSPLASH_ACESS_KEY, UNSPLAH_SECRET_KEY } from '../../config';
 import Image from '../../assets/welcome-bg.png';
 import Spinner from '../../components/ui/Spinner';
-
-const unsplash = new Unsplash({
-  accessKey: UNSPLASH_ACESS_KEY,
-  secret: UNSPLAH_SECRET_KEY,
-});
+import PostContext from '../../context/post/postContext';
 
 const PostsContainer = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [photos, setPhotos] = useState([]);
+  const postContext = useContext(PostContext);
+  const { posts, photos, loading, getUnsplashPhoto, getPosts } = postContext;
+  const { results } = photos;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get(`http://localhost:5000/posts`);
-      await unsplash.search
-        .photos('children', 1, posts.length, {
-          orientation: 'portrait',
-        })
-        .then(toJson)
-        .then((json) => {
-          setPhotos(json);
-        });
-      setPosts(res.data.data);
-      setLoading(false);
-    };
-
-    fetchData();
-    //eslint-disable-next-line
+    getUnsplashPhoto();
+    getPosts();
   }, []);
 
   // Photo by <a href="https://unsplash.com/@anniespratt?utm_source=your_app_name&utm_medium=referral">Annie Spratt</a> on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral">Unsplash</a>
-
-  const { results } = photos;
 
   if (loading) {
     return (
       <div>
         <Spinner />
+      </div>
+    );
+  } else if (posts.length < 1) {
+    return (
+      <div>
+        <h1>No Posts Uploaded Yet</h1>
       </div>
     );
   } else {

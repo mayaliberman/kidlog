@@ -18,7 +18,7 @@ const PostsGallery = () => {
     setPopup(false);
     setFeedbackPost(false);
   };
-  const submit = (e) => {
+  const submitPost = (e) => {
     e.preventDefault();
     setPopup(false);
     setFeedbackPost(true);
@@ -33,20 +33,16 @@ const PostsGallery = () => {
     }, 1500);
   };
 
-  const toggleThankyouFeedback = () => {
-    setThankYouPopup(false);
-  };
   return (
     <div className={postGallery}>
       <AddPostButton togglePop={togglePop} />
-      {popup ? <AddPost togglePop={togglePop} submit={submit} /> : null}
+      {popup ? <AddPost togglePop={togglePop} submit={submitPost} /> : null}
       {feedbackPost ? (
         <PostFeedback togglePop={feedbackToggle} submit={submitFeedback} />
       ) : null}
       {ThankYouPopup ? (
-        <FeedBackThankYou togglePop={toggleThankyouFeedback} />
+        <FeedBackThankYou togglePop={() => setThankYouPopup(false)} />
       ) : null}
-
       <PostsContainer />
     </div>
   );
