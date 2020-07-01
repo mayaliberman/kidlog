@@ -17,7 +17,7 @@ import AuthContext from '../../../context/auth/authContext';
 
 const SignIn = () => {
   const authContext = useContext(AuthContext);
-
+  console.log(authContext);
   // const { login } = authContext;
   // const login = async (email, password) => {
   //   try {

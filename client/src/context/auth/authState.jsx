@@ -4,6 +4,7 @@ import authReducer from './authReducer';
 import AuthContext from './authContext';
 import cookies from 'react-cookies';
 import { LOGIN_SUCCESS } from '../types';
+import { withRouter } from 'react-router-dom';
 const AuthState = (props) => {
   const initialState = {
     isLogged: false,
@@ -22,18 +23,18 @@ const AuthState = (props) => {
           type: LOGIN_SUCCESS,
           payload: { ['auth']: res.data.token },
         });
-        console.log(res.data.token);
+
         cookies.save('auth', res.data.token, { path: '/' });
+
         props.history.push('/posts');
       }
-      console.log(res);
     } catch (err) {
       console.error(err);
     }
   };
   return (
     <AuthContext.Provider
-      values={{
+      value={{
         isLogged: state.isLogged,
         userId: state.userId,
         login,
@@ -44,4 +45,4 @@ const AuthState = (props) => {
   );
 };
 
-export default AuthState;
+export default withRouter(AuthState);

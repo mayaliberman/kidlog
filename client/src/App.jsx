@@ -8,17 +8,19 @@ import PostsGallery from './components/posts/PostGallery/PostsGallery';
 import NotFound from './components/NotFound/NotFound';
 import PostState from './context/post/PostState';
 import AuthState from './context/auth/AuthState';
+import PrivateRoute from './components/PriveteRoute';
 
 const App = () => {
   return (
-    <AuthState>
-      <PostState>
-        <BrowserRouter>
+    <BrowserRouter>
+      <AuthState>
+        <PostState>
           <Header />
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/sign-in' component={SignIn} />
             <Route exact path='/sign-up' component={SignUp} />
+            <PrivateRoute path={'/posts'} exact component={PostsGallery} />
             <Route exact path='/posts' component={PostsGallery} />
 
             <Route
@@ -30,9 +32,9 @@ const App = () => {
             />
             <Route component={NotFound} />
           </Switch>
-        </BrowserRouter>
-      </PostState>
-    </AuthState>
+        </PostState>
+      </AuthState>
+    </BrowserRouter>
   );
 };
 
