@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 import {
@@ -13,24 +13,28 @@ import {
 import logo from '../../../assets/Logo_white_splash.svg';
 import { Link } from 'react-router-dom';
 import cookies from 'react-cookies';
+import AuthContext from '../../../context/auth/authContext';
 
-const SignIn = (props) => {
-  const login = async (email, password) => {
-    try {
-      const res = await axios.post(`http://localhost:5000/users/signin`, {
-        email,
-        password,
-      });
-      if (res) {
-        console.log(res.data.token);
-        cookies.save('auth', res.data.token, { path: '/' });
-        props.history.push('/posts');
-      }
-      console.log(res);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+const SignIn = () => {
+  const authContext = useContext(AuthContext);
+
+  // const { login } = authContext;
+  // const login = async (email, password) => {
+  //   try {
+  //     const res = await axios.post(`http://localhost:5000/users/signin`, {
+  //       email,
+  //       password,
+  //     });
+  //     if (res) {
+  //       console.log(res.data.token);
+  //       cookies.save('auth', res.data.token, { path: '/' });
+  //       props.history.push('/posts');
+  //     }
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <div className={content}>
@@ -55,7 +59,7 @@ const SignIn = (props) => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          return login(values.email, values.password);
+          return authContext.login(values.email, values.password);
         }}
       >
         {({
