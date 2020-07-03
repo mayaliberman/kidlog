@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Formik } from 'formik';
-import axios from 'axios';
 import {
   content,
   form,
@@ -12,29 +11,10 @@ import {
 } from './SignIn.module.scss';
 import logo from '../../../assets/Logo_white_splash.svg';
 import { Link } from 'react-router-dom';
-import cookies from 'react-cookies';
 import AuthContext from '../../../context/auth/authContext';
 
 const SignIn = () => {
   const authContext = useContext(AuthContext);
-  console.log(authContext);
-  // const { login } = authContext;
-  // const login = async (email, password) => {
-  //   try {
-  //     const res = await axios.post(`http://localhost:5000/users/signin`, {
-  //       email,
-  //       password,
-  //     });
-  //     if (res) {
-  //       console.log(res.data.token);
-  //       cookies.save('auth', res.data.token, { path: '/' });
-  //       props.history.push('/posts');
-  //     }
-  //     console.log(res);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   return (
     <div className={content}>

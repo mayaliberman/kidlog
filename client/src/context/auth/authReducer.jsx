@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS } from '../types';
+import { LOGIN_SUCCESS, USER_LOADED, LOGOUT, REGISTER_SUCCESS } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -6,8 +6,28 @@ export default (state, action) => {
       return {
         ...state,
         isLogged: true,
-        userId: action.payload,
+        token: action.payload,
       };
+    case USER_LOADED:
+      return {
+        ...state,
+        isLogged: true,
+        user: action.payload,
+      };
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        isLogged: true,
+      };
+
+    case LOGOUT: {
+      return {
+        ...state,
+        isLogged: false,
+        token: null,
+        user: null,
+      };
+    }
     default:
       return state;
   }

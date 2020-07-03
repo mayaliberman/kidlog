@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 import {
@@ -14,34 +14,36 @@ import {
 import logo from '../../../assets/logo-purple.svg';
 import cookies from 'react-cookies';
 
+import AuthContext from '../../../context/auth/authContext';
 const SignUp = (props) => {
-  const signup = async (
-    firstName,
-    lastName,
-    email,
-    password,
-    passwordConfirm
-  ) => {
-    try {
-      const res = await axios.post(`http://localhost:5000/users/signup`, {
-        firstName,
-        lastName,
-        email,
-        password,
-        passwordConfirm,
-      });
-      if (res) {
-        console.log(res.data.token);
-        cookies.save('auth', res.data.token, { path: '/' });
+  const authContext = useContext(AuthContext);
+  // const signup = async (
+  //   firstName,
+  //   lastName,
+  //   email,
+  //   password,
+  //   passwordConfirm
+  // ) => {
+  //   try {
+  //     const res = await axios.post(`http://localhost:5000/users/signup`, {
+  //       firstName,
+  //       lastName,
+  //       email,
+  //       password,
+  //       passwordConfirm,
+  //     });
+  //     if (res) {
+  //       console.log(res.data.token);
+  //       cookies.save('auth', res.data.token, { path: '/' });
 
-        props.history.push('/posts');
-        console.log(window.location.pathname);
-      }
-      console.log(res);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //       props.history.push('/posts');
+  //       console.log(window.location.pathname);
+  //     }
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
   return (
     <div className={content}>
       <img alt='company logo' src={logo} className={logoIcon} />
@@ -84,7 +86,7 @@ const SignUp = (props) => {
           return errors;
         }}
         onSubmit={(values) => {
-          return signup(
+          return authContext.signup(
             values.firstName,
             values.lastName,
             values.email,

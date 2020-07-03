@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   content,
   header,
@@ -12,7 +12,6 @@ import {
   customSelect,
   modal,
 } from './AddPost.module.scss';
-import PostFeedback from '../PostFeedback/PostFeedback';
 import exitIcon from '../../../assets/Exit_icon.svg';
 
 const AddPost = (props) => {

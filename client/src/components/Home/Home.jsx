@@ -9,8 +9,14 @@ export const Home = () => {
       <h1 className={title}>Every kid can become multi-talent</h1>
       <h3>Track your kid's progress and share your experiences</h3>
       <Link to='/sign-in' className={button}>
-        {' '}
-        Let's Start
+        Sign In
+      </Link>
+      <Link
+        to='/sign-up'
+        className={button}
+        style={{ backgroundColor: '#6f8ba4' }}
+      >
+        Sign Up
       </Link>
     </div>
   );

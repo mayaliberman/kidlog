@@ -9,7 +9,6 @@ const PostsContainer = () => {
   const postContext = useContext(PostContext);
   const { posts, photos, loading, getUnsplashPhoto, getPosts } = postContext;
   const { results } = photos;
-  console.log(authContext.isLogged);
   useEffect(() => {
     getUnsplashPhoto();
     getPosts();

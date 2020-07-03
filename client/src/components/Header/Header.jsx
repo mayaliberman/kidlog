@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   nav,
   logoIcon,
@@ -12,7 +12,9 @@ import { useLocation } from 'react-router-dom';
 import avatarIcon from '../../assets/image-4.svg';
 import logo from '../../assets/Logo_white_splash.svg';
 import logout from '../../assets/logout.svg';
+import AuthContext from '../../context/auth/authContext';
 const Header = () => {
+  const authContext = useContext(AuthContext);
   let header = null;
   const location = useLocation();
   if (
@@ -29,7 +31,12 @@ const Header = () => {
         <div className={account}>
           <img alt='avatar' src={avatarIcon} className={avatar} />
           <p className={accountName}>Maya</p>
-          <img alt='logout' src={logout} className={logoutIcon} />
+          <img
+            alt='logout'
+            src={logout}
+            className={logoutIcon}
+            onClick={authContext.logout}
+          />
         </div>
       </div>
     );

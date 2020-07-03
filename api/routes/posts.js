@@ -13,9 +13,9 @@ const {
 } = require('../controllers/postController');
 
 //***ROUTES */
-router.get('/', getPosts);
 //USER ROUTES
 router.use(protect);
+router.get('/', getPosts);
 //get all user posts posts
 router.get('/myposts', getUserPosts);
 
