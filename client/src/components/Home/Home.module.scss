@@ -13,5 +13,14 @@
 }
 
 .button {
-  @include button($padding: 15px 80px);
+  @include button($padding: 15px 120px);
+}
+
+.signIn {
+  text-align: right;
+  color: $bg-paper;
+  margin-top: 20px;
+  & a {
+    color: $bg-paper;
+  }
 }
