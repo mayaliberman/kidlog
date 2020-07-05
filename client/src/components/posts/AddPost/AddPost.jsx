@@ -17,8 +17,6 @@ import Select from 'react-select';
 const colourStyles = {
   control: (styles, { data, isDisabled, isFocused, isSelected }) => ({
     ...styles,
-    // display: 'block',
-
     borderColor: 'white',
 
     borderColor: 'white',
@@ -30,11 +28,9 @@ const colourStyles = {
     },
     '&:active': {
       borderColor: 'white',
-      // border: '1px solid white',
     },
     '&:focus': {
       borderColor: 'white',
-      // border: 'white 1px solid',
     },
   }),
 

@@ -86,8 +86,6 @@ userSchema.pre(/^find/, async function (next) {
 //   doc.children = doc.children.filter((c) => c.active);
 // });
 
-
-
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
@@ -113,7 +111,6 @@ userSchema.methods.createPasswordResetToken = function () {
     .update(resetToken)
     .digest('hex');
 
-  console.log({ resetToken }, this.passwordResetToken);
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;

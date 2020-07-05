@@ -61,12 +61,11 @@ const AuthState = (props) => {
           type: USER_LOADED,
           payload: { user: JSON.parse(atob(res.data.token.split('.')[1])) },
         });
-        console.log(res.data.token);
+
         cookies.save('auth', res.data.token, { path: '/' });
 
         props.history.push('/posts');
       }
-      console.log(res);
     } catch (err) {
       console.error(err);
     }

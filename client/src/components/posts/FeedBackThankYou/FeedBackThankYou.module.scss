@@ -29,6 +29,7 @@
 
 .header {
   padding: 10px 15px;
+  border-radius: 15px 15px 0px 0;
   @include flexy($justify: space-between);
   height: 30px;
   background-color: $card-header-bg;

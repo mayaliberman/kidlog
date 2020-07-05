@@ -50,10 +50,10 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 });
 
 exports.createPost = asyncHandler(async (req, res, next) => {
-  const { desc,  ratings } = req.body;
+  const { desc, ratings } = req.body;
   const userId = req.user.id;
   const lesson = await Lesson.findOne({ lessonNum: req.body.lessonNum });
-  const child = await Child.findById(req.body.childId)
+  const child = await Child.findById(req.body.childId);
   const newPost = {
     desc,
     lessonId: lesson._id,
@@ -105,7 +105,6 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
   post.remove(function (err, item) {
     if (err)
       return next(new AppError(`could not proceed deleting ${err}`, 500));
-    console.log(item);
   });
   res.status(204).json({ status: 'success', data: null });
 });

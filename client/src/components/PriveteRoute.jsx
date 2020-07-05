@@ -7,9 +7,7 @@ const PrivateRoute = (props) => {
   let loggedIn = !!token;
   try {
     const user = JSON.parse(atob(token.split('.')[1]));
-    console.log(user);
   } catch (err) {
-    console.log(err);
     loggedIn = false;
   }
 

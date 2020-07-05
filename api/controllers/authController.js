@@ -6,14 +6,16 @@ const { asyncHandler } = require('../utils/asyncHanlder');
 const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
 
-const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+const signToken = (user) => {
+  user.password = undefined;
+  console.log(user);
+  return jwt.sign({ user }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
 
 const createSendToken = (user, statusCode, res) => {
-  const token = signToken(user._id);
+  const token = signToken(user);
   const cookieOptions = {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
@@ -45,7 +47,6 @@ exports.signup = asyncHandler(async (req, res, next) => {
 
 exports.signin = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
-  console.log(email, password);
 
   //Check if email and password exist
   if (!email || !password) {
@@ -77,7 +78,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
   }
 
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  const currentUser = await User.findById(decoded.id);
+  const currentUser = await User.findById(decoded.user._id);
   if (!currentUser) {
     return next(
       new AppError(`The user belonging this token does not exist anymore`, 401)
