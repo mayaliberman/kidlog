@@ -1,51 +1,71 @@
 @import '../../styles/style.scss';
-
-.nav {
-  height: 60px;
-  position: fixed;
+.navHeader {
   width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
   top: 0;
-  padding: 0px 10px;
+  height: 60px;
   background-color: $primary-main;
-  @include flexy($justify: space-between, $align: center);
-
-  @media (max-width: 375px) {
+  @media (max-width: 768px) {
     height: 80px;
+  }
+}
+.nav {
+  position: fixed;
+  width: 65%;
+  padding: 0px 10px;
+
+  @include flexy($justify: space-between, $align: center);
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+  @media (max-width: 375px) {
+    width: 90%;
   }
 }
 
 .logoIcon {
-  height: 70%;
   @media (max-width: 768px) {
-    height: 60%;
+    width: 20%;
   }
   @media (max-width: 375px) {
-    height: 35%;
+    width: 30%;
   }
 }
 
 .headerTitle {
+  text-transform: capitalize;
   color: $bg-paper;
   font-size: 18px;
+  @media (max-width: 375px) {
+    font-size: 16px;
+  }
 }
 
 .account {
   color: $bg-paper;
-  padding: 10px;
   @include flexy($justify: space-between, $align: center, $wrap: nowrap);
 }
 .avatar {
   margin-right: 10px;
   background-color: $bg-paper;
   border-radius: 50px;
+  @media (max-width: 375px) {
+    width: 30%;
+  }
 }
 
 .accountName {
-  padding-right: 10px;
+  padding-right: 40px;
+  @media (max-width: 375px) {
+    font-size: 14px;
+  }
 }
 
 .logoutIcon {
   height: 50%;
-  margin-right: 10px;
+  // margin-right: 10px;
 }

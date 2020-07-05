@@ -7,6 +7,7 @@ import {
   account,
   accountName,
   logoutIcon,
+  navHeader,
 } from './Header.module.scss';
 import { useLocation } from 'react-router-dom';
 import avatarIcon from '../../assets/image-4.svg';
@@ -15,6 +16,7 @@ import logout from '../../assets/logout.svg';
 import AuthContext from '../../context/auth/authContext';
 const Header = () => {
   const authContext = useContext(AuthContext);
+  console.log(authContext);
   let header = null;
   const location = useLocation();
   if (
@@ -25,18 +27,20 @@ const Header = () => {
     header = <></>;
   else
     header = (
-      <div className={nav}>
-        <img alt='company logo' src={logo} className={logoIcon} />
-        <h3 className={headerTitle}>My Posts</h3>
-        <div className={account}>
-          <img alt='avatar' src={avatarIcon} className={avatar} />
-          <p className={accountName}>Maya</p>
-          <img
-            alt='logout'
-            src={logout}
-            className={logoutIcon}
-            onClick={authContext.logout}
-          />
+      <div className={navHeader}>
+        <div className={nav}>
+          <img alt='company logo' src={logo} className={logoIcon} />
+          <h3 className={headerTitle}>{location.pathname.slice(1)}</h3>
+          <div className={account}>
+            <img alt='avatar' src={avatarIcon} className={avatar} />
+            <p className={accountName}>Maya</p>
+            <img
+              alt='logout'
+              src={logout}
+              className={logoutIcon}
+              onClick={authContext.logout}
+            />
+          </div>
         </div>
       </div>
     );

@@ -18,7 +18,7 @@ const unsplash = new Unsplash({
 });
 
 const PostState = (props) => {
-  const authContext = useContext(AuthContext);
+  // const authContext = useContext(AuthContext);
   const initialState = {
     posts: [],
     loading: true,
@@ -30,8 +30,8 @@ const PostState = (props) => {
   const getPosts = async () => {
     const token = cookie.load('auth');
     const user = JSON.parse(atob(token.split('.')[1]));
-    // console.log(user.id);
-    // console.log(token);
+    console.log(user.id);
+    console.log(token);
     setLoading();
 
     const config = {
@@ -39,6 +39,7 @@ const PostState = (props) => {
         Authorization: `Bearer ${token}`,
       },
     };
+    console.log(config);
     const res = axios.create({
       baseURL: 'http://localhost:5000/posts/myposts',
       headers: {
@@ -46,26 +47,26 @@ const PostState = (props) => {
         Pragma: 'no-cache',
         'Content-Type': 'application/json',
       },
-      data: { userId: user.id },
+
       // timeout: 10000,
       // transform the request before it get sent
       transformRequest: [
-        function (data, headers) {
+        function (user, headers) {
           headers['Expires'] = '0';
           if (getToken()) headers['Authorization'] = `Bearer ` + getToken();
 
-          dispatch({ type: GET_POSTS, payload: data });
-          return JSON.stringify(data);
+          return JSON.stringify(user);
         },
       ], // transform the response before it get recieved
       transformResponse: [
-        function (data, headers) {
+        function (user, headers) {
           if (headers['content-type'].indexOf('application/json') > -1) {
-            const json = JSON.parse(data);
+            const json = JSON.parse(user);
             console.log(json);
             return json;
           }
-          return data;
+          dispatch({ type: GET_POSTS, payload: user });
+          return user;
         },
       ],
     });

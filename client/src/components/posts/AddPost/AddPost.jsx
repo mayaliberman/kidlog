@@ -9,10 +9,58 @@ import {
   postForm,
   firstPartForm,
   inputSecondPart,
-  customSelect,
   modal,
 } from './AddPost.module.scss';
 import exitIcon from '../../../assets/Exit_icon.svg';
+import Select from 'react-select';
+
+const colourStyles = {
+  control: (styles, { data, isDisabled, isFocused, isSelected }) => ({
+    ...styles,
+    // display: 'block',
+
+    borderColor: 'white',
+
+    borderColor: 'white',
+    '&:visited': {
+      borderColor: 'white',
+    },
+    '&:hover': {
+      borderColor: 'white',
+    },
+    '&:active': {
+      borderColor: 'white',
+      // border: '1px solid white',
+    },
+    '&:focus': {
+      borderColor: 'white',
+      // border: 'white 1px solid',
+    },
+  }),
+
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    const color = 'white';
+    return {
+      ...styles,
+      backgroundColor: isDisabled ? 'lightblue' : 'white',
+      color: '#c0d1e1',
+      cursor: isDisabled ? 'not-allowed' : 'default',
+      borderColor: 'white',
+    };
+  },
+  indicatorSeparator: (styles) => {
+    return {
+      ...styles,
+      backgroundColor: 'white',
+    };
+  },
+};
+
+const groupedOptions = [
+  { value: 'Eyal', label: 'Eyal' },
+  { value: 'Danielle', label: 'Danielle' },
+  { value: 'Romi', label: 'Romi' },
+];
 
 const AddPost = (props) => {
   return (
@@ -38,10 +86,12 @@ const AddPost = (props) => {
             <div className={secondPartForm}>
               <div className={inputSecondPart}>
                 <label>Kid</label>
-                <select className={customSelect} name='kid' id='kid'>
-                  <option value='Eyal'>Eyal</option>
-                  <option value='Daniel'>Danielle</option>
-                </select>
+                <Select
+                  defaultValue={groupedOptions[0]}
+                  label='Single select'
+                  options={groupedOptions}
+                  styles={colourStyles}
+                />
               </div>
               <div className={inputSecondPart}>
                 <label>Lesson</label>

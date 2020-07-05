@@ -24,8 +24,8 @@ const PostsContainer = () => {
     );
   } else if (posts.length < 1) {
     return (
-      <div>
-        <h1>No Posts Uploaded Yet</h1>
+      <div style={{ textAlign: 'center' }}>
+        <h2>No Posts Uploaded Yet</h2>
       </div>
     );
   } else {
