@@ -11,7 +11,7 @@ import { Formik, Form, Field, ErrorMessage, FieldProps } from 'formik';
 import PostContext from '../../../context/post/postContext';
 const AddPostForm = (props) => {
   const postContext = useContext(PostContext);
-  const { getUserData, user, createPost } = postContext;
+  const { getUserData, user, createPost, getPosts } = postContext;
   useEffect(() => {
     getUserData();
   }, []);
@@ -41,12 +41,16 @@ const AddPostForm = (props) => {
             errors.lessonNum = '* Required';
           }
         }}
-        onSubmit={(values) => {
-          console.log(values.childId);
-          console.log(user.children);
-          const slicedId = values.childId.slice(0, values.childId.length - 1);
-          console.log(slicedId, typeof values.childId);
-          createPost('5efdaee011e2985c4c77948b');
+        onSubmit={async (values) => {
+          const requestBody = {
+            desc: values.desc,
+            childId: values.childId,
+            lessonNum: values.lessonNum,
+          };
+          createPost(requestBody);
+          await getPosts();
+
+          props.goToFeedback();
           return values;
         }}
       >
@@ -72,6 +76,7 @@ const AddPostForm = (props) => {
                 onBlur={handleBlur}
                 value={values.desc}
               />
+
               {/* <label className={filebutton}>
             <span>
               <input type='file' name='photo' id='myfile' name='myfile' />
@@ -101,12 +106,7 @@ const AddPostForm = (props) => {
                 />
               </div>
             </div>
-            <button
-              type='submit'
-              className={button}
-              disabled={isSubmitting}
-              //   onClick={onSubmit}
-            >
+            <button type='submit' className={button} disabled={isSubmitting}>
               Submit
             </button>
           </Form>

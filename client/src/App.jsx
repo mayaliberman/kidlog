@@ -9,8 +9,7 @@ import NotFound from './components/NotFound/NotFound';
 import PostState from './context/post/PostState';
 import AuthState from './context/auth/AuthState';
 import PrivateRoute from './components/PriveteRoute';
-import Example from './components/posts/Example';
-import AddPostForm from './components/posts/AddPost/AddPostForm';
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -21,7 +20,6 @@ const App = () => {
             <Route exact path='/' component={Home} />
             <Route exact path='/sign-in' component={SignIn} />
             <Route exact path='/sign-up' component={SignUp} />
-            <Route exact path='/example' component={AddPostForm} />
             <PrivateRoute path={'/posts'} exact component={PostsGallery} />
 
             <Route

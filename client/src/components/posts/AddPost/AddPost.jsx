@@ -83,41 +83,6 @@ const AddPost = (props) => {
         </div>
         <div>
           <AddPostFrom goToFeedback={props.submit} />
-          {/* <form className={postForm}>
-            <div className={firstPartForm}>
-              <input
-                type='textarea'
-                name='desc'
-                className={desc}
-                placeholder='Describe here the activity with your kid'
-              />
-              <label className={filebutton}>
-                <span>
-                  <input type='file' name='photo' id='myfile' name='myfile' />
-                </span>
-              </label>
-            </div>
-            <div className={secondPartForm}>
-              <div className={inputSecondPart}>
-                <label>Kid</label>
-                <Select
-                  defaultValue={
-                    user.children ? childrenOptions[0] : preLoadOptions[0]
-                  }
-                  label='Single select'
-                  options={user.children ? childrenOptions : preLoadOptions}
-                  styles={colourStyles}
-                />
-              </div>
-              <div className={inputSecondPart}>
-                <label>Lesson</label>
-                <input type='number' />
-              </div>
-            </div>
-            <button className={button} onClick={props.submit}>
-              Submit
-            </button>
-          </form> */}
         </div>
       </div>
     </div>
