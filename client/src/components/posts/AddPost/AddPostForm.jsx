@@ -11,7 +11,13 @@ import { Formik, Form, Field, ErrorMessage, FieldProps } from 'formik';
 import PostContext from '../../../context/post/postContext';
 const AddPostForm = (props) => {
   const postContext = useContext(PostContext);
-  const { getUserData, user, createPost, getPosts } = postContext;
+  const {
+    getUserData,
+    user,
+    createPost,
+    getPosts,
+    getUnsplashPhoto,
+  } = postContext;
   useEffect(() => {
     getUserData();
   }, []);
@@ -47,10 +53,11 @@ const AddPostForm = (props) => {
             childId: values.childId,
             lessonNum: values.lessonNum,
           };
-          createPost(requestBody);
+          await createPost(requestBody);
           await getPosts();
+          await getUnsplashPhoto();
 
-          props.goToFeedback();
+          //   props.goToFeedback();
           return values;
         }}
       >

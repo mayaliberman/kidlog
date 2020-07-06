@@ -41,10 +41,12 @@ const PostState = (props) => {
 
   const createPost = async (body) => {
     setLoading();
-    console.log(body, 'body');
-    // const requestBody = {childId: body, }
-    // dispatch({ type: CREATE_POST, payload: body });
-    await axios.post('/posts', body);
+    // console.log(body, 'body');
+    // const requestBody = { childId: body };
+    const res = await axios.post('/posts', body);
+    // dispatch({ type: CREATE_POST, payload: res.data });
+    // await getPosts();
+    // await getUnsplashPhoto();
   };
   const getUnsplashPhoto = async () => {
     setLoading();

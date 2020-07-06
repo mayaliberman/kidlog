@@ -31,6 +31,7 @@ const PostsContainer = () => {
     return (
       <div>
         {posts.map((post, index) => {
+          console.log(results, index);
           return (
             <PostCard
               key={post._id}
