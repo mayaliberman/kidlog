@@ -44,9 +44,11 @@ const PostState = (props) => {
     // console.log(body, 'body');
     // const requestBody = { childId: body };
     const res = await axios.post('/posts', body);
-    // dispatch({ type: CREATE_POST, payload: res.data });
-    // await getPosts();
-    // await getUnsplashPhoto();
+    await dispatch({ type: CREATE_POST, payload: res.data });
+    await getPosts();
+    await getUnsplashPhoto();
+
+    props.history.push('/posts');
   };
   const getUnsplashPhoto = async () => {
     setLoading();

@@ -5,6 +5,7 @@ import SignIn from './components/user/SignIn/SignIn';
 import SignUp from './components/user/SignUp/SignUp';
 import Header from './components/Header/Header';
 import PostsGallery from './components/posts/PostGallery/PostsGallery';
+import AddPost from './components/posts/AddPost/AddPost';
 import NotFound from './components/NotFound/NotFound';
 import PostState from './context/post/PostState';
 import AuthState from './context/auth/AuthState';
@@ -21,6 +22,7 @@ const App = () => {
             <Route exact path='/sign-in' component={SignIn} />
             <Route exact path='/sign-up' component={SignUp} />
             <PrivateRoute path={'/posts'} exact component={PostsGallery} />
+            <PrivateRoute path={'/add-post'} component={AddPost} />
 
             <Route
               exact

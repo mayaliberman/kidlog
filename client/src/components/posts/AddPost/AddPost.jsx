@@ -1,22 +1,13 @@
 import React, { useContext, useEffect } from 'react';
-import {
-  content,
-  header,
-  desc,
-  button,
-  secondPartForm,
-  filebutton,
-  postForm,
-  firstPartForm,
-  inputSecondPart,
-  modal,
-} from './AddPost.module.scss';
+import { content, header, modal, postGallery } from './AddPost.module.scss';
 import exitIcon from '../../../assets/Exit_icon.svg';
 import Select, { Option, ReactSelectProps } from 'react-select';
 import PostContext from '../../../context/post/postContext';
 import Spinner from '../../ui/Spinner';
 import { Formik, Form, Field, ErrorMessage, FieldProps } from 'formik';
 import AddPostFrom from './AddPostForm';
+import { Link } from 'react-router-dom';
+import PostsContainer from '../PostsContainer';
 const colourStyles = {
   control: (styles, { data, isDisabled, isFocused, isSelected }) => ({
     ...styles,
@@ -70,22 +61,28 @@ const AddPost = (props) => {
       childOptions.label = child.name;
       return childOptions;
     });
-    console.log(childrenOptions);
   }
   const preLoadOptions = [{ value: 'no-options', label: 'No Options' }];
 
   return (
-    <div className={modal}>
-      <div className={content}>
-        <div className={header}>
-          <h6>New Activity</h6>
-          <img src={exitIcon} alt='exit-icon' onClick={props.togglePop} />
-        </div>
-        <div>
-          <AddPostFrom goToFeedback={props.submit} />
+    <>
+      <div className={modal}>
+        <div className={content}>
+          <div className={header}>
+            <h6>New Activity</h6>
+            <Link to='/posts'>
+              <img src={exitIcon} alt='exit-icon' />
+            </Link>
+          </div>
+          <div>
+            <AddPostFrom />
+          </div>
         </div>
       </div>
-    </div>
+      <div className={postGallery}>
+        <PostsContainer />
+      </div>
+    </>
   );
 };
 
