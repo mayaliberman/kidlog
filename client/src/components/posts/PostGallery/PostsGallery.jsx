@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PostsContainer from '../PostsContainer';
 import { postGallery } from './PostGallery.module.scss';
 import AddPostButton from '../AddPostButton/AddPostButton';
 import AddPost from '../AddPost/AddPost';
 import PostFeedback from '../PostFeedback/PostFeedback';
 import FeedBackThankYou from '../FeedBackThankYou/FeedBackThankYou';
+import PostContext from '../../../context/post/postContext';
 const PostsGallery = () => {
   const [popup, setPopup] = useState(false);
   const [feedbackPost, setFeedbackPost] = useState(false);
   const [ThankYouPopup, setThankYouPopup] = useState(false);
+  const postContext = useContext(PostContext);
 
   const togglePop = () => {
     setPopup(!popup);

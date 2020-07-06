@@ -17,6 +17,8 @@ const AddPostForm = (props) => {
     createPost,
     getPosts,
     getUnsplashPhoto,
+    posts,
+    photos,
   } = postContext;
   useEffect(() => {
     getUserData();
@@ -54,8 +56,8 @@ const AddPostForm = (props) => {
             lessonNum: values.lessonNum,
           };
           createPost(requestBody);
-          getPosts();
-          getUnsplashPhoto();
+          //   getPosts();
+          //   getUnsplashPhoto();
 
           //   props.goToFeedback();
           return values;

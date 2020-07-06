@@ -32,6 +32,7 @@ export default (state, action) => {
     case CREATE_POST:
       return {
         ...state,
+        photos: action.payload,
         // photos: [action.payload, ...state.photos],
         posts: action.payload,
         loading: false,

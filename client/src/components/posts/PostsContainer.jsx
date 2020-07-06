@@ -41,6 +41,7 @@ const PostsContainer = () => {
               childId={post.childId._id}
               childName={post.childId.name}
               defaultPhoto={results ? results[index].urls.regular : Image}
+              // defaultPhoto={Image}
               photoTitle={results ? results[index].alt_description : null}
             />
           );
