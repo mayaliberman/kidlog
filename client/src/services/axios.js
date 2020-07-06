@@ -16,6 +16,7 @@ export default axios.create({
       if (token) headers['Authorization'] = `Bearer ` + token;
 
       return JSON.stringify(data);
+      // return data;
     },
   ], // transform the response before it get recieved
   transformResponse: [

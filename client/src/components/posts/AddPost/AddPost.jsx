@@ -12,10 +12,11 @@ import {
   modal,
 } from './AddPost.module.scss';
 import exitIcon from '../../../assets/Exit_icon.svg';
-import Select from 'react-select';
+import Select, { Option, ReactSelectProps } from 'react-select';
 import PostContext from '../../../context/post/postContext';
 import Spinner from '../../ui/Spinner';
-import { Formik } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FieldProps } from 'formik';
+import AddPostFrom from './AddPostForm';
 const colourStyles = {
   control: (styles, { data, isDisabled, isFocused, isSelected }) => ({
     ...styles,
@@ -47,11 +48,13 @@ const AddPost = (props) => {
   const {
     posts,
     photos,
+    newPost,
     loading,
     getUnsplashPhoto,
     getPosts,
     getUserData,
     user,
+    createPost,
   } = postContext;
   useEffect(() => {
     getUnsplashPhoto();
@@ -71,66 +74,54 @@ const AddPost = (props) => {
   }
   const preLoadOptions = [{ value: 'no-options', label: 'No Options' }];
 
-  if (loading) {
-    return (
-      <div className={modal}>
-        <div className={content}>
-          <div className={header}>
-            <h6>New Activity</h6>
-          </div>
-          <div>
-            <Spinner />
-          </div>
+  return (
+    <div className={modal}>
+      <div className={content}>
+        <div className={header}>
+          <h6>New Activity</h6>
+          <img src={exitIcon} alt='exit-icon' onClick={props.togglePop} />
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className={modal}>
-        <div className={content}>
-          <div className={header}>
-            <h6>New Activity</h6>
-            <img src={exitIcon} alt='exit-icon' onClick={props.togglePop} />
-          </div>
-          <div>
-            <form className={postForm}>
-              <div className={firstPartForm}>
-                <textarea
-                  className={desc}
-                  placeholder='Describe here the activity with your kid'
+        <div>
+          <AddPostFrom goToFeedback={props.submit} />
+          {/* <form className={postForm}>
+            <div className={firstPartForm}>
+              <input
+                type='textarea'
+                name='desc'
+                className={desc}
+                placeholder='Describe here the activity with your kid'
+              />
+              <label className={filebutton}>
+                <span>
+                  <input type='file' name='photo' id='myfile' name='myfile' />
+                </span>
+              </label>
+            </div>
+            <div className={secondPartForm}>
+              <div className={inputSecondPart}>
+                <label>Kid</label>
+                <Select
+                  defaultValue={
+                    user.children ? childrenOptions[0] : preLoadOptions[0]
+                  }
+                  label='Single select'
+                  options={user.children ? childrenOptions : preLoadOptions}
+                  styles={colourStyles}
                 />
-                <label className={filebutton}>
-                  <span>
-                    <input type='file' id='myfile' name='myfile' />
-                  </span>
-                </label>
               </div>
-              <div className={secondPartForm}>
-                <div className={inputSecondPart}>
-                  <label>Kid</label>
-                  <Select
-                    defaultValue={
-                      user.children ? childrenOptions[0] : preLoadOptions[0]
-                    }
-                    label='Single select'
-                    options={user.children ? childrenOptions : preLoadOptions}
-                    styles={colourStyles}
-                  />
-                </div>
-                <div className={inputSecondPart}>
-                  <label>Lesson</label>
-                  <input type='number' />
-                </div>
+              <div className={inputSecondPart}>
+                <label>Lesson</label>
+                <input type='number' />
               </div>
-              <button className={button} onClick={props.submit}>
-                Submit
-              </button>
-            </form>
-          </div>
+            </div>
+            <button className={button} onClick={props.submit}>
+              Submit
+            </button>
+          </form> */}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default AddPost;

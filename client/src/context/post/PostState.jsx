@@ -8,6 +8,7 @@ import {
   GET_UNSPLASH_PHOTOS,
   SET_LOADING,
   GET_USER_DATA,
+  CREATE_POST,
 } from '../types';
 import axios from '../../services/axios';
 import { getUser } from '../../services/cookies';
@@ -38,6 +39,11 @@ const PostState = (props) => {
     dispatch({ type: GET_POSTS, payload: response.data.data });
   };
 
+  const createPost = async (body) => {
+    setLoading();
+    // dispatch({ type: CREATE_POST, payload: body });
+    await axios.post('/posts', body);
+  };
   const getUnsplashPhoto = async () => {
     setLoading();
     await unsplash.search
@@ -57,9 +63,11 @@ const PostState = (props) => {
         photos: state.photos,
         loading: state.loading,
         user: state.user,
+        newPost: state.newPost,
         getUnsplashPhoto,
         getPosts,
         getUserData,
+        createPost,
       }}
     >
       {props.children}

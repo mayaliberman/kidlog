@@ -29,6 +29,12 @@ export default (state, action) => {
         user: action.payload,
         loading: false,
       };
+    case CREATE_POST:
+      return {
+        ...state,
+        newPost: action.payload,
+        loading: false,
+      };
     case SET_LOADING:
       return {
         ...state,
