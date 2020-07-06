@@ -5,6 +5,7 @@ import {
   UPDATE_POST,
   SET_LOADING,
   GET_UNSPLASH_PHOTOS,
+  GET_USER_DATA,
 } from '../types';
 
 export default (state, action) => {
@@ -19,6 +20,13 @@ export default (state, action) => {
       return {
         ...state,
         photos: action.payload,
+        loading: false,
+      };
+
+    case GET_USER_DATA:
+      return {
+        ...state,
+        user: action.payload,
         loading: false,
       };
     case SET_LOADING:

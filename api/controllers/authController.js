@@ -8,7 +8,6 @@ const sendEmail = require('../utils/email');
 
 const signToken = (user) => {
   user.password = undefined;
-  console.log(user);
   return jwt.sign({ user }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
@@ -53,7 +52,10 @@ exports.signin = asyncHandler(async (req, res, next) => {
     return next(new AppError('Please provide correct email and password', 400));
   }
   //check if the user exist && password is correct
-  const user = await User.findOne({ email }).select('+password');
+  const user = await User.findOne({ email })
+    .select('+password')
+    .populate({ path: 'children' });
+
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
   }

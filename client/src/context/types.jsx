@@ -3,7 +3,7 @@ export const GET_UNSPLASH_PHOTOS = 'GET_UNSPLASH_PHOTOS';
 export const REMOVE_POST = 'REMOVE_POST';
 export const CREATE_POST = 'CREATE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
-
+export const GET_USER_DATA = 'GET_USER_DATA';
 export const GET_CHILD = 'GET_CHILD';
 export const CREACT_CHILD = 'CREATE_CHILD';
 export const UPDATE_CHILD = 'UPDATE_CHILD';

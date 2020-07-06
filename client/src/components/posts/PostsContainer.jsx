@@ -3,9 +3,8 @@ import PostCard from './PostCard/PostCard.jsx';
 import Image from '../../assets/welcome-bg.png';
 import Spinner from '../../components/ui/Spinner';
 import PostContext from '../../context/post/postContext';
-import AuthContext from '../../context/auth/authContext';
+
 const PostsContainer = () => {
-  const authContext = useContext(AuthContext);
   const postContext = useContext(PostContext);
   const { posts, photos, loading, getUnsplashPhoto, getPosts } = postContext;
   const { results } = photos;

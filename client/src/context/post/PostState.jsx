@@ -7,9 +7,11 @@ import {
   GET_POSTS,
   GET_UNSPLASH_PHOTOS,
   SET_LOADING,
-  REGISTER_SUCCESS,
+  GET_USER_DATA,
 } from '../types';
 import axios from '../../services/axios';
+import { getUser } from '../../services/cookies';
+
 const unsplash = new Unsplash({
   accessKey: UNSPLASH_ACESS_KEY,
   secret: UNSPLAH_SECRET_KEY,
@@ -20,9 +22,16 @@ const PostState = (props) => {
     posts: [],
     loading: true,
     photos: [],
+    user: {},
   };
 
   const [state, dispatch] = useReducer(postReducer, initialState);
+
+  const getUserData = async () => {
+    setLoading();
+    const user = await getUser();
+    dispatch({ type: GET_USER_DATA, payload: user });
+  };
   const getPosts = async () => {
     setLoading();
     const response = await axios.get('/posts/myposts');
@@ -47,8 +56,10 @@ const PostState = (props) => {
         posts: state.posts,
         photos: state.photos,
         loading: state.loading,
+        user: state.user,
         getUnsplashPhoto,
         getPosts,
+        getUserData,
       }}
     >
       {props.children}

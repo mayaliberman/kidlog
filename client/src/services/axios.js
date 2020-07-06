@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import cookie from 'react-cookies';
 import { getToken } from './cookies';
 import { BASE_URL } from '../config';
 export default axios.create({
