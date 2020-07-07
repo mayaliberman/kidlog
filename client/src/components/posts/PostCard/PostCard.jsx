@@ -23,6 +23,7 @@ const PostCard = ({
   lessonTags,
   childName,
   lessonNum,
+  postData,
 }) => {
   const [toggleMenu, setToggleMenu] = useState(true);
 
@@ -72,7 +73,7 @@ const PostCard = ({
           className={more}
           onClick={toggleHidden}
         />
-        {!toggleMenu && <PostMenu />}
+        {!toggleMenu && <PostMenu postData={postData} />}
       </div>
       <div>
         <figure className={photoFigure}>

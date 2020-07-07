@@ -55,12 +55,9 @@ const AddPostForm = (props) => {
             childId: values.childId,
             lessonNum: values.lessonNum,
           };
-          createPost(requestBody);
-          //   getPosts();
-          //   getUnsplashPhoto();
+          await createPost(requestBody);
 
-          //   props.goToFeedback();
-          return values;
+          return props.history.replace('/posts');
         }}
       >
         {({

@@ -1,11 +1,12 @@
 import {
   GET_POSTS,
-  REMOVE_POST,
+  DELETE_POST,
   CREATE_POST,
   UPDATE_POST,
   SET_LOADING,
   GET_UNSPLASH_PHOTOS,
   GET_USER_DATA,
+  POST_ERROR,
 } from '../types';
 
 export default (state, action) => {
@@ -32,15 +33,25 @@ export default (state, action) => {
     case CREATE_POST:
       return {
         ...state,
-        photos: action.payload,
-        // photos: [action.payload, ...state.photos],
-        posts: action.payload,
+        // photos: action.payload,
+        // // photos: [action.payload, ...state.photos],
+        // posts: action.payload,
         loading: false,
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== action.payload),
       };
     case SET_LOADING:
       return {
         ...state,
         loading: true,
+      };
+    case POST_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

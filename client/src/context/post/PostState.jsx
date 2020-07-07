@@ -9,6 +9,8 @@ import {
   SET_LOADING,
   GET_USER_DATA,
   CREATE_POST,
+  DELETE_POST,
+  POST_ERROR,
 } from '../types';
 import axios from '../../services/axios';
 import { getUser } from '../../services/cookies';
@@ -41,24 +43,38 @@ const PostState = (props) => {
 
   const createPost = async (body) => {
     setLoading();
-    // console.log(body, 'body');
-    // const requestBody = { childId: body };
-    const res = await axios.post('/posts', body);
-    await dispatch({ type: CREATE_POST, payload: res.data });
-    // await getPosts();
 
-    props.history.push('/posts');
+    try {
+      const res = await axios.post('/posts', body);
+      await getPosts();
+      await getUnsplashPhoto();
+    } catch (err) {
+      console.log(err);
+    }
   };
   const getUnsplashPhoto = async () => {
     setLoading();
-    await unsplash.search
-      .photos('children', 1, state.posts.length, {
-        orientation: 'portrait',
-      })
-      .then(toJson)
-      .then((json) => {
-        dispatch({ type: GET_UNSPLASH_PHOTOS, payload: json });
-      });
+    try {
+      await unsplash.search
+        .photos('children', 10, state.posts.length, {
+          orientation: 'portrait',
+        })
+        .then(toJson)
+        .then((json) => {
+          dispatch({ type: GET_UNSPLASH_PHOTOS, payload: json });
+        });
+    } catch (err) {
+      dispatch({ type: POST_ERROR, payload: err.response });
+    }
+  };
+
+  const deletePost = async (postId) => {
+    try {
+      await axios.delete(`/posts/${postId}`);
+      dispatch({ DELETE_POST, payload: postId });
+    } catch (err) {
+      dispatch({ type: POST_ERROR, payload: err.response });
+    }
   };
   const setLoading = () => dispatch({ type: SET_LOADING });
   return (
@@ -69,10 +85,12 @@ const PostState = (props) => {
         loading: state.loading,
         user: state.user,
         newPost: state.newPost,
+        error: state.error,
         getUnsplashPhoto,
         getPosts,
         getUserData,
         createPost,
+        deletePost,
       }}
     >
       {props.children}
