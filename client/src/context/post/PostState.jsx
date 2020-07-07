@@ -37,19 +37,22 @@ const PostState = (props) => {
   };
   const getPosts = async () => {
     setLoading();
-    const response = await axios.get('/posts/myposts');
-    dispatch({ type: GET_POSTS, payload: response.data.data });
+    try {
+      const response = await axios.get('/posts/myposts');
+      dispatch({ type: GET_POSTS, payload: response.data.data });
+    } catch (err) {
+      dispatch({ type: POST_ERROR, payload: err.response });
+    }
   };
 
   const createPost = async (body) => {
     setLoading();
-
     try {
       const res = await axios.post('/posts', body);
       await getPosts();
       await getUnsplashPhoto();
     } catch (err) {
-      console.log(err);
+      dispatch({ type: POST_ERROR, payload: err.response });
     }
   };
   const getUnsplashPhoto = async () => {

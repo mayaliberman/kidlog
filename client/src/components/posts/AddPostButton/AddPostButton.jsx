@@ -19,10 +19,10 @@ const AddPostButton = (props) => {
           Hello Maya, ready to add today's activity with your kid?
         </h3>
         <div>
-          <Link to='/add-post' className={button}>
+          <button className={button} onClick={props.togglePop}>
             <img src={addIcon} alt='add-icon' />
             Add
-          </Link>
+          </button>
         </div>
       </div>
     </div>

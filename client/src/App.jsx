@@ -22,7 +22,7 @@ const App = () => {
             <Route exact path='/sign-in' component={SignIn} />
             <Route exact path='/sign-up' component={SignUp} />
             <PrivateRoute path={'/posts'} exact component={PostsGallery} />
-            <PrivateRoute path={'/add-post'} component={AddPost} />
+            {/* <PrivateRoute path={'/add-post'} component={AddPost} /> */}
 
             <Route
               exact

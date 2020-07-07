@@ -6,9 +6,20 @@ import {
   postForm,
   firstPartForm,
   inputSecondPart,
-} from './AddPost.module.scss';
-import { Formik, Form, Field, ErrorMessage, FieldProps } from 'formik';
+  inputErrors,
+  filebutton,
+} from './AddPostForm.module.scss';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+
 import PostContext from '../../../context/post/postContext';
+
+const AddPostSchema = Yup.object().shape({
+  desc: Yup.string().required('Required'),
+  lessonNum: Yup.number().required('Required'),
+  childId: Yup.string().required('Required'),
+});
+
 const AddPostForm = (props) => {
   const postContext = useContext(PostContext);
   const {
@@ -37,18 +48,7 @@ const AddPostForm = (props) => {
     <>
       <Formik
         initialValues={{ desc: '', childId: '', lessonNum: '' }}
-        validate={(values) => {
-          const errors = {};
-          if (!values.desc) {
-            errors.desc = '* Required';
-          }
-          if (!values.childId) {
-            errors.childId = '* Required';
-          }
-          if (!values.lessonNum) {
-            errors.lessonNum = '* Required';
-          }
-        }}
+        validationSchema={AddPostSchema}
         onSubmit={async (values) => {
           const requestBody = {
             desc: values.desc,
@@ -56,8 +56,8 @@ const AddPostForm = (props) => {
             lessonNum: values.lessonNum,
           };
           await createPost(requestBody);
-
-          return props.history.replace('/posts');
+          props.submit();
+          return;
         }}
       >
         {({
@@ -83,26 +83,37 @@ const AddPostForm = (props) => {
                 value={values.desc}
               />
 
-              {/* <label className={filebutton}>
-            <span>
-              <input type='file' name='photo' id='myfile' name='myfile' />
-            </span>
-          </label> */}
+              <label className={filebutton}>
+                <span>
+                  <input type='file' name='photo' id='myfile' name='myfile' />
+                </span>
+              </label>
+              {errors.desc && touched.desc ? (
+                <div className={inputErrors}>{errors.desc} </div>
+              ) : null}
             </div>
+
             <div className={secondPartForm}>
               <div className={inputSecondPart}>
                 <label>Kid</label>
+
                 <Field
                   as='select'
                   name='childId'
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  value={values.chilId}
                 >
+                  <option value=''>Select a kid</option>
                   {options}
                 </Field>
+                {errors.childId && touched.childId ? (
+                  <div className={inputErrors}>{errors.childId}</div>
+                ) : null}
               </div>
               <div className={inputSecondPart}>
                 <label>Lesson</label>
+
                 <input
                   type='number'
                   name='lessonNum'
@@ -110,6 +121,9 @@ const AddPostForm = (props) => {
                   onBlur={handleBlur}
                   value={values.lessonNum}
                 />
+                {errors.lessonNum && touched.lessonNum ? (
+                  <div className={inputErrors}>{errors.lessonNum}</div>
+                ) : null}
               </div>
             </div>
             <button type='submit' className={button} disabled={isSubmitting}>
@@ -121,5 +135,4 @@ const AddPostForm = (props) => {
     </>
   );
 };
-
 export default AddPostForm;

@@ -37,14 +37,14 @@ const PostsGallery = () => {
 
   return (
     <div className={postGallery}>
-      <AddPostButton />
-      {/* {popup && <AddPost togglePop={togglePop} submit={submitPost} />}
+      <AddPostButton togglePop={togglePop} />
+      {popup && <AddPost togglePop={togglePop} submit={submitPost} />}
       {feedbackPost && (
         <PostFeedback togglePop={feedbackToggle} submit={submitFeedback} />
       )}
       {ThankYouPopup && (
         <FeedBackThankYou togglePop={() => setThankYouPopup(false)} />
-      )} */}
+      )}
       <PostsContainer />
     </div>
   );
