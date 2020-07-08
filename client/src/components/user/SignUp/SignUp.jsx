@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 import {
   content,
   form,
@@ -11,8 +12,22 @@ import {
   error,
 } from './SignUp.module.scss';
 import logo from '../../../assets/logo-purple.svg';
-
 import AuthContext from '../../../context/auth/authContext';
+
+const SignUpSchema = Yup.object().shape({
+  firstName: Yup.string().required('Please add first name'),
+  lastName: Yup.string().required('Please add last name'),
+  email: Yup.string().email('Invalid email').required('Please add your email'),
+  password: Yup.string()
+    .required('No password provided.')
+    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+  passwordConfirm: Yup.string().oneOf(
+    [Yup.ref('password'), null],
+    'Passwords must match'
+  ),
+});
+
 const SignUp = (props) => {
   const authContext = useContext(AuthContext);
 
@@ -28,35 +43,7 @@ const SignUp = (props) => {
           password: '',
           passwordConfirm: '',
         }}
-        validate={(values) => {
-          const errors = {};
-          if (!values.firstName) {
-            errors.firstName = '* First name is required!';
-          }
-          if (!values.lastName) {
-            errors.lastName = '* Last name is required!';
-          }
-          if (!values.email) {
-            errors.email = '* Email is required!';
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          ) {
-            errors.email = '* Invalid email address';
-          }
-          if (!values.password) {
-            errors.password = '*Password is required!';
-          } else if (values.password.length < 6) {
-            errors.password = '*Password has to be longer than 6 characters';
-          }
-          if (!values.passwordConfirm) {
-            errors.passwordConfirm = '*Password confirm is required!';
-          }
-          if (values.password !== values.passwordConfirm) {
-            errors.passwordConfirm =
-              '* Password and password confirm does not mutch!';
-          }
-          return errors;
-        }}
+        validationSchema={SignUpSchema}
         onSubmit={(values) => {
           return authContext.signup(
             values.firstName,
@@ -67,16 +54,7 @@ const SignUp = (props) => {
           );
         }}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-          /* and other goodies */
-        }) => (
+        {({ errors, touched, isSubmitting }) => (
           <>
             <div>
               <div
@@ -139,66 +117,34 @@ const SignUp = (props) => {
                   errors.passwordConfirm}
               </div>
             </div>
-            <form onSubmit={handleSubmit} className={form}>
-              <input
-                type='text'
-                id='firstName'
+            <Form className={form}>
+              <Field
                 name='firstName'
                 placeholder='First Name'
                 className={input}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.firstName}
               />
-
-              <input
-                type='text'
-                id='lastName'
+              <Field
                 name='lastName'
                 placeholder='Last Name'
                 className={input}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.lastName}
               />
-
-              <input
-                type='text'
-                id='email'
-                name='email'
-                placeholder='Email'
-                className={input}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-
-              <input
+              <Field name='email' placeholder='Email' className={input} />
+              <Field
                 type='password'
-                id='password'
                 name='password'
                 placeholder='Password'
                 className={[input, password].join(' ')}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
               />
-
-              <input
+              <Field
                 type='password'
-                id='passwordConfirm'
                 name='passwordConfirm'
                 placeholder='Confirm Password'
                 className={[input, password].join(' ')}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.passwordConfirm}
               />
-
               <button type='submit' disabled={isSubmitting} className={button}>
                 Submit
               </button>
-            </form>
+            </Form>
           </>
         )}
       </Formik>

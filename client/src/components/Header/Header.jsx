@@ -34,7 +34,7 @@ const Header = () => {
           <h3 className={headerTitle}>{location.pathname.slice(1)}</h3>
           <div className={account}>
             <img alt='avatar' src={avatarIcon} className={avatar} />
-            <p className={accountName}>{user.firstName}</p>
+            <p className={accountName}>{user ? user.firstName : null}</p>
             <img
               alt='logout'
               src={logout}
