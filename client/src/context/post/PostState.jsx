@@ -11,6 +11,8 @@ import {
   CREATE_POST,
   DELETE_POST,
   POST_ERROR,
+  CURRENT_POST,
+  CLEAR_CURRENT_POST,
 } from '../types';
 import axios from '../../services/axios';
 import { getUser } from '../../services/cookies';
@@ -26,6 +28,7 @@ const PostState = (props) => {
     loading: true,
     photos: [],
     user: {},
+    currentPost: {},
   };
 
   const [state, dispatch] = useReducer(postReducer, initialState);
@@ -51,6 +54,7 @@ const PostState = (props) => {
       const res = await axios.post('/posts', body);
       await getPosts();
       await getUnsplashPhoto();
+      await clearCurrentPost();
     } catch (err) {
       dispatch({ type: POST_ERROR, payload: err.response });
     }
@@ -58,19 +62,33 @@ const PostState = (props) => {
   const getUnsplashPhoto = async () => {
     setLoading();
     try {
-      await unsplash.search
-        .photos('children', 10, state.posts.length, {
-          orientation: 'portrait',
-        })
-        .then(toJson)
-        .then((json) => {
-          dispatch({ type: GET_UNSPLASH_PHOTOS, payload: json });
-        });
+      if (state.photos) {
+        await unsplash.search
+          .photos('children', 15, 100, {
+            orientation: 'portrait',
+          })
+          .then(toJson)
+          .then((json) => {
+            dispatch({ type: GET_UNSPLASH_PHOTOS, payload: json });
+          });
+      }
     } catch (err) {
       dispatch({ type: POST_ERROR, payload: err.response });
     }
   };
 
+  const showCurrentPost = (data) => {
+    setLoading();
+    try {
+      dispatch({ type: CURRENT_POST, payload: data });
+    } catch (err) {
+      dispatch({ type: POST_ERROR, payload: err.response });
+    }
+  };
+
+  const clearCurrentPost = () => {
+    dispatch({ type: CLEAR_CURRENT_POST });
+  };
   const deletePost = async (postId) => {
     try {
       await axios.delete(`/posts/${postId}`);
@@ -89,11 +107,14 @@ const PostState = (props) => {
         user: state.user,
         newPost: state.newPost,
         error: state.error,
+        currentPost: state.currentPost,
         getUnsplashPhoto,
         getPosts,
         getUserData,
         createPost,
         deletePost,
+        showCurrentPost,
+        clearCurrentPost,
       }}
     >
       {props.children}

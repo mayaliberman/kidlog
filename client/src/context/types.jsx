@@ -1,11 +1,12 @@
 export const GET_POSTS = 'GET_POSTS';
 export const GET_UNSPLASH_PHOTOS = 'GET_UNSPLASH_PHOTOS';
 export const REMOVE_POST = 'REMOVE_POST';
+export const CURRENT_POST = ' CURRENT_POST';
 export const CREATE_POST = 'CREATE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const POST_ERROR = 'POST_ERROR';
-
+export const CLEAR_CURRENT_POST = 'CLEAR_CURRENT_POST';
 export const GET_USER_DATA = 'GET_USER_DATA';
 export const GET_CHILD = 'GET_CHILD';
 export const CREACT_CHILD = 'CREATE_CHILD';

@@ -11,13 +11,13 @@ const AddPost = (props) => {
       <div className={modal}>
         <div className={content}>
           <div className={header}>
-            <h6>New Activity</h6>
+            <h6>{props.headerTitle}</h6>
             <Link to='/posts'>
               <img src={exitIcon} alt='exit-icon' onClick={props.togglePop} />
             </Link>
           </div>
           <div>
-            <AddPostForm submit={'() => props.submit'} />
+            <AddPostForm submit={() => props.submit} />
           </div>
         </div>
       </div>

@@ -7,6 +7,8 @@ import {
   GET_UNSPLASH_PHOTOS,
   GET_USER_DATA,
   POST_ERROR,
+  CURRENT_POST,
+  CLEAR_CURRENT_POST,
 } from '../types';
 
 export default (state, action) => {
@@ -38,10 +40,21 @@ export default (state, action) => {
         // posts: action.payload,
         loading: false,
       };
+    case CURRENT_POST:
+      return {
+        ...state,
+        currentPost: action.payload,
+        loading: false,
+      };
     case DELETE_POST:
       return {
         ...state,
         posts: state.posts.filter((post) => post._id !== action.payload),
+      };
+    case CLEAR_CURRENT_POST:
+      return {
+        ...state,
+        currenPost: null,
       };
     case SET_LOADING:
       return {

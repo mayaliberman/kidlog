@@ -8,12 +8,18 @@ import FeedBackThankYou from '../FeedBackThankYou/FeedBackThankYou';
 import PostContext from '../../../context/post/postContext';
 const PostsGallery = () => {
   const [popup, setPopup] = useState(false);
+  const [addButtonPopup, setAddButtonPopup] = useState(false);
   const [feedbackPost, setFeedbackPost] = useState(false);
   const [ThankYouPopup, setThankYouPopup] = useState(false);
   const postContext = useContext(PostContext);
+  const { currentPost } = postContext;
 
   const togglePop = () => {
     setPopup(!popup);
+  };
+
+  const addPostButtonTogglePop = () => {
+    setAddButtonPopup(!addButtonPopup);
   };
 
   const feedbackToggle = () => {
@@ -37,8 +43,15 @@ const PostsGallery = () => {
 
   return (
     <div className={postGallery}>
-      <AddPostButton togglePop={togglePop} />
-      {popup && <AddPost togglePop={togglePop} submit={submitPost} />}
+      <AddPostButton togglePop={addPostButtonTogglePop} />
+      {popup ||
+        (currentPost._id && (
+          <AddPost
+            togglePop={togglePop}
+            submit={submitPost}
+            headerTitle={currentPost._id ? 'Edit Post' : 'New Activity'}
+          />
+        ))}
       {feedbackPost && (
         <PostFeedback togglePop={feedbackToggle} submit={submitFeedback} />
       )}

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   box,
   toggleBox,
@@ -9,27 +9,26 @@ import {
 import deleteIcon from '../../../assets/delete.svg';
 import editIcon from '../../../assets/edit.svg';
 import PostContext from '../../../context/post/postContext';
+import AddPost from '../AddPost/AddPost';
 
 const PostMenu = ({ postData }) => {
   const postContext = useContext(PostContext);
-  const {
-    posts,
-    photos,
-    loading,
-    getUnsplashPhoto,
-    getPosts,
-    deletePost,
-  } = postContext;
+  const { getPosts, deletePost, currentPost, showCurrentPost } = postContext;
   const id = postData._id;
+  const [editPost, displayEditPost] = useState(false);
 
   const onDelete = async (id) => {
     await deletePost(id);
     await getPosts();
   };
+
+  const showEditPost = async (postData) => {
+    await showCurrentPost(postData);
+  };
   return (
     <div className={[box, toggleBox].join(' ')}>
       <ul className={notificationList}>
-        <li className={deleteButton}>
+        <li className={deleteButton} onClick={() => showEditPost(postData)}>
           <img
             src={editIcon}
             style={{ paddingRight: '10px' }}
