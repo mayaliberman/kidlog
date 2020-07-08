@@ -16,8 +16,8 @@ const PostMenu = ({ postData }) => {
   const id = postData._id;
 
   const onDelete = async (id) => {
-    await deletePost(id);
-    await getPosts();
+    console.log(id);
+    deletePost(id);
   };
 
   const showEditPost = async (postData) => {

@@ -9,6 +9,7 @@ import {
   inputSecondPart,
   inputErrors,
   filebutton,
+  selectInput,
 } from './AddPostForm.module.scss';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -30,11 +31,14 @@ const AddPostForm = (props) => {
     loading,
     currentPost,
     clearCurrentPost,
+    getPosts,
+    showCurrentPost,
   } = postContext;
   useEffect(() => {
     getUserData();
+    // showCurrentPost();
   }, []);
-
+  console.log(props.submit);
   const closeWindow = () => {
     props.submit();
   };
@@ -58,10 +62,10 @@ const AddPostForm = (props) => {
       <>
         <Formik
           initialValues={
-            currentPost.lessonNum
+            currentPost.childId
               ? {
                   desc: currentPost.desc,
-                  childId: currentPost.childId,
+                  childId: currentPost.childId.id,
                   lessonNum: currentPost.lessonId.lessonNum,
                 }
               : { desc: '', childId: '', lessonNum: '' }
@@ -73,9 +77,12 @@ const AddPostForm = (props) => {
               childId: values.childId,
               lessonNum: values.lessonNum,
             };
-            await createPost(requestBody);
+            // currentPost.childId
+            //   ? await updatePost(requestBody, currentPost._id)
+            //   : await createPost(requestBody);
             await clearCurrentPost();
-            return closeWindow();
+            // props.history.push('/posts');
+            props.submit();
           }}
         >
           {({
@@ -116,11 +123,13 @@ const AddPostForm = (props) => {
                   <label>Kid</label>
 
                   <Field
+                    className={selectInput}
                     as='select'
                     name='childId'
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.chilId}
+                    default
                   >
                     <option value=''>Select a kid</option>
                     {options}

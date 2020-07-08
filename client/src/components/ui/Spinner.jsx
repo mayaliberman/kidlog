@@ -1,12 +1,18 @@
 import React, { Fragment } from 'react';
 import spinner from '../../assets/spinner.gif';
+import colorfulSpinner from '../../assets/810.gif';
 const Spinner = () => {
   return (
     <Fragment>
       <img
-        src={spinner}
+        src={colorfulSpinner}
         alt='loading ...'
-        style={{ width: '200px', margin: 'auto', display: 'block' }}
+        style={{
+          width: '80px',
+          margin: 'auto',
+          display: 'block',
+          padding: '100px',
+        }}
       />
     </Fragment>
   );

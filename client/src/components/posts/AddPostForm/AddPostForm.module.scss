@@ -148,3 +148,12 @@ label span input {
   color: $error;
   font-size: 10px;
 }
+
+.selectInput {
+  margin-top: 12px;
+  border: $bg-paper;
+}
+
+option {
+  font-size: 13px;
+}

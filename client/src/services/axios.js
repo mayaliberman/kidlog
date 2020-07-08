@@ -21,7 +21,7 @@ export default axios.create({
   ], // transform the response before it get recieved
   transformResponse: [
     function (data, headers) {
-      if (headers['content-type'].indexOf('application/json') > -1) {
+      if (headers['content-type']?.indexOf('application/json') > -1) {
         const json = JSON.parse(data);
         return json;
       }

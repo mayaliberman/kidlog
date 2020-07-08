@@ -13,20 +13,7 @@ import {
 } from './SignUp.module.scss';
 import logo from '../../../assets/logo-purple.svg';
 import AuthContext from '../../../context/auth/authContext';
-
-const SignUpSchema = Yup.object().shape({
-  firstName: Yup.string().required('Please add first name'),
-  lastName: Yup.string().required('Please add last name'),
-  email: Yup.string().email('Invalid email').required('Please add your email'),
-  password: Yup.string()
-    .required('No password provided.')
-    .min(8, 'Password is too short - should be 8 chars minimum.')
-    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
-  passwordConfirm: Yup.string().oneOf(
-    [Yup.ref('password'), null],
-    'Passwords must match'
-  ),
-});
+import { SignUpSchema, ErrorMessages } from './SignUpUtils';
 
 const SignUp = (props) => {
   const authContext = useContext(AuthContext);
@@ -56,9 +43,10 @@ const SignUp = (props) => {
       >
         {({ errors, touched, isSubmitting }) => (
           <>
+            {/* <ErrorMessages errors={errors} touched={touched} error={error} /> */}
             <div>
               <div
-                className={errors}
+                className={error}
                 style={{
                   display:
                     errors.firstName && touched.firstName && errors.firstName

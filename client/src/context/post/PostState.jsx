@@ -28,10 +28,10 @@ const PostState = (props) => {
     photos: [],
     user: {},
     currentPost: {},
+    isDeleted: false,
   };
 
   const [state, dispatch] = useReducer(postReducer, initialState);
-
   const getUserData = async () => {
     setLoading();
     const user = await getUser();
@@ -90,8 +90,13 @@ const PostState = (props) => {
   };
   const deletePost = async (postId) => {
     try {
-      await axios.delete(`/posts/${postId}`);
-      dispatch({ DELETE_POST, payload: postId });
+      console.log('delete from state');
+      axios.delete(`/posts/${postId}`);
+      dispatch({ DELETE_POST, payload: true });
+      //post deleted
+      getPosts();
+      console.log('get posts');
+      dispatch({ DELETE_POST, payload: false });
     } catch (err) {
       dispatch({ type: POST_ERROR, payload: err.response });
     }
@@ -106,6 +111,7 @@ const PostState = (props) => {
         user: state.user,
         newPost: state.newPost,
         error: state.error,
+        isDeleted: state.isDeleted,
         currentPost: state.currentPost,
         getUnsplashPhoto,
         getPosts,

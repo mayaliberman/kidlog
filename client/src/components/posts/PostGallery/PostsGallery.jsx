@@ -7,7 +7,7 @@ import PostFeedback from '../PostFeedback/PostFeedback';
 import FeedBackThankYou from '../FeedBackThankYou/FeedBackThankYou';
 import PostContext from '../../../context/post/postContext';
 const PostsGallery = () => {
-  const [popup, setPopup] = useState(false);
+  const [editPopup, setEditPopup] = useState(false);
   const [addButtonPopup, setAddButtonPopup] = useState(false);
   const [feedbackPost, setFeedbackPost] = useState(false);
   const [ThankYouPopup, setThankYouPopup] = useState(false);
@@ -15,25 +15,26 @@ const PostsGallery = () => {
   const { currentPost } = postContext;
 
   const togglePop = () => {
-    setPopup(!popup);
+    // setPopup(!popup);
   };
 
   const addPostButtonTogglePop = () => {
-    setAddButtonPopup(!addButtonPopup);
+    setAddButtonPopup(true);
   };
 
   const feedbackToggle = () => {
-    setPopup(false);
+    setEditPopup(false);
     setFeedbackPost(false);
   };
-  const submitPost = (e) => {
-    e.preventDefault();
-    setPopup(false);
+  const submitAddPost = (e) => {
+    // e.preventDefault();
+    console.log('add post');
+    setAddButtonPopup(false);
     setFeedbackPost(true);
   };
 
-  const submitFeedback = (e) => {
-    e.preventDefault();
+  const submitFeedback = () => {
+    // e.preventDefault();
     setFeedbackPost(false);
     setThankYouPopup(true);
     setTimeout(() => {
@@ -46,17 +47,13 @@ const PostsGallery = () => {
       <AddPostButton togglePop={addPostButtonTogglePop} />
       {addButtonPopup && (
         <AddPost
-          togglePop={addPostButtonTogglePop}
-          submit={submitPost}
+          close={() => setAddButtonPopup(false)}
+          submit={submitAddPost}
           headerTitle={'New Activity'}
         />
       )}
-      {currentPost._id && (
-        <AddPost
-          togglePop={togglePop}
-          submit={submitPost}
-          headerTitle={'Edit Post'}
-        />
+      {editPopup && (
+        <AddPost submit={submitAddPost} headerTitle={'Edit Post'} />
       )}
       {feedbackPost && (
         <PostFeedback togglePop={feedbackToggle} submit={submitFeedback} />

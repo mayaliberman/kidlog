@@ -6,13 +6,20 @@ import PostContext from '../../context/post/postContext';
 
 const PostsContainer = () => {
   const postContext = useContext(PostContext);
-  const { posts, photos, loading, getUnsplashPhoto, getPosts } = postContext;
+  const {
+    posts,
+    photos,
+    loading,
+    getUnsplashPhoto,
+    getPosts,
+    isDeleted,
+  } = postContext;
   const { results } = photos;
   useEffect(() => {
     getUnsplashPhoto();
+
     getPosts();
   }, []);
-
   // Photo by <a href="https://unsplash.com/@anniespratt?utm_source=your_app_name&utm_medium=referral">Annie Spratt</a> on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral">Unsplash</a>
 
   if (loading) {
@@ -41,8 +48,13 @@ const PostsContainer = () => {
               childId={post.childId._id}
               childName={post.childId.name}
               postData={post}
-              // defaultPhoto={results ? results[index].urls.regular : Image}
-              defaultPhoto={Image}
+              defaultPhoto={
+                results
+                  ? results[Math.floor(Math.random() * results.length)].urls
+                      .regular
+                  : Image
+              }
+              // defaultPhoto={Image}
               // photoTitle={results ? results[index].alt_description : null}
             />
           );

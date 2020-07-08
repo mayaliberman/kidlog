@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { Formik } from 'formik';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 import {
   content,
   form,
@@ -13,6 +14,10 @@ import logo from '../../../assets/Logo_white_splash.svg';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../../context/auth/authContext';
 
+const SignInSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Please add your email'),
+  password: Yup.string().required('No password provided.'),
+});
 const SignIn = () => {
   const authContext = useContext(AuthContext);
 
@@ -21,47 +26,14 @@ const SignIn = () => {
       <img alt='company logo' src={logo} />
       <Formik
         initialValues={{ email: '', password: '' }}
-        validate={(values) => {
-          const errors = {};
-
-          if (!values.email) {
-            errors.email = '* Required';
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          ) {
-            errors.email = '* Invalid email address';
-          }
-          if (!values.password) {
-            errors.password = '*Password is required!';
-          } else if (values.password.length < 6) {
-            errors.password = '*Password has to be longer than 6 characters';
-          }
-          return errors;
-        }}
-        onSubmit={(values, { setSubmitting }) => {
+        validationSchema={SignInSchema}
+        onSubmit={(values) => {
           return authContext.login(values.email, values.password);
         }}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-          /* and other goodies */
-        }) => (
-          <form onSubmit={handleSubmit} className={form}>
-            <input
-              type='email'
-              placeholder='Email'
-              name='email'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-              className={input}
-            />
+        {({ errors, touched, isSubmitting }) => (
+          <Form className={form}>
+            <Field placeholder='Email' name='email' className={input} />
             <div
               className={
                 errors.email && touched.email && errors.email ? error : null
@@ -69,13 +41,10 @@ const SignIn = () => {
             >
               {errors.email && touched.email && errors.email}
             </div>
-            <input
+            <Field
               type='password'
               name='password'
               placeholder='Password'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
               className={[input, password].join(' ')}
             />
 
@@ -95,7 +64,7 @@ const SignIn = () => {
             <button type='submit' disabled={isSubmitting} className={button}>
               Submit
             </button>
-          </form>
+          </Form>
         )}
       </Formik>
     </div>

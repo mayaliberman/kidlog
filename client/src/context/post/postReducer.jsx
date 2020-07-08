@@ -39,14 +39,17 @@ export default (state, action) => {
         loading: false,
       };
     case DELETE_POST:
+      debugger;
       return {
         ...state,
-        posts: state.posts.filter((post) => post._id !== action.payload),
+
+        isDeleted: action.payload,
       };
     case CLEAR_CURRENT_POST:
       return {
         ...state,
-        currenPost: null,
+        currentPost: {},
+        loading: false,
       };
     case SET_LOADING:
       return {
