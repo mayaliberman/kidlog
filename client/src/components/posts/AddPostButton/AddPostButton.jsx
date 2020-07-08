@@ -6,7 +6,6 @@ import {
   button,
   message,
 } from './AddPostButton.module.scss';
-import { Link } from 'react-router-dom';
 import addIcon from '../../../assets/Add_Icon.svg';
 const AddPostButton = (props) => {
   return (

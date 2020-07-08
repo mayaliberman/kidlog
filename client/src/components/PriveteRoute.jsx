@@ -6,7 +6,7 @@ const PrivateRoute = (props) => {
   const token = cookie.load('auth');
   let loggedIn = !!token;
   try {
-    const user = JSON.parse(atob(token.split('.')[1]));
+    const res = JSON.parse(atob(token.split('.')[1]));
   } catch (err) {
     loggedIn = false;
   }

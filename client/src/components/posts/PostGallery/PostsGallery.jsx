@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import PostsContainer from '../PostsContainer';
 import { postGallery } from './PostGallery.module.scss';
 import AddPostButton from '../AddPostButton/AddPostButton';
@@ -44,14 +44,20 @@ const PostsGallery = () => {
   return (
     <div className={postGallery}>
       <AddPostButton togglePop={addPostButtonTogglePop} />
-      {popup ||
-        (currentPost._id && (
-          <AddPost
-            togglePop={togglePop}
-            submit={submitPost}
-            headerTitle={currentPost._id ? 'Edit Post' : 'New Activity'}
-          />
-        ))}
+      {addButtonPopup && (
+        <AddPost
+          togglePop={addPostButtonTogglePop}
+          submit={submitPost}
+          headerTitle={'New Activity'}
+        />
+      )}
+      {currentPost._id && (
+        <AddPost
+          togglePop={togglePop}
+          submit={submitPost}
+          headerTitle={'Edit Post'}
+        />
+      )}
       {feedbackPost && (
         <PostFeedback togglePop={feedbackToggle} submit={submitFeedback} />
       )}

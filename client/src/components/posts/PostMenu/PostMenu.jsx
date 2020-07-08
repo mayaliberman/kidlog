@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {
   box,
   toggleBox,
@@ -9,13 +9,11 @@ import {
 import deleteIcon from '../../../assets/delete.svg';
 import editIcon from '../../../assets/edit.svg';
 import PostContext from '../../../context/post/postContext';
-import AddPost from '../AddPost/AddPost';
 
 const PostMenu = ({ postData }) => {
   const postContext = useContext(PostContext);
-  const { getPosts, deletePost, currentPost, showCurrentPost } = postContext;
+  const { getPosts, deletePost, showCurrentPost } = postContext;
   const id = postData._id;
-  const [editPost, displayEditPost] = useState(false);
 
   const onDelete = async (id) => {
     await deletePost(id);

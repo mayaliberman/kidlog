@@ -1,7 +1,6 @@
 import {
   GET_POSTS,
   DELETE_POST,
-  CREATE_POST,
   UPDATE_POST,
   SET_LOADING,
   GET_UNSPLASH_PHOTOS,
@@ -32,14 +31,7 @@ export default (state, action) => {
         user: action.payload,
         loading: false,
       };
-    case CREATE_POST:
-      return {
-        ...state,
-        // photos: action.payload,
-        // // photos: [action.payload, ...state.photos],
-        // posts: action.payload,
-        loading: false,
-      };
+
     case CURRENT_POST:
       return {
         ...state,

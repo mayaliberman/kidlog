@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 import Unsplash, { toJson } from 'unsplash-js';
 import { UNSPLASH_ACESS_KEY, UNSPLAH_SECRET_KEY } from '../../config';
 import PostContext from './postContext';
@@ -8,7 +8,6 @@ import {
   GET_UNSPLASH_PHOTOS,
   SET_LOADING,
   GET_USER_DATA,
-  CREATE_POST,
   DELETE_POST,
   POST_ERROR,
   CURRENT_POST,
@@ -51,7 +50,7 @@ const PostState = (props) => {
   const createPost = async (body) => {
     setLoading();
     try {
-      const res = await axios.post('/posts', body);
+      await axios.post('/posts', body);
       await getPosts();
       await getUnsplashPhoto();
       await clearCurrentPost();

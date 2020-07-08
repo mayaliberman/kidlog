@@ -35,6 +35,9 @@ const AddPostForm = (props) => {
     getUserData();
   }, []);
 
+  const closeWindow = () => {
+    props.submit();
+  };
   let arrayOfData = user.children
     ? user.children
     : [{ id: 1, name: 'no option' }];
@@ -55,7 +58,7 @@ const AddPostForm = (props) => {
       <>
         <Formik
           initialValues={
-            currentPost
+            currentPost.lessonNum
               ? {
                   desc: currentPost.desc,
                   childId: currentPost.childId,
@@ -72,8 +75,7 @@ const AddPostForm = (props) => {
             };
             await createPost(requestBody);
             await clearCurrentPost();
-            props.submit();
-            return;
+            return closeWindow();
           }}
         >
           {({

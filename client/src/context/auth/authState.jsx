@@ -22,7 +22,7 @@ const AuthState = (props) => {
       if (res) {
         dispatch({
           type: LOGIN_SUCCESS,
-          payload: { ['auth']: res.data.token },
+          payload: res.data.token,
         });
         dispatch({
           type: USER_LOADED,
@@ -55,7 +55,7 @@ const AuthState = (props) => {
       if (res) {
         dispatch({
           type: REGISTER_SUCCESS,
-          payload: { ['auth']: res.data.token },
+          payload: res.data.token,
         });
         dispatch({
           type: USER_LOADED,
