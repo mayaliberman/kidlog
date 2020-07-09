@@ -63,7 +63,7 @@ const PostsGallery = () => {
           submitButton='Edit Post'
         />
       )}
-      <PostFeedback togglePop={feedbackToggle} submit={submitFeedback} />
+
       <PostsContainer />
     </div>
   );

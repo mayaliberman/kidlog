@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Spinner from '../../ui/Spinner';
+import { CLOUDINARY_API_BASE_URL } from '../../../config';
 import {
   desc,
   button,
@@ -39,7 +40,26 @@ const AddPostForm = (props) => {
     getUserData();
     // showCurrentPost();
   }, []);
+  const [loadingPhoto, setLoadingPhoto] = useState(false);
+  const [image, setImage] = useState('');
 
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'kidlogimages');
+    setLoadingPhoto(true);
+    const res = await fetch(CLOUDINARY_API_BASE_URL, {
+      method: 'POST',
+      body: data,
+    });
+
+    const file = await res.json();
+    setImage(file.secure_url);
+    setLoadingPhoto(false);
+  };
+
+  //{loading ? (loading) : <img}
   let arrayOfData = user.children || [{ id: 1, name: 'no option' }];
   let options = arrayOfData.map((child) => (
     <option key={child.id} value={child.id}>
@@ -72,7 +92,9 @@ const AddPostForm = (props) => {
               desc: values.desc,
               childId: values.childId,
               lessonNum: values.lessonNum,
+              image: image,
             };
+            console.log(requestBody);
             currentPost.childId
               ? await updatePost(currentPost._id, requestBody)
               : await createPost(requestBody);
@@ -102,7 +124,14 @@ const AddPostForm = (props) => {
 
                 <label className={filebutton}>
                   <span>
-                    <input type='file' name='photo' id='myfile' name='myfile' />
+                    <input
+                      type='file'
+                      name='file'
+                      id='file'
+                      name='file'
+                      onChange={uploadImage}
+                      // value={image}
+                    />
                   </span>
                 </label>
                 {errors.desc && touched.desc ? (

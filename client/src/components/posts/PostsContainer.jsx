@@ -41,12 +41,9 @@ const PostsContainer = () => {
               childId={post.childId._id}
               childName={post.childId.name}
               postData={post}
-              defaultPhoto={
-                results
-                  ? results[Math.floor(Math.random() * results.length)].urls
-                      .regular
-                  : Image
-              }
+              defaultPhoto={post.image}
+              // ||
+              // results[Math.floor(Math.random() * results.length)].urls.regular
             />
           );
         })}

@@ -50,8 +50,7 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 });
 
 exports.createPost = asyncHandler(async (req, res, next) => {
-  const { desc, childId } = req.body;
-  console.log(childId);
+  const { desc, image } = req.body;
   const userId = req.user._id;
   const lesson = await Lesson.findOne({ lessonNum: req.body.lessonNum });
   const child = await Child.findById(req.body.childId);
@@ -60,6 +59,7 @@ exports.createPost = asyncHandler(async (req, res, next) => {
     lessonId: lesson._id,
     userId,
     childId: child._id,
+    image,
   };
   const post = await Post.create(newPost);
   return res.status(201).json({ status: 'success', data: post });
