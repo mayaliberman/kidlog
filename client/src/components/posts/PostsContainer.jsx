@@ -54,8 +54,6 @@ const PostsContainer = () => {
                       .regular
                   : Image
               }
-              // defaultPhoto={Image}
-              // photoTitle={results ? results[index].alt_description : null}
             />
           );
         })}

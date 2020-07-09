@@ -10,6 +10,7 @@ import {
   GET_USER_DATA,
   DELETE_POST,
   POST_ERROR,
+  UPDATE_POST,
   CURRENT_POST,
   CLEAR_CURRENT_POST,
 } from '../types';
@@ -29,6 +30,7 @@ const PostState = (props) => {
     user: {},
     currentPost: {},
     isDeleted: false,
+    isUpdated: false,
   };
 
   const [state, dispatch] = useReducer(postReducer, initialState);
@@ -53,7 +55,6 @@ const PostState = (props) => {
       await axios.post('/posts', body);
       await getPosts();
       await getUnsplashPhoto();
-      await clearCurrentPost();
     } catch (err) {
       dispatch({ type: POST_ERROR, payload: err.response });
     }
@@ -63,7 +64,7 @@ const PostState = (props) => {
     try {
       if (state.photos) {
         await unsplash.search
-          .photos('children', 15, 100, {
+          .photos('children', 15, 30, {
             orientation: 'portrait',
           })
           .then(toJson)
@@ -85,17 +86,32 @@ const PostState = (props) => {
     }
   };
 
+  const updatePost = async (postId, body) => {
+    setLoading();
+    try {
+      const res = await axios.patch(`/posts/${postId}`, body);
+      if (res) {
+        console.log('res updated');
+        dispatch({ UPDATE_POST, payload: true });
+        getPosts();
+        getUnsplashPhoto();
+        clearCurrentPost();
+        dispatch({ UPDATE_POST, payload: false });
+      }
+    } catch (err) {
+      dispatch({ type: POST_ERROR, payload: err.response });
+    }
+  };
+
   const clearCurrentPost = () => {
     dispatch({ type: CLEAR_CURRENT_POST });
   };
+
   const deletePost = async (postId) => {
     try {
-      console.log('delete from state');
       axios.delete(`/posts/${postId}`);
       dispatch({ DELETE_POST, payload: true });
-      //post deleted
       getPosts();
-      console.log('get posts');
       dispatch({ DELETE_POST, payload: false });
     } catch (err) {
       dispatch({ type: POST_ERROR, payload: err.response });
@@ -112,11 +128,13 @@ const PostState = (props) => {
         newPost: state.newPost,
         error: state.error,
         isDeleted: state.isDeleted,
+        isUpdated: state.isUpdated,
         currentPost: state.currentPost,
         getUnsplashPhoto,
         getPosts,
         getUserData,
         createPost,
+        updatePost,
         deletePost,
         showCurrentPost,
         clearCurrentPost,

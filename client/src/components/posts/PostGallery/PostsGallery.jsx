@@ -7,39 +7,36 @@ import PostFeedback from '../PostFeedback/PostFeedback';
 import FeedBackThankYou from '../FeedBackThankYou/FeedBackThankYou';
 import PostContext from '../../../context/post/postContext';
 const PostsGallery = () => {
+  const postContext = useContext(PostContext);
+  const { currentPost, clearCurrentPost } = postContext;
+
   const [editPopup, setEditPopup] = useState(false);
   const [addButtonPopup, setAddButtonPopup] = useState(false);
   const [feedbackPost, setFeedbackPost] = useState(false);
   const [ThankYouPopup, setThankYouPopup] = useState(false);
-  const postContext = useContext(PostContext);
-  const { currentPost } = postContext;
-
-  const togglePop = () => {
-    // setPopup(!popup);
-  };
 
   const addPostButtonTogglePop = () => {
     setAddButtonPopup(true);
   };
 
   const feedbackToggle = () => {
-    setEditPopup(false);
-    setFeedbackPost(false);
+    setFeedbackPost(feedbackPost);
   };
   const submitAddPost = (e) => {
-    // e.preventDefault();
-    console.log('add post');
     setAddButtonPopup(false);
     setFeedbackPost(true);
   };
 
   const submitFeedback = () => {
-    // e.preventDefault();
     setFeedbackPost(false);
     setThankYouPopup(true);
     setTimeout(() => {
       setThankYouPopup(false);
     }, 1500);
+  };
+
+  const toggleEditPost = () => {
+    setEditPopup(!editPopup);
   };
 
   return (
@@ -52,14 +49,18 @@ const PostsGallery = () => {
           headerTitle={'New Activity'}
         />
       )}
-      {editPopup && (
-        <AddPost submit={submitAddPost} headerTitle={'Edit Post'} />
-      )}
       {feedbackPost && (
         <PostFeedback togglePop={feedbackToggle} submit={submitFeedback} />
       )}
-      {ThankYouPopup && (
+      {/* {ThankYouPopup && (
         <FeedBackThankYou togglePop={() => setThankYouPopup(false)} />
+      )} */}
+      {currentPost.desc && (
+        <AddPost
+          submit={toggleEditPost}
+          close={() => clearCurrentPost()}
+          headerTitle={'Edit Post'}
+        />
       )}
       <PostsContainer />
     </div>

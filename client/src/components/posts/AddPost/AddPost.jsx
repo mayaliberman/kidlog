@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const AddPost = (props) => {
   const { submit } = props;
-  console.log(submit);
+
   return (
     <>
       <div className={modal}>
@@ -26,7 +26,6 @@ const AddPost = (props) => {
           </div>
         </div>
       </div>
-      {/* <div className={postGallery}><PostsContainer /></div> */}
     </>
   );
 };

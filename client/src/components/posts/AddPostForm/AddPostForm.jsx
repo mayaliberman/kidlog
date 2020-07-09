@@ -33,18 +33,14 @@ const AddPostForm = (props) => {
     clearCurrentPost,
     getPosts,
     showCurrentPost,
+    updatePost,
   } = postContext;
   useEffect(() => {
     getUserData();
     // showCurrentPost();
   }, []);
-  console.log(props.submit);
-  const closeWindow = () => {
-    props.submit();
-  };
-  let arrayOfData = user.children
-    ? user.children
-    : [{ id: 1, name: 'no option' }];
+
+  let arrayOfData = user.children || [{ id: 1, name: 'no option' }];
   let options = arrayOfData.map((child) => (
     <option key={child.id} value={child.id}>
       {child.name}
@@ -77,11 +73,10 @@ const AddPostForm = (props) => {
               childId: values.childId,
               lessonNum: values.lessonNum,
             };
-            // currentPost.childId
-            //   ? await updatePost(requestBody, currentPost._id)
-            //   : await createPost(requestBody);
-            await clearCurrentPost();
-            // props.history.push('/posts');
+            currentPost.childId
+              ? await updatePost(currentPost._id, requestBody)
+              : await createPost(requestBody);
+
             props.submit();
           }}
         >
@@ -90,10 +85,7 @@ const AddPostForm = (props) => {
             errors,
             touched,
             handleChange,
-            setFieldTouched,
-            setFieldValue,
             handleBlur,
-            handlSubmit,
             isSubmitting,
           }) => (
             <Form className={postForm}>

@@ -38,11 +38,17 @@ export default (state, action) => {
         currentPost: action.payload,
         loading: false,
       };
+
+    case UPDATE_POST:
+      return {
+        ...state,
+        isUpdated: action.payload,
+        loading: false,
+      };
     case DELETE_POST:
       debugger;
       return {
         ...state,
-
         isDeleted: action.payload,
       };
     case CLEAR_CURRENT_POST:
