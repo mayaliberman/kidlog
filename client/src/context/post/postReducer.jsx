@@ -46,10 +46,10 @@ export default (state, action) => {
         loading: false,
       };
     case DELETE_POST:
-      debugger;
       return {
         ...state,
         isDeleted: action.payload,
+        loading: false,
       };
     case CLEAR_CURRENT_POST:
       return {

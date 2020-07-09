@@ -20,7 +20,7 @@ const PostsGallery = () => {
   };
 
   const feedbackToggle = () => {
-    setFeedbackPost(feedbackPost);
+    setFeedbackPost(!feedbackPost);
   };
   const submitAddPost = (e) => {
     setAddButtonPopup(false);
@@ -47,19 +47,21 @@ const PostsGallery = () => {
           close={() => setAddButtonPopup(false)}
           submit={submitAddPost}
           headerTitle={'New Activity'}
+          submitButton='Add Post'
         />
       )}
       {feedbackPost && (
         <PostFeedback togglePop={feedbackToggle} submit={submitFeedback} />
       )}
-      {/* {ThankYouPopup && (
+      {ThankYouPopup && (
         <FeedBackThankYou togglePop={() => setThankYouPopup(false)} />
-      )} */}
+      )}
       {currentPost.desc && (
         <AddPost
           submit={toggleEditPost}
           close={() => clearCurrentPost()}
           headerTitle={'Edit Post'}
+          submitButton='Edit Post'
         />
       )}
       <PostsContainer />

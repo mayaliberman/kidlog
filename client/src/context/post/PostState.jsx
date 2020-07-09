@@ -108,10 +108,11 @@ const PostState = (props) => {
   };
 
   const deletePost = async (postId) => {
+    setLoading();
     try {
-      axios.delete(`/posts/${postId}`);
+      await axios.delete(`/posts/${postId}`);
       dispatch({ DELETE_POST, payload: true });
-      getPosts();
+      await getPosts();
       dispatch({ DELETE_POST, payload: false });
     } catch (err) {
       dispatch({ type: POST_ERROR, payload: err.response });

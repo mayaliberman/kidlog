@@ -146,7 +146,7 @@ const AddPostForm = (props) => {
                 </div>
               </div>
               <button type='submit' className={button} disabled={isSubmitting}>
-                Submit
+                {props.submitButton}
               </button>
             </Form>
           )}

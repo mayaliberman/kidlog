@@ -22,7 +22,10 @@ const AddPost = (props) => {
             </Link>
           </div>
           <div>
-            <AddPostForm submit={props.submit} />
+            <AddPostForm
+              submit={props.submit}
+              submitButton={props.submitButton}
+            />
           </div>
         </div>
       </div>
