@@ -9,7 +9,6 @@ import PostContext from '../../../context/post/postContext';
 const PostsGallery = () => {
   const postContext = useContext(PostContext);
   const { currentPost, clearCurrentPost } = postContext;
-
   const [editPopup, setEditPopup] = useState(false);
   const [addButtonPopup, setAddButtonPopup] = useState(false);
   const [feedbackPost, setFeedbackPost] = useState(false);
@@ -22,7 +21,7 @@ const PostsGallery = () => {
   const feedbackToggle = () => {
     setFeedbackPost(!feedbackPost);
   };
-  const submitAddPost = (e) => {
+  const submitAddPost = () => {
     setAddButtonPopup(false);
     setFeedbackPost(true);
   };
@@ -64,6 +63,7 @@ const PostsGallery = () => {
           submitButton='Edit Post'
         />
       )}
+      <PostFeedback togglePop={feedbackToggle} submit={submitFeedback} />
       <PostsContainer />
     </div>
   );

@@ -6,14 +6,7 @@ import PostContext from '../../context/post/postContext';
 
 const PostsContainer = () => {
   const postContext = useContext(PostContext);
-  const {
-    posts,
-    photos,
-    loading,
-    getUnsplashPhoto,
-    getPosts,
-    isDeleted,
-  } = postContext;
+  const { posts, photos, loading, getUnsplashPhoto, getPosts } = postContext;
   const { results } = photos;
   useEffect(() => {
     getUnsplashPhoto();

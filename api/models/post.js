@@ -12,14 +12,14 @@ const postSchema = new mongoose.Schema(
       ref: 'Lesson',
       required: [true, 'Please add a lesson number'],
     },
-    difficultyLevel: { type: Number, min: 1, max: 5, default: 5 },
-   
+    difficultyLevel: { type: Number, min: 0, max: 5, default: 0 },
+
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: [true, 'Please add a user Id'],
     },
-    
+
     childId: {
       type: mongoose.Schema.ObjectId,
       ref: 'Child',
@@ -35,7 +35,7 @@ const postSchema = new mongoose.Schema(
 postSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'lessonId',
-  }).populate({path: 'childId'});
+  }).populate({ path: 'childId' });
   next();
 });
 

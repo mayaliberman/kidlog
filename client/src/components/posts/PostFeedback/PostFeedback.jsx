@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import {
   modal,
   content,
@@ -7,19 +7,33 @@ import {
   button,
   message,
   subtext,
-  iconList,
   feedbackQuestion,
   iconImage,
-  iconText,
+  ratingBox,
 } from './PostFeedback.module.scss';
+import Rating from 'react-rating';
 import exitIcon from '../../../assets/Exit_icon.svg';
 import challengingIcon from '../../../assets/Challenging_icon.svg';
 import difficultIcon from '../../../assets/Difficult_icon.svg';
 import easyIcon from '../../../assets/Easy_icon.svg';
 import justRightIcon from '../../../assets/Just_right_icon.svg';
 import tooHardIcon from '../../../assets/Too_hard_icon.svg';
-
+import PostContext from '../../../context/post/postContext';
 const PostFeedback = (props) => {
+  const [rating, setRating] = useState({ value: 0 });
+  const postContext = useContext(PostContext);
+  const { posts, updatePost, getPosts } = postContext;
+  const currentPost = posts[posts.length - 1];
+
+  const submitFeedback = async () => {
+    if (currentPost !== undefined) {
+      const requestBody = { difficultyLevel: rating };
+      await updatePost(currentPost._id, requestBody);
+      await getPosts();
+      setRating({ value: 0 });
+      props.submit();
+    }
+  };
   return (
     <div className={modal}>
       <div className={content}>
@@ -34,55 +48,90 @@ const PostFeedback = (props) => {
             our lesson plans
           </p>
           <h6 className={feedbackQuestion}>How difficult was the activity?</h6>
-          <ul className={iconList}>
-            <li>
-              <img src={easyIcon} className={iconImage} alt='easy-icon' />
-            </li>
-            <li>
-              <img
-                src={justRightIcon}
-                className={iconImage}
-                alt='just-right-icon'
-              />
-            </li>
-            <li>
-              <img
-                src={challengingIcon}
-                className={iconImage}
-                alt='challenging-icon'
-              />
-            </li>
-            <li>
-              <img
-                src={difficultIcon}
-                className={iconImage}
-                alt='difficult-icon'
-              />
-            </li>
-            <li>
-              <img
-                src={tooHardIcon}
-                className={iconImage}
-                alt='too-hard-icon'
-              />
-            </li>
-          </ul>
-          <ul className={iconText}>
-            <li>Easy</li>
-            <li>
-              <span>Just Right</span>
-            </li>
-            <li>
-              <span>Challenging</span>
-            </li>
-            <li>
-              <span>Difficult</span>
-            </li>
-            <li>
-              <span>Too hard!</span>
-            </li>
-          </ul>
-          <button className={button} onClick={props.submit}>
+          <Rating
+            initialRating={rating}
+            onChange={(value) => {
+              setRating(value);
+            }}
+            quiet={true}
+            emptySymbol={[
+              <div className={ratingBox}>
+                <img src={easyIcon} className={iconImage} alt='easy-icon' />{' '}
+                <span>Easy</span>
+              </div>,
+              <div className={ratingBox}>
+                <img
+                  src={justRightIcon}
+                  className={iconImage}
+                  alt='just-right-icon'
+                />{' '}
+                <span>Just Right</span>
+              </div>,
+              <div className={ratingBox}>
+                <img
+                  src={challengingIcon}
+                  className={iconImage}
+                  alt='difficult-icon'
+                />{' '}
+                <span>Challenging</span>
+              </div>,
+              <div className={ratingBox}>
+                <img
+                  src={difficultIcon}
+                  className={iconImage}
+                  alt='difficult-icon'
+                />{' '}
+                <span>Difficult</span>
+              </div>,
+              <div className={ratingBox}>
+                <img
+                  src={tooHardIcon}
+                  className={iconImage}
+                  alt='difficult-icon'
+                />{' '}
+                <span>Too hard!</span>
+              </div>,
+            ]}
+            fullSymbol={[
+              <div className={ratingBox}>
+                <img src={easyIcon} className={iconImage} alt='easy-icon' />
+                <span>Easy</span>
+              </div>,
+              <div className={ratingBox}>
+                <img
+                  src={justRightIcon}
+                  className={iconImage}
+                  alt='just-right-icon'
+                />
+                <span>Just Right</span>
+              </div>,
+              <div className={ratingBox}>
+                <img
+                  src={challengingIcon}
+                  className={iconImage}
+                  alt='difficult-icon'
+                />
+                <span>Challenging</span>
+              </div>,
+              <div className={ratingBox}>
+                <img
+                  src={difficultIcon}
+                  className={iconImage}
+                  alt='difficult-icon'
+                />
+                <span>Difficult</span>
+              </div>,
+              <div className={ratingBox}>
+                <img
+                  src={tooHardIcon}
+                  className={iconImage}
+                  alt='too-hard-icon'
+                />
+                <span>Too Hard!</span>
+              </div>,
+            ]}
+          />
+          <button className={button} onClick={() => submitFeedback()}>
             Send Feedback
           </button>
         </div>

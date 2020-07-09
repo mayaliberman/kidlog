@@ -91,7 +91,6 @@ const PostState = (props) => {
     try {
       const res = await axios.patch(`/posts/${postId}`, body);
       if (res) {
-        console.log('res updated');
         dispatch({ UPDATE_POST, payload: true });
         getPosts();
         getUnsplashPhoto();
@@ -126,7 +125,6 @@ const PostState = (props) => {
         photos: state.photos,
         loading: state.loading,
         user: state.user,
-        newPost: state.newPost,
         error: state.error,
         isDeleted: state.isDeleted,
         isUpdated: state.isUpdated,
