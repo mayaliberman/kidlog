@@ -15,6 +15,7 @@ import logo from '../../assets/Logo_white_splash.svg';
 import logout from '../../assets/logout.svg';
 import AuthContext from '../../context/auth/authContext';
 import { getUser } from '../../services/cookies';
+import { Link } from 'react-router-dom';
 const Header = () => {
   const user = getUser();
   const authContext = useContext(AuthContext);
@@ -31,10 +32,12 @@ const Header = () => {
       <div className={navHeader}>
         <div className={nav}>
           <img alt='company logo' src={logo} className={logoIcon} />
-          <h3 className={headerTitle}>{location.pathname.slice(1)}</h3>
+          {/* <h3 className={headerTitle}>{location.pathname.slice(1)}</h3> */}
           <div className={account}>
-            <img alt='avatar' src={avatarIcon} className={avatar} />
-            <p className={accountName}>{user ? user.firstName : null}</p>
+            <Link to='/my-account' className={account}>
+              <img alt='avatar' src={avatarIcon} className={avatar} />
+              <p className={accountName}>{user ? user.firstName : null}</p>
+            </Link>
             <img
               alt='logout'
               src={logout}

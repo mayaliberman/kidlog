@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
 import {
   content,
   form,
@@ -13,9 +12,9 @@ import {
 } from './SignUp.module.scss';
 import logo from '../../../assets/logo-purple.svg';
 import AuthContext from '../../../context/auth/authContext';
-import { SignUpSchema, ErrorMessages } from './SignUpUtils';
+import { SignUpSchema } from './SignUpUtils';
 
-const SignUp = (props) => {
+const SignUp = () => {
   const authContext = useContext(AuthContext);
 
   return (

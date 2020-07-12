@@ -105,8 +105,11 @@
 
 .button {
   margin: 0 auto;
-  width: 40%;
   @include button($padding: 15px);
+  width: 60%;
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 }
 
 label.filebutton {

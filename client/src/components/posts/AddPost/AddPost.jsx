@@ -5,7 +5,7 @@ import AddPostForm from '../AddPostForm/AddPostForm';
 import { Link } from 'react-router-dom';
 
 const AddPost = (props) => {
-  const { submit } = props;
+  const { submit, submitButton } = props;
 
   return (
     <>
@@ -22,10 +22,7 @@ const AddPost = (props) => {
             </Link>
           </div>
           <div>
-            <AddPostForm
-              submit={props.submit}
-              submitButton={props.submitButton}
-            />
+            <AddPostForm submit={submit} submitButton={submitButton} />
           </div>
         </div>
       </div>

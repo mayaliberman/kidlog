@@ -47,6 +47,7 @@
 
 .account {
   color: $bg-paper;
+  text-decoration: none;
   @include flexy($justify: space-between, $align: center, $wrap: nowrap);
 }
 .avatar {

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Spinner from '../../ui/Spinner';
+
 import { CLOUDINARY_API_BASE_URL } from '../../../config';
 import {
   desc,
@@ -9,7 +9,6 @@ import {
   firstPartForm,
   inputSecondPart,
   inputErrors,
-  filebutton,
   selectInput,
 } from './AddPostForm.module.scss';
 import { Formik, Form, Field } from 'formik';
@@ -31,9 +30,6 @@ const AddPostForm = (props) => {
     createPost,
     loading,
     currentPost,
-    clearCurrentPost,
-    getPosts,
-    showCurrentPost,
     updatePost,
   } = postContext;
   useEffect(() => {
@@ -52,6 +48,7 @@ const AddPostForm = (props) => {
     const res = await fetch(CLOUDINARY_API_BASE_URL, {
       method: 'POST',
       body: data,
+      mode: 'no-cors',
     });
 
     const file = await res.json();
@@ -70,7 +67,7 @@ const AddPostForm = (props) => {
   if (loading) {
     return (
       <div>
-        <Spinner />
+        <h2>Loading...</h2>
       </div>
     );
   } else {
@@ -122,7 +119,7 @@ const AddPostForm = (props) => {
                   value={values.desc}
                 />
 
-                <label className={filebutton}>
+                {/* <label className={filebutton}>
                   <span>
                     <input
                       type='file'
@@ -133,7 +130,7 @@ const AddPostForm = (props) => {
                       // value={image}
                     />
                   </span>
-                </label>
+                </label> */}
                 {errors.desc && touched.desc ? (
                   <div className={inputErrors}>{errors.desc} </div>
                 ) : null}

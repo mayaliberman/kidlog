@@ -11,7 +11,8 @@ export const GET_USER_DATA = 'GET_USER_DATA';
 export const GET_CHILD = 'GET_CHILD';
 export const CREACT_CHILD = 'CREATE_CHILD';
 export const UPDATE_CHILD = 'UPDATE_CHILD';
-
+export const DELETE_CHILD = 'DELETE_CHILD';
+export const USER_ERROR = 'USER_ERROR';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const USER_LOADED = 'USER_LOADED';

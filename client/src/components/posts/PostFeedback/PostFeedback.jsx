@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, createRef } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   modal,
   content,
@@ -9,6 +9,7 @@ import {
   subtext,
   feedbackQuestion,
   iconImage,
+  iconImageFull,
   ratingBox,
 } from './PostFeedback.module.scss';
 import Rating from 'react-rating';
@@ -21,11 +22,11 @@ import tooHardIcon from '../../../assets/Too_hard_icon.svg';
 import PostContext from '../../../context/post/postContext';
 const PostFeedback = (props) => {
   const [rating, setRating] = useState({ value: 0 });
+
   const postContext = useContext(PostContext);
   const { posts, updatePost, getPosts } = postContext;
   const currentPost = posts[posts.length - 1];
-  // const refContainer = useRef(null);
-  const refContainer = useRef();
+
   const submitFeedback = async () => {
     if (currentPost !== undefined) {
       const requestBody = { difficultyLevel: rating };
@@ -35,12 +36,9 @@ const PostFeedback = (props) => {
       props.submit();
     }
   };
-
-  const handleClick = (event) => {
-    console.log(event.target);
+  const getTarget = (e) => {
+    console.log(console.log('working', (e.target.className = iconImageFull)));
   };
-
-  const printRef = () => {};
   return (
     <div className={modal}>
       <div className={content}>
@@ -63,7 +61,7 @@ const PostFeedback = (props) => {
                 <img src={easyIcon} className={iconImage} alt='easy-icon' />{' '}
                 <span>Easy</span>
               </div>,
-              <div className={ratingBox} ref={refContainer}>
+              <div className={ratingBox}>
                 <img
                   src={justRightIcon}
                   className={iconImage}
@@ -71,7 +69,7 @@ const PostFeedback = (props) => {
                 />{' '}
                 <span>Just Right</span>
               </div>,
-              <div className={ratingBox} ref={refContainer}>
+              <div className={ratingBox}>
                 <img
                   src={challengingIcon}
                   className={iconImage}
@@ -79,7 +77,7 @@ const PostFeedback = (props) => {
                 />{' '}
                 <span>Challenging</span>
               </div>,
-              <div className={ratingBox} ref={refContainer}>
+              <div className={ratingBox}>
                 <img
                   src={difficultIcon}
                   className={iconImage}
@@ -87,7 +85,7 @@ const PostFeedback = (props) => {
                 />{' '}
                 <span>Difficult</span>
               </div>,
-              <div className={ratingBox} ref={refContainer}>
+              <div className={ratingBox}>
                 <img
                   src={tooHardIcon}
                   className={iconImage}
@@ -97,11 +95,11 @@ const PostFeedback = (props) => {
               </div>,
             ]}
             fullSymbol={[
-              <div className={ratingBox} ref={refContainer}>
+              <div className={ratingBox} onClick={getTarget}>
                 <img src={easyIcon} className={iconImage} alt='easy-icon' />
                 <span>Easy</span>
               </div>,
-              <div className={ratingBox} ref={refContainer} data-value='2'>
+              <div className={ratingBox} onClick={getTarget}>
                 <img
                   src={justRightIcon}
                   className={iconImage}
@@ -109,7 +107,7 @@ const PostFeedback = (props) => {
                 />
                 <span>Just Right</span>
               </div>,
-              <div className={ratingBox} ref={refContainer}>
+              <div className={ratingBox} onClick={getTarget}>
                 <img
                   src={challengingIcon}
                   className={iconImage}
@@ -117,7 +115,7 @@ const PostFeedback = (props) => {
                 />
                 <span>Challenging</span>
               </div>,
-              <div className={ratingBox} ref={refContainer}>
+              <div className={ratingBox} onClick={getTarget}>
                 <img
                   src={difficultIcon}
                   className={iconImage}
@@ -125,7 +123,7 @@ const PostFeedback = (props) => {
                 />
                 <span>Difficult</span>
               </div>,
-              <div className={ratingBox} ref={refContainer}>
+              <div className={ratingBox} onClick={getTarget}>
                 <img
                   src={tooHardIcon}
                   className={iconImage}

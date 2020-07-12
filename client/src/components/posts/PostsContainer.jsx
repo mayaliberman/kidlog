@@ -10,7 +10,6 @@ const PostsContainer = () => {
   const { results } = photos;
   useEffect(() => {
     getUnsplashPhoto();
-
     getPosts();
   }, []);
   // Photo by <a href="https://unsplash.com/@anniespratt?utm_source=your_app_name&utm_medium=referral">Annie Spratt</a> on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral">Unsplash</a>
@@ -41,9 +40,12 @@ const PostsContainer = () => {
               childId={post.childId._id}
               childName={post.childId.name}
               postData={post}
-              defaultPhoto={post.image}
-              // ||
-              // results[Math.floor(Math.random() * results.length)].urls.regular
+              defaultPhoto={
+                results
+                  ? results[Math.floor(Math.random() * results.length)].urls
+                      .regular
+                  : Image
+              }
             />
           );
         })}

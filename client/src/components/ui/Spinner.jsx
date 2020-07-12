@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import spinner from '../../assets/spinner.gif';
 import colorfulSpinner from '../../assets/810.gif';
 const Spinner = () => {
   return (

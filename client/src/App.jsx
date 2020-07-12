@@ -8,6 +8,8 @@ import PostsGallery from './components/posts/PostGallery/PostsGallery';
 import NotFound from './components/NotFound/NotFound';
 import PostState from './context/post/PostState';
 import AuthState from './context/auth/AuthState';
+import UserState from './context/user/UserState';
+import MyAccount from './components/user/MyAccount/MyAccount';
 import PrivateRoute from './components/PriveteRoute';
 
 const App = () => {
@@ -15,21 +17,17 @@ const App = () => {
     <BrowserRouter>
       <AuthState>
         <PostState>
-          <Header />
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/sign-in' component={SignIn} />
-            <Route exact path='/sign-up' component={SignUp} />
-            <PrivateRoute path={'/posts'} exact component={PostsGallery} />
-            <Route
-              exact
-              path='/my-acount'
-              component={() => (
-                <div style={{ marginTop: '100px' }}>My Account</div>
-              )}
-            />
-            <Route component={NotFound} />
-          </Switch>
+          <UserState>
+            <Header />
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/sign-in' component={SignIn} />
+              <Route exact path='/sign-up' component={SignUp} />
+              <PrivateRoute path={'/posts'} exact component={PostsGallery} />
+              <PrivateRoute exact path='/my-account' component={MyAccount} />
+              <Route component={NotFound} />
+            </Switch>
+          </UserState>
         </PostState>
       </AuthState>
     </BrowserRouter>

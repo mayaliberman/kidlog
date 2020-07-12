@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   content,
   header,
@@ -6,8 +6,15 @@ import {
   button,
   message,
 } from './AddPostButton.module.scss';
+import PostContext from '../../../context/post/postContext';
 import addIcon from '../../../assets/Add_Icon.svg';
 const AddPostButton = (props) => {
+  const postContext = useContext(PostContext);
+  const { user, getUserData } = postContext;
+
+  useEffect(() => {
+    getUserData();
+  }, []);
   return (
     <div className={content}>
       <div className={header}>
@@ -15,7 +22,7 @@ const AddPostButton = (props) => {
       </div>
       <div className={text}>
         <h3 className={message}>
-          Hello Maya, ready to add today's activity with your kid?
+          Hello {user.firstName}, ready to add today's activity with your kid?
         </h3>
         <div>
           <button className={button} onClick={props.togglePop}>

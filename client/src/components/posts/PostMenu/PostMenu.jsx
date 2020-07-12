@@ -12,11 +12,10 @@ import PostContext from '../../../context/post/postContext';
 
 const PostMenu = ({ postData }) => {
   const postContext = useContext(PostContext);
-  const { getPosts, deletePost, showCurrentPost } = postContext;
+  const { deletePost, showCurrentPost } = postContext;
   const id = postData._id;
 
   const onDelete = async (id) => {
-    console.log(id);
     deletePost(id);
   };
 

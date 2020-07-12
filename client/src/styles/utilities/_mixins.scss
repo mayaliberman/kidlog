@@ -18,7 +18,8 @@
 }
 
 @mixin button($padding: 15px) {
-  margin-top: 30px;
+  margin: 30px auto;
+  width: 100%;
   color: $bg-paper;
   text-decoration: none;
   padding: $padding;
