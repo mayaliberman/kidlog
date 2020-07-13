@@ -1,8 +1,7 @@
 const User = require('../models/user');
 const { asyncHandler } = require('../utils/asyncHanlder');
 const AppError = require('../utils/appError');
-const {filterObj} = require('../utils/filterObj');
-
+const { filterObj } = require('../utils/filterObj');
 
 exports.getMe = (req, res, next) => {
   req.params.id = req.user.id;
@@ -20,7 +19,7 @@ exports.getAllUsers = asyncHandler(async (req, res) => {
 
 exports.getUser = asyncHandler(async (req, res, next) => {
   let user = await User.findById(req.params.id).populate({ path: 'children' });
-  
+
   if (!user) {
     return next(new AppError(`No user with the ID ${req.originalUrl}`, 404));
   }
@@ -49,7 +48,7 @@ exports.updateMe = asyncHandler(async (req, res, next) => {
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
     runValidators: true,
-  });
+  }).populate({ path: 'children' });
 
   res.status(200).json({ status: 'sucess', data: updatedUser });
 });

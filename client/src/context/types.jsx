@@ -8,6 +8,7 @@ export const DELETE_POST = 'DELETE_POST';
 export const POST_ERROR = 'POST_ERROR';
 export const CLEAR_CURRENT_POST = 'CLEAR_CURRENT_POST';
 export const GET_USER_DATA = 'GET_USER_DATA';
+export const UPDATE_USER = 'UPDATE_USER';
 export const GET_CHILD = 'GET_CHILD';
 export const CREACT_CHILD = 'CREATE_CHILD';
 export const UPDATE_CHILD = 'UPDATE_CHILD';

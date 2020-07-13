@@ -6,6 +6,7 @@ import {
   DELETE_ME,
   SET_LOADING,
   GET_USER_DATA,
+  UPDATE_USER,
 } from '../types';
 
 export default (state, action) => {
@@ -16,6 +17,14 @@ export default (state, action) => {
         user: action.payload,
         loading: false,
       };
+    case UPDATE_USER:
+      return {
+        ...state,
+        user: action.payload,
+        isUpdated: action.payload,
+        loading: false,
+      };
+
     case GET_CHILD:
       return {
         ...state,

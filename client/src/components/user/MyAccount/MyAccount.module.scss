@@ -45,3 +45,28 @@
   padding: 15px;
   @include flexy($justify: center, $direction: column);
 }
+
+.kidContainer {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+  border: none;
+  & img {
+    padding: 10px;
+  }
+  & span {
+    padding: 10px;
+    text-transform: uppercase;
+    color: $secondary-light;
+    font-size: 15px;
+    font-weight: bold;
+  }
+}

@@ -91,7 +91,7 @@ const AddPostForm = (props) => {
               lessonNum: values.lessonNum,
               image: image,
             };
-            console.log(requestBody);
+
             currentPost.childId
               ? await updatePost(currentPost._id, requestBody)
               : await createPost(requestBody);

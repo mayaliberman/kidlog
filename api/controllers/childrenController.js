@@ -37,7 +37,7 @@ exports.createChild = asyncHandler(async (req, res, next) => {
     gender,
     user,
   };
-  const checkChild = await Child.findOne({ name: name });
+  const checkChild = await Child.findOne({ name: name, user: user });
   if (checkChild) {
     return next(
       new AppError(`this child already exists ${checkChild._id}`, 400)
