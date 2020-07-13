@@ -48,12 +48,14 @@ const MyAccount = () => {
       </div>
       <div className={kidContainer}>
         <KidContainer />
-        {showEditChild && <KidForm />}
+        {showEditChild && <KidForm cancel={toggleEditChild} />}
 
-        <button className={button} onClick={toggleEditChild}>
-          <img src={PlusIcon} />
-          <span>Add Kid</span>
-        </button>
+        {!showEditChild && (
+          <button className={button} onClick={toggleEditChild}>
+            <img src={PlusIcon} />
+            <span>Add Kid</span>
+          </button>
+        )}
       </div>
     </div>
   );

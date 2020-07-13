@@ -7,9 +7,11 @@ import {
   button,
   error,
   formSecondPart,
+  cancelButton,
+  avatar,
 } from './KidForm.module.scss';
 import UserContext from '../../../context/user/userContext';
-const KidForm = () => {
+const KidForm = (props) => {
   const userContext = useContext(UserContext);
   const { user, getUserData, loading, updateUser } = userContext;
   useEffect(() => {
@@ -38,11 +40,13 @@ const KidForm = () => {
             birthYear: values.birthYear,
             gender: values.gender,
           };
+          props.cancel();
           //   await updateUser(requestBody);
           //   getUserData();
         }}
       >
         <Form className={form}>
+          <div className={avatar}></div>
           <ErrorMessage
             name='name'
             render={(msg) => <div className={error}>{msg}</div>}
@@ -86,6 +90,9 @@ const KidForm = () => {
           </div>
           <button type='submit' className={button}>
             Update
+          </button>
+          <button onClick={props.cancel} className={cancelButton}>
+            Cancel
           </button>
         </Form>
       </Formik>
