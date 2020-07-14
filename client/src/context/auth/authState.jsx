@@ -20,13 +20,18 @@ const AuthState = (props) => {
         password,
       });
       if (res) {
+        const user = JSON.parse(atob(res.data.token.split('.')[1]));
+        const id = user.user.id;
         dispatch({
           type: LOGIN_SUCCESS,
           payload: res.data.token,
         });
         dispatch({
           type: USER_LOADED,
-          payload: { user: JSON.parse(atob(res.data.token.split('.')[1])) },
+          payload: {
+            // user: JSON.parse(atob(res.data.token.split('.')[1])),
+            user: id,
+          },
         });
         cookies.save('auth', res.data.token, { path: '/' });
 
@@ -53,13 +58,16 @@ const AuthState = (props) => {
         passwordConfirm,
       });
       if (res) {
+        const user = JSON.parse(atob(res.data.token.split('.')[1]));
+        const id = user.user.id;
         dispatch({
           type: REGISTER_SUCCESS,
           payload: res.data.token,
         });
         dispatch({
           type: USER_LOADED,
-          payload: { user: JSON.parse(atob(res.data.token.split('.')[1])) },
+          payload: { user: id },
+          // payload: { user: JSON.parse(atob(res.data.token.split('.')[1])) },
         });
 
         cookies.save('auth', res.data.token, { path: '/' });

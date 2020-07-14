@@ -23,8 +23,17 @@ const UserState = (props) => {
 
   const getUserData = async () => {
     setLoading();
-    const user = await getUser();
-    dispatch({ type: GET_USER_DATA, payload: user });
+    // const user = await getUser();
+    // const userId = await getUser();
+    // console.log(userId._id);
+    try {
+      const user = await axios.get(`/users/me`);
+      if (user) {
+        dispatch({ type: GET_USER_DATA, payload: user.data.data });
+      }
+    } catch (err) {
+      dispatch({ type: USER_ERROR, payload: err.response });
+    }
   };
 
   const showCurrentChild = (id) => {
@@ -43,10 +52,7 @@ const UserState = (props) => {
       const res = await axios.patch(`/users/updateMe`, body);
       if (res) {
         dispatch({ type: UPDATE_USER, payload: true });
-        // console.log(res.data.data);
-        // console.log(state.user);
-        // dispatch({ type: GET_USER_DATA, payload: res.data.data });
-
+        await getUserData();
         dispatch({ type: UPDATE_USER, payload: false });
       }
     } catch (err) {
@@ -54,6 +60,18 @@ const UserState = (props) => {
     }
   };
 
+  const createChild = async (body) => {
+    // setLoading();
+    try {
+      const res = await axios.post(`/users/${body.user}/children`, body);
+      if (res) {
+        await getUserData();
+        // dispatch({ type: SET_LOADING, payload: true });
+      }
+    } catch (err) {
+      dispatch({ type: USER_ERROR, payload: err.response });
+    }
+  };
   const setLoading = () => dispatch({ type: SET_LOADING });
   return (
     <UserContext.Provider
@@ -66,6 +84,7 @@ const UserState = (props) => {
         getUserData,
         showCurrentChild,
         updateUser,
+        createChild,
       }}
     >
       {props.children}

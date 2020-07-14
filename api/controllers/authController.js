@@ -93,6 +93,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
   }
 
   req.user = currentUser;
+
   next();
 });
 

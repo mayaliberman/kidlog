@@ -16,8 +16,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <AuthState>
-        <PostState>
-          <UserState>
+        <UserState>
+          <PostState>
             <Header />
             <Switch>
               <Route exact path='/' component={Home} />
@@ -27,8 +27,8 @@ const App = () => {
               <PrivateRoute exact path='/my-account' component={MyAccount} />
               <Route component={NotFound} />
             </Switch>
-          </UserState>
-        </PostState>
+          </PostState>
+        </UserState>
       </AuthState>
     </BrowserRouter>
   );

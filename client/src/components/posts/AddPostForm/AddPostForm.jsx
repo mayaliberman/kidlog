@@ -15,6 +15,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 import PostContext from '../../../context/post/postContext';
+import UserContext from '../../../context/user/userContext';
 
 const AddPostSchema = Yup.object().shape({
   desc: Yup.string().required('Required'),
@@ -24,17 +25,11 @@ const AddPostSchema = Yup.object().shape({
 
 const AddPostForm = (props) => {
   const postContext = useContext(PostContext);
-  const {
-    getUserData,
-    user,
-    createPost,
-    loading,
-    currentPost,
-    updatePost,
-  } = postContext;
+  const userContext = useContext(UserContext);
+  const { createPost, loading, currentPost, updatePost } = postContext;
+  const { user, getUserData } = userContext;
   useEffect(() => {
     getUserData();
-    // showCurrentPost();
   }, []);
   const [loadingPhoto, setLoadingPhoto] = useState(false);
   const [image, setImage] = useState('');

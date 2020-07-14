@@ -34,11 +34,11 @@ const PostState = (props) => {
   };
 
   const [state, dispatch] = useReducer(postReducer, initialState);
-  const getUserData = async () => {
-    setLoading();
-    const user = await getUser();
-    dispatch({ type: GET_USER_DATA, payload: user });
-  };
+  // const getUserData = async () => {
+  //   setLoading();
+  //   const user = await getUser();
+  //   dispatch({ type: GET_USER_DATA, payload: user });
+  // };
   const getPosts = async () => {
     setLoading();
     try {
@@ -131,7 +131,7 @@ const PostState = (props) => {
         currentPost: state.currentPost,
         getUnsplashPhoto,
         getPosts,
-        getUserData,
+        // getUserData,
         createPost,
         updatePost,
         deletePost,

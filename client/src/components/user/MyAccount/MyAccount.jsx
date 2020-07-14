@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   content,
   header,
@@ -10,17 +10,10 @@ import {
 import { Link } from 'react-router-dom';
 import exitIcon from '../../../assets/Exit_icon.svg';
 import KidContainer from '../KidContainer/KidContainer';
-import UserContext from '../../../context/user/userContext';
 import AccountForm from '../AccountForm/AccountForm';
 import KidForm from '../KidForm/KidForm';
 import PlusIcon from '../../../assets/Plus_icon.svg';
 const MyAccount = () => {
-  const userContext = useContext(UserContext);
-  const { user, getUserData } = userContext;
-
-  useEffect(() => {
-    getUserData();
-  }, []);
   const [showEditChild, setShowEditChild] = useState(false);
   const toggleEditChild = () => {
     setShowEditChild(!showEditChild);
@@ -40,8 +33,6 @@ const MyAccount = () => {
         <div>
           <AccountForm />
         </div>
-        {/* <h1 className={message}>We got it!</h1>
-        <p className={subtext}>Thank you for your feedback</p> */}
       </div>
       <div className={header} style={{ borderRadius: ' 0px', m: '20px' }}>
         <h6>My Kids</h6>

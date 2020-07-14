@@ -13,7 +13,7 @@ import {
 import UserContext from '../../../context/user/userContext';
 const KidForm = (props) => {
   const userContext = useContext(UserContext);
-  const { user, getUserData, loading, updateUser } = userContext;
+  const { user, getUserData, loading, updateUser, createChild } = userContext;
   useEffect(() => {
     getUserData();
   }, []);
@@ -24,22 +24,27 @@ const KidForm = (props) => {
       <Formik
         initialValues={{
           name: '',
-          age: '',
-          gender: 'user.email',
+          birthYear: '',
+          gender: '',
         }}
-        validationSchema={Yup.object({
+        validationSchema={Yup.object().shape({
           name: Yup.string().required('* Name is Required'),
           birthYear: Yup.number()
-            .min(1950, 'Must be born after 1950')
+            .max(new Date().getFullYear())
             .required('* Last Name is Required'),
-          gender: Yup.string().required('* Gender is Required'),
+          gender: Yup.string()
+            .oneOf(['male', 'female', 'other'], 'Invalid Gender Type')
+            .required('* Gender is Required'),
         })}
         onSubmit={async (values) => {
           const requestBody = {
             name: values.name,
             birthYear: values.birthYear,
             gender: values.gender,
+            user: user.id,
           };
+          console.log(requestBody);
+          await createChild(requestBody);
           props.cancel();
           //   await updateUser(requestBody);
           //   getUserData();
@@ -52,7 +57,7 @@ const KidForm = (props) => {
             render={(msg) => <div className={error}>{msg}</div>}
           />
 
-          <label htmlFor='firstName'>First Name</label>
+          <label htmlFor='name'>First Name</label>
           <Field
             name='name'
             type='text'
@@ -68,7 +73,7 @@ const KidForm = (props) => {
               <label htmlFor='birthYear'>Birth Year</label>
               <Field
                 name='birthYear'
-                type='text'
+                type='number'
                 // placeholder='Last Name'
                 className={input}
               />
@@ -80,7 +85,7 @@ const KidForm = (props) => {
               />
 
               <label htmlFor='gender'>Gender</label>
-              <Field name='gnder' as='select' className={input} default>
+              <Field name='gender' as='select' className={input} default>
                 <option value=''>Select a gender</option>
                 <option value='female'>Femle</option>
                 <option value='male'>Male</option>
