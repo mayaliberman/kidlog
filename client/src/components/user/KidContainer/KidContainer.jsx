@@ -10,11 +10,7 @@ const KidContainer = () => {
   }, []);
 
   if (loading || !user.children) {
-    return (
-      <div>
-        <h2>Loading</h2>
-      </div>
-    );
+    return null;
   } else {
     return (
       <>

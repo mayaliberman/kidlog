@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   nav,
   logoIcon,
@@ -12,19 +12,27 @@ import {
 import { useLocation } from 'react-router-dom';
 import avatarIcon from '../../assets/image-4.svg';
 import logo from '../../assets/Logo_white_splash.svg';
-import logout from '../../assets/logout.svg';
+import LogoutIcon from '../../assets/logout.svg';
 import AuthContext from '../../context/auth/authContext';
+import UserContext from '../../context/user/userContext';
 import { getUser } from '../../services/cookies';
 import { Link } from 'react-router-dom';
 const Header = () => {
-  const user = getUser();
+  const userContext = useContext(UserContext);
+  const { user, getUserData } = userContext;
   const authContext = useContext(AuthContext);
+  const { logout, isLogged } = authContext;
   let header = null;
   const location = useLocation();
+  useEffect(() => {
+    getUserData();
+  }, []);
   if (
+    // isLogged
     location.pathname === '/' ||
     location.pathname === '/sign-in' ||
-    location.pathname === '/sign-up'
+    location.pathname === '/sign-up' ||
+    location.pathname === '/add-kid'
   )
     header = <></>;
   else
@@ -40,9 +48,9 @@ const Header = () => {
             </Link>
             <img
               alt='logout'
-              src={logout}
+              src={LogoutIcon}
               className={logoutIcon}
-              onClick={authContext.logout}
+              onClick={logout}
             />
           </div>
         </div>

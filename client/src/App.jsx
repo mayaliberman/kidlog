@@ -10,6 +10,7 @@ import PostState from './context/post/PostState';
 import AuthState from './context/auth/AuthState';
 import UserState from './context/user/UserState';
 import MyAccount from './components/user/MyAccount/MyAccount';
+import AddKid from './components/user/AddKid/AddKid';
 import PrivateRoute from './components/PriveteRoute';
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
               <Route exact path='/' component={Home} />
               <Route exact path='/sign-in' component={SignIn} />
               <Route exact path='/sign-up' component={SignUp} />
+              <Route exact path='/add-kid' component={AddKid} />
               <PrivateRoute path={'/posts'} exact component={PostsGallery} />
               <PrivateRoute exact path='/my-account' component={MyAccount} />
               <Route component={NotFound} />

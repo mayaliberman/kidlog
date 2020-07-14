@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import EditIcon from '../../../assets/Edit_icon.svg';
 import Avatar from '../../../assets/image-4.svg';
 import { card, edit, kid, avatar } from './KidCard.module.scss';
@@ -18,7 +18,7 @@ const KidCard = (props) => {
         <h2>{name}</h2>
       </div>
       <div className={edit} onClick={openEditChild}>
-        <img src={EditIcon}></img>
+        <img src={EditIcon} alt='exit-icon'></img>
         <p>Edit</p>
       </div>
     </div>

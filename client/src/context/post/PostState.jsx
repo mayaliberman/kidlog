@@ -7,7 +7,7 @@ import {
   GET_POSTS,
   GET_UNSPLASH_PHOTOS,
   SET_LOADING,
-  GET_USER_DATA,
+  // GET_USER_DATA,
   DELETE_POST,
   POST_ERROR,
   UPDATE_POST,
@@ -15,7 +15,7 @@ import {
   CLEAR_CURRENT_POST,
 } from '../types';
 import axios from '../../services/axios';
-import { getUser } from '../../services/cookies';
+// import { getUser } from '../../services/cookies';
 
 const unsplash = new Unsplash({
   accessKey: UNSPLASH_ACESS_KEY,
@@ -27,7 +27,7 @@ const PostState = (props) => {
     posts: [],
     loading: true,
     photos: [],
-    user: {},
+    // user: {},
     currentPost: {},
     isDeleted: false,
     isUpdated: false,
@@ -124,7 +124,7 @@ const PostState = (props) => {
         posts: state.posts,
         photos: state.photos,
         loading: state.loading,
-        user: state.user,
+        // user: state.user,
         error: state.error,
         isDeleted: state.isDeleted,
         isUpdated: state.isUpdated,

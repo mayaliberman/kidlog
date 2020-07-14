@@ -9,7 +9,7 @@ import {
   UPDATE_USER,
 } from '../types';
 import axios from '../../services/axios';
-import { getUser } from '../../services/cookies';
+
 const UserState = (props) => {
   const initialState = {
     loading: true,
@@ -23,9 +23,6 @@ const UserState = (props) => {
 
   const getUserData = async () => {
     setLoading();
-    // const user = await getUser();
-    // const userId = await getUser();
-    // console.log(userId._id);
     try {
       const user = await axios.get(`/users/me`);
       if (user) {
@@ -61,12 +58,10 @@ const UserState = (props) => {
   };
 
   const createChild = async (body) => {
-    // setLoading();
     try {
       const res = await axios.post(`/users/${body.user}/children`, body);
       if (res) {
         await getUserData();
-        // dispatch({ type: SET_LOADING, payload: true });
       }
     } catch (err) {
       dispatch({ type: USER_ERROR, payload: err.response });

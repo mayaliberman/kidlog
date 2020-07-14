@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -13,7 +13,7 @@ import {
 import UserContext from '../../../context/user/userContext';
 const KidForm = (props) => {
   const userContext = useContext(UserContext);
-  const { user, getUserData, loading, updateUser, createChild } = userContext;
+  const { user, getUserData, loading, createChild } = userContext;
   useEffect(() => {
     getUserData();
   }, []);
