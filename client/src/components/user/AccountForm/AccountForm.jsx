@@ -3,15 +3,16 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { form, input, button, error } from './AccountForm.module.scss';
 import UserContext from '../../../context/user/userContext';
+import { getUser } from '../../../services/cookies';
 const AccountForm = () => {
   const userContext = useContext(UserContext);
-  const { user, getUserData, loading, updateUser } = userContext;
-
+  const { loading, updateUser, isUpdated } = userContext;
+  let user = getUser();
   useEffect(() => {
-    getUserData();
-  }, []);
+    user = getUser();
+  }, [isUpdated]);
 
-  if (loading) {
+  if (isUpdated) {
     return <div>Loading</div>;
   } else {
     return (
@@ -38,8 +39,9 @@ const AccountForm = () => {
             lastName: values.lastName,
             email: values.email,
           };
+
           await updateUser(requestBody);
-          getUserData();
+          getUser();
         }}
       >
         <Form className={form}>

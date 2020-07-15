@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   content,
   header,
@@ -8,10 +8,14 @@ import {
 } from './AddPostButton.module.scss';
 import UserContext from '../../../context/user/userContext';
 import addIcon from '../../../assets/Add_Icon.svg';
+import { getUser } from '../../../services/cookies';
 const AddPostButton = (props) => {
   const userContext = useContext(UserContext);
-  const { user } = userContext;
-
+  const { isUpdated } = userContext;
+  let user = getUser();
+  useEffect(() => {
+    user = getUser();
+  }, [isUpdated]);
   return (
     <div className={content}>
       <div className={header}>

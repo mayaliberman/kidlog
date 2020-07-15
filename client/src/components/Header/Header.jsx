@@ -19,14 +19,15 @@ import { getUser } from '../../services/cookies';
 import { Link } from 'react-router-dom';
 const Header = () => {
   const userContext = useContext(UserContext);
-  const { user, getUserData } = userContext;
+  const { isUpdated } = userContext;
   const authContext = useContext(AuthContext);
   const { logout, isLogged } = authContext;
   let header = null;
   const location = useLocation();
+  let user = getUser();
   useEffect(() => {
-    getUserData();
-  }, []);
+    user = getUser();
+  }, [isUpdated]);
   if (
     // isLogged
     location.pathname === '/' ||

@@ -13,7 +13,7 @@ import {
 } from './AddPostForm.module.scss';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-
+import { getUser } from '../../../services/cookies';
 import PostContext from '../../../context/post/postContext';
 import UserContext from '../../../context/user/userContext';
 
@@ -27,10 +27,11 @@ const AddPostForm = (props) => {
   const postContext = useContext(PostContext);
   const userContext = useContext(UserContext);
   const { createPost, loading, currentPost, updatePost } = postContext;
-  const { user, getUserData } = userContext;
+  const { isUpdated } = userContext;
+  let user = getUser();
   useEffect(() => {
-    getUserData();
-  }, []);
+    user = getUser();
+  }, [isUpdated]);
   const [loadingPhoto, setLoadingPhoto] = useState(false);
   const [image, setImage] = useState('');
 

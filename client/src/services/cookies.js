@@ -3,8 +3,6 @@ export const getToken = () => {
   return cookies.load('auth');
 };
 
-export const getUser = () => {
-  if (getToken()) {
-    return JSON.parse(atob(getToken().split('.')[1])).user;
-  }
-};
+export const getUser = () => cookies.load('user');
+
+export const setUser = (user) => cookies.save('user', user, { path: '/' });

@@ -1,15 +1,16 @@
 import React, { useContext, useEffect } from 'react';
 import KidCard from '../KidCard/KidCard';
-import UserContext from '../../../context/user/userContext';
-
+// import UserContext from '../../../context/user/userContext';
+import { getUser } from '../../../services/cookies';
 const KidContainer = () => {
-  const userContext = useContext(UserContext);
-  const { getUserData, user, loading } = userContext;
+  // const userContext = useContext(UserContext);
+  // const { isUpdated } = userContext;
+  let user = getUser();
   useEffect(() => {
-    getUserData();
+    user = getUser();
   }, []);
 
-  if (loading || !user.children) {
+  if (!user.children) {
     return null;
   } else {
     return (

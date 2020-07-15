@@ -54,6 +54,7 @@ const PostFeedback = (props) => {
           </p>
           <h6 className={feedbackQuestion}>How difficult was the activity?</h6>
           <Rating
+            onChange={(value) => console.log(value)}
             initialRating={rating}
             quiet={true}
             emptySymbol={[
@@ -96,13 +97,13 @@ const PostFeedback = (props) => {
             ]}
             fullSymbol={[
               <div className={ratingBox} onClick={getTarget}>
-                <img src={easyIcon} className={iconImage} alt='easy-icon' />
+                <img src={easyIcon} className={iconImageFull} alt='easy-icon' />
                 <span>Easy</span>
               </div>,
               <div className={ratingBox} onClick={getTarget}>
                 <img
                   src={justRightIcon}
-                  className={iconImage}
+                  className={iconImageFull}
                   alt='just-right-icon'
                 />
                 <span>Just Right</span>
@@ -110,7 +111,7 @@ const PostFeedback = (props) => {
               <div className={ratingBox} onClick={getTarget}>
                 <img
                   src={challengingIcon}
-                  className={iconImage}
+                  className={iconImageFull}
                   alt='challenging-icon'
                 />
                 <span>Challenging</span>

@@ -7,7 +7,6 @@ import {
   GET_POSTS,
   GET_UNSPLASH_PHOTOS,
   SET_LOADING,
-  // GET_USER_DATA,
   DELETE_POST,
   POST_ERROR,
   UPDATE_POST,
@@ -27,18 +26,14 @@ const PostState = (props) => {
     posts: [],
     loading: true,
     photos: [],
-    // user: {},
+
     currentPost: {},
     isDeleted: false,
     isUpdated: false,
   };
 
   const [state, dispatch] = useReducer(postReducer, initialState);
-  // const getUserData = async () => {
-  //   setLoading();
-  //   const user = await getUser();
-  //   dispatch({ type: GET_USER_DATA, payload: user });
-  // };
+
   const getPosts = async () => {
     setLoading();
     try {
@@ -92,10 +87,12 @@ const PostState = (props) => {
       const res = await axios.patch(`/posts/${postId}`, body);
       if (res) {
         dispatch({ UPDATE_POST, payload: true });
+        console.log(state.isUpdated);
         getPosts();
         getUnsplashPhoto();
         clearCurrentPost();
         dispatch({ UPDATE_POST, payload: false });
+        console.log(state.isUpdated);
       }
     } catch (err) {
       dispatch({ type: POST_ERROR, payload: err.response });
@@ -124,14 +121,13 @@ const PostState = (props) => {
         posts: state.posts,
         photos: state.photos,
         loading: state.loading,
-        // user: state.user,
         error: state.error,
         isDeleted: state.isDeleted,
         isUpdated: state.isUpdated,
         currentPost: state.currentPost,
         getUnsplashPhoto,
         getPosts,
-        // getUserData,
+
         createPost,
         updatePost,
         deletePost,

@@ -10,14 +10,16 @@ import {
   cancelButton,
   avatar,
 } from './KidForm.module.scss';
+import { getUser } from '../../../services/cookies';
 import UserContext from '../../../context/user/userContext';
 const KidForm = (props) => {
   const userContext = useContext(UserContext);
-  const { user, getUserData, loading, createChild } = userContext;
+  const { getUserData, loading, createChild, isUpdated } = userContext;
+  let user = getUser();
   useEffect(() => {
-    getUserData();
-  }, []);
-  if (loading) {
+    user = getUser();
+  }, [isUpdated]);
+  if (!user) {
     return <div>Loading</div>;
   } else {
     return (
@@ -43,11 +45,8 @@ const KidForm = (props) => {
             gender: values.gender,
             user: user.id,
           };
-          console.log(requestBody);
           await createChild(requestBody);
           props.cancel();
-          //   await updateUser(requestBody);
-          //   getUserData();
         }}
       >
         <Form className={form}>

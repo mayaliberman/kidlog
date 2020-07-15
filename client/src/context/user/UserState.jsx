@@ -9,6 +9,7 @@ import {
   UPDATE_USER,
 } from '../types';
 import axios from '../../services/axios';
+import { setUser } from '../../services/cookies';
 
 const UserState = (props) => {
   const initialState = {
@@ -20,18 +21,6 @@ const UserState = (props) => {
   };
 
   const [state, dispatch] = useReducer(userReducer, initialState);
-
-  const getUserData = async () => {
-    setLoading();
-    try {
-      const user = await axios.get(`/users/me`);
-      if (user) {
-        dispatch({ type: GET_USER_DATA, payload: user.data.data });
-      }
-    } catch (err) {
-      dispatch({ type: USER_ERROR, payload: err.response });
-    }
-  };
 
   const showCurrentChild = (id) => {
     setLoading();
@@ -49,7 +38,8 @@ const UserState = (props) => {
       const res = await axios.patch(`/users/updateMe`, body);
       if (res) {
         dispatch({ type: UPDATE_USER, payload: true });
-        await getUserData();
+        setUser(res.data.data);
+
         dispatch({ type: UPDATE_USER, payload: false });
       }
     } catch (err) {
@@ -58,16 +48,20 @@ const UserState = (props) => {
   };
 
   const createChild = async (body) => {
+    setLoading();
     try {
       const res = await axios.post(`/users/${body.user}/children`, body);
       if (res) {
-        await getUserData();
+        const user = await axios.get('/users/me');
+        setUser(user.data.data);
+        dispatch({ SET_LOADING, payload: false });
       }
     } catch (err) {
       dispatch({ type: USER_ERROR, payload: err.response });
     }
   };
   const setLoading = () => dispatch({ type: SET_LOADING });
+
   return (
     <UserContext.Provider
       value={{
@@ -76,7 +70,7 @@ const UserState = (props) => {
         error: state.error,
         loading: state.loading,
         isUpdated: state.isUpdated,
-        getUserData,
+
         showCurrentChild,
         updateUser,
         createChild,

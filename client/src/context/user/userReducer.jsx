@@ -11,16 +11,15 @@ import {
 
 export default (state, action) => {
   switch (action.type) {
-    case GET_USER_DATA:
-      return {
-        ...state,
-        user: action.payload,
-        loading: false,
-      };
+    // case GET_USER_DATA:
+    //   return {
+    //     ...state,
+    //     user: action.payload,
+    //     loading: false,
+    //   };
     case UPDATE_USER:
       return {
         ...state,
-        user: action.payload,
         isUpdated: action.payload,
         loading: false,
       };

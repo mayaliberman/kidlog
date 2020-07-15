@@ -5,6 +5,7 @@ import AuthContext from './authContext';
 import cookies from 'react-cookies';
 import { LOGIN_SUCCESS, USER_LOADED, LOGOUT, REGISTER_SUCCESS } from '../types';
 import { withRouter } from 'react-router-dom';
+import { setUser } from '../../services/cookies';
 const AuthState = (props) => {
   const initialState = {
     isLogged: false,
@@ -34,6 +35,7 @@ const AuthState = (props) => {
           },
         });
         cookies.save('auth', res.data.token, { path: '/' });
+        setUser(res.data.data.user);
 
         props.history.push('/posts');
       }
@@ -81,6 +83,7 @@ const AuthState = (props) => {
   const logout = () => {
     dispatch({ type: LOGOUT });
     cookies.remove('auth', { path: '/' });
+    cookies.remove('user', { path: '/' });
     props.history.push('/');
   };
   return (
