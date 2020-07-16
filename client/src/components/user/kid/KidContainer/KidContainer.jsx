@@ -8,7 +8,6 @@ const KidContainer = () => {
   let user = getUser();
   useEffect(() => {
     user = getUser();
-    console.log(user);
   }, [child]);
   if (!user.children) {
     return null;

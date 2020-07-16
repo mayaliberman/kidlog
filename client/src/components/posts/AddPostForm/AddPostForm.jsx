@@ -144,7 +144,7 @@ const AddPostForm = (props) => {
                     name='childId'
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.chilId}
+                    value={values.childId}
                     default
                   >
                     <option value=''>Select a kid</option>

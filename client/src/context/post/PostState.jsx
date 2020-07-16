@@ -87,12 +87,10 @@ const PostState = (props) => {
       const res = await axios.patch(`/posts/${postId}`, body);
       if (res) {
         dispatch({ UPDATE_POST, payload: true });
-        console.log(state.isUpdated);
         getPosts();
         getUnsplashPhoto();
         clearCurrentPost();
         dispatch({ UPDATE_POST, payload: false });
-        console.log(state.isUpdated);
       }
     } catch (err) {
       dispatch({ type: POST_ERROR, payload: err.response });
