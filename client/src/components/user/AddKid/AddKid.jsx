@@ -26,7 +26,8 @@ const AddKid = () => {
       <img alt='company logo' src={logo} className={logoIcon} />
       <h4 className={subtitle}>Finel step - fill you kid's details</h4>
       <div className={container}>
-        <KidContainer />
+        {user.children && <KidContainer />}
+
         {!showKidForm && (
           <div className={actionButtons}>
             <button className={addButton} onClick={toggleKidForm}>

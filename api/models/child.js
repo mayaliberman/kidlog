@@ -25,10 +25,10 @@ const childSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// childSchema.pre(/^find/, async function (next) {
-//   //this points to the current query
-//   this.find({ active: { $ne: false } });
-//   next();
-// });
+childSchema.pre(/^find/, async function (next) {
+  //this points to the current query
+  this.find({ active: { $ne: false } });
+  next();
+});
 
 module.exports = mongoose.model('Child', childSchema);

@@ -67,7 +67,6 @@ exports.updateChild = asyncHandler(async (req, res, next) => {
       )
     );
   }
-
   if (req.params.id !== req.user.id) {
     return next(
       new AppError(
@@ -85,13 +84,20 @@ exports.updateChild = asyncHandler(async (req, res, next) => {
 });
 
 exports.deleteChild = asyncHandler(async (req, res, next) => {
-  const child = await Child.findOne({ _id: req.params.childId });
+  const child = await Child.findById(req.params.childId);
+  console.log(child);
 
   if (!child) {
     return next(new AppError(`No user with the ID ${req.originalUrl}`, 404));
   }
 
-  if (child.user !== req.user._id) {
+  if (String(child.user) !== req.user.id) {
+    console.log(
+      JSON.stringify(child.user),
+      'child.user',
+      req.user.id,
+      'req.uesr.id'
+    );
     return next(
       new AppError(
         `You are not authorize to visits this page ${req.originalUrl}`,

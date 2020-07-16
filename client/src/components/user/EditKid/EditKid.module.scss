@@ -1,0 +1,16 @@
+@import '../../../styles/style.scss';
+.deleteSection {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.deleteButton {
+  outline: none;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  color: $error;
+  text-transform: uppercase;
+}

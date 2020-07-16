@@ -64,7 +64,25 @@ const UserState = (props) => {
       await axios.patch(`/users/${body.user}/children/${body.id}`, reqBody);
       const user = await axios.get('/users/me');
       setUser(user.data.data);
+      dispatch({ type: GET_CHILD, payload: [] });
       dispatch({ SET_LOADING, payload: false });
+    } catch (err) {
+      dispatch({ type: USER_ERROR, payload: err.response });
+    }
+  };
+
+  const deleteChild = async (userId, childId) => {
+    setLoading();
+    try {
+      const deleteChild = await axios.delete(
+        `/users/${userId}/children/${childId}`
+      );
+      if (deleteChild) {
+        const user = await axios.get('/users/me');
+        setUser(user.data.data);
+        dispatch({ type: GET_CHILD, payload: [] });
+        dispatch({ SET_LOADING, payload: false });
+      }
     } catch (err) {
       dispatch({ type: USER_ERROR, payload: err.response });
     }
@@ -83,6 +101,7 @@ const UserState = (props) => {
         showCurrentChild,
         updateUser,
         createChild,
+        deleteChild,
       }}
     >
       {props.children}
