@@ -3,13 +3,15 @@ import EditIcon from '../../../assets/Edit_icon.svg';
 import Avatar from '../../../assets/image-4.svg';
 import { card, edit, kid, avatar } from './KidCard.module.scss';
 import UserContext from '../../../context/user/userContext';
-
+import { useHistory } from 'react-router-dom';
 const KidCard = (props) => {
+  let history = useHistory();
   const userContext = useContext(UserContext);
   const { showCurrentChild } = userContext;
   const { name, id } = props;
   const openEditChild = () => {
     showCurrentChild(id);
+    history.push('/edit-kid');
   };
   return (
     <div className={card}>

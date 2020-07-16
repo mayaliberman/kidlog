@@ -11,6 +11,7 @@ import AuthState from './context/auth/AuthState';
 import UserState from './context/user/UserState';
 import MyAccount from './components/user/MyAccount/MyAccount';
 import AddKid from './components/user/AddKid/AddKid';
+import EditKid from './components/user/EditKid/EditKid';
 import PrivateRoute from './components/PriveteRoute';
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
               <Route exact path='/add-kid' component={AddKid} />
               <PrivateRoute path={'/posts'} exact component={PostsGallery} />
               <PrivateRoute exact path='/my-account' component={MyAccount} />
+              <PrivateRoute exact path='/edit-kid' component={EditKid} />
               <Route component={NotFound} />
             </Switch>
           </PostState>

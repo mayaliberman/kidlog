@@ -1,15 +1,9 @@
 import React, { useReducer } from 'react';
 import UserContext from './userContext';
 import userReducer from './userReducer';
-import {
-  GET_USER_DATA,
-  SET_LOADING,
-  GET_CHILD,
-  USER_ERROR,
-  UPDATE_USER,
-} from '../types';
+import { SET_LOADING, GET_CHILD, USER_ERROR, UPDATE_USER } from '../types';
 import axios from '../../services/axios';
-import { setUser } from '../../services/cookies';
+import { setUser, getUser } from '../../services/cookies';
 
 const UserState = (props) => {
   const initialState = {
@@ -17,14 +11,15 @@ const UserState = (props) => {
     photos: [],
     isUpdated: false,
     user: {},
-    child: {},
+    child: [],
   };
 
   const [state, dispatch] = useReducer(userReducer, initialState);
 
   const showCurrentChild = (id) => {
     setLoading();
-    const child = state.user.children.filter((child) => child.id === id);
+    const user = getUser();
+    const child = user.children.filter((child) => child.id === id);
     try {
       dispatch({ type: GET_CHILD, payload: child });
     } catch (err) {
@@ -60,6 +55,20 @@ const UserState = (props) => {
       dispatch({ type: USER_ERROR, payload: err.response });
     }
   };
+
+  const updateChild = async (body) => {
+    setLoading();
+    try {
+      const { name, gender, birthYear } = body;
+      const reqBody = { name, gender, birthYear };
+      await axios.patch(`/users/${body.user}/children/${body.id}`, reqBody);
+      const user = await axios.get('/users/me');
+      setUser(user.data.data);
+      dispatch({ SET_LOADING, payload: false });
+    } catch (err) {
+      dispatch({ type: USER_ERROR, payload: err.response });
+    }
+  };
   const setLoading = () => dispatch({ type: SET_LOADING });
 
   return (
@@ -70,7 +79,7 @@ const UserState = (props) => {
         error: state.error,
         loading: state.loading,
         isUpdated: state.isUpdated,
-
+        updateChild,
         showCurrentChild,
         updateUser,
         createChild,

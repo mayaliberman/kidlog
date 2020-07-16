@@ -14,21 +14,36 @@ import { getUser } from '../../../services/cookies';
 import UserContext from '../../../context/user/userContext';
 const KidForm = (props) => {
   const userContext = useContext(UserContext);
-  const { getUserData, loading, createChild, isUpdated } = userContext;
+  const {
+    getUserData,
+    loading,
+    createChild,
+    isUpdated,
+    child,
+    updateChild,
+  } = userContext;
   let user = getUser();
   useEffect(() => {
     user = getUser();
-  }, [isUpdated]);
+  }, [isUpdated, child]);
   if (!user) {
     return <div>Loading</div>;
   } else {
     return (
       <Formik
-        initialValues={{
-          name: '',
-          birthYear: '',
-          gender: '',
-        }}
+        initialValues={
+          props.childValue
+            ? {
+                name: props.childValue.name,
+                birthYear: props.childValue.birthYear,
+                gender: props.childValue.gender,
+              }
+            : {
+                name: '',
+                birthYear: '',
+                gender: '',
+              }
+        }
         validationSchema={Yup.object().shape({
           name: Yup.string().required('* Name is Required'),
           birthYear: Yup.number()
@@ -45,7 +60,13 @@ const KidForm = (props) => {
             gender: values.gender,
             user: user.id,
           };
-          await createChild(requestBody);
+          console.log(child);
+          if (child.length > 0) {
+            requestBody.id = child[0].id;
+            await updateChild(requestBody);
+          } else {
+            await createChild(requestBody);
+          }
           props.cancel();
         }}
       >

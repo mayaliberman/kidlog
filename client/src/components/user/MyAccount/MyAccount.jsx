@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   content,
   header,
@@ -13,7 +13,17 @@ import KidContainer from '../KidContainer/KidContainer';
 import AccountForm from '../AccountForm/AccountForm';
 import KidForm from '../KidForm/KidForm';
 import PlusIcon from '../../../assets/Plus_icon.svg';
+import { getUser } from '../../../services/cookies';
+import UserContext from '../../../context/user/userContext';
+
 const MyAccount = () => {
+  const userContext = useContext(UserContext);
+  const { child } = userContext;
+
+  let user = getUser();
+  useEffect(() => {
+    user = getUser();
+  }, [child]);
   const [showEditChild, setShowEditChild] = useState(false);
   const toggleEditChild = () => {
     setShowEditChild(!showEditChild);
@@ -39,7 +49,9 @@ const MyAccount = () => {
       </div>
       <div className={kidContainer}>
         <KidContainer />
-        {showEditChild && <KidForm cancel={toggleEditChild} />}
+        {showEditChild && (
+          <KidForm cancel={toggleEditChild} childValue={child[0]} />
+        )}
 
         {!showEditChild && (
           <button className={button} onClick={toggleEditChild}>
