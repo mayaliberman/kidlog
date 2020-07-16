@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import EditIcon from '../../../assets/Edit_icon.svg';
-import Avatar from '../../../assets/image-4.svg';
+import EditIcon from '../../../../assets/Edit_icon.svg';
+import Avatar from '../../../../assets/image-4.svg';
 import { card, edit, kid, avatar } from './KidCard.module.scss';
-import UserContext from '../../../context/user/userContext';
+import UserContext from '../../../../context/user/userContext';
 import { useHistory } from 'react-router-dom';
 const KidCard = (props) => {
   let history = useHistory();

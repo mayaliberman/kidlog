@@ -10,8 +10,8 @@ import {
   cancelButton,
   avatar,
 } from './KidForm.module.scss';
-import { getUser } from '../../../services/cookies';
-import UserContext from '../../../context/user/userContext';
+import { getUser } from '../../../../services/cookies';
+import UserContext from '../../../../context/user/userContext';
 const KidForm = (props) => {
   const userContext = useContext(UserContext);
   const {

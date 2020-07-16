@@ -1,12 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import KidForm from '../KidForm/KidForm';
-import UserContext from '../../../context/user/userContext';
+import UserContext from '../../../../context/user/userContext';
 import { useHistory } from 'react-router-dom';
 import { deleteButton, deleteSection } from './EditKid.module.scss';
 const EditKid = (props) => {
   let history = useHistory();
   const userContext = useContext(UserContext);
   const { child, deleteChild } = userContext;
+
+  const [confirmDelete, setConfirmDelete] = useState(false);
   let values = '';
   if (child[0]) {
     const { name, gender, birthYear } = child[0];

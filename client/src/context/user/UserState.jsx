@@ -45,11 +45,20 @@ const UserState = (props) => {
   const createChild = async (body) => {
     setLoading();
     try {
-      const res = await axios.post(`/users/${body.user}/children`, body);
-      if (res) {
-        const user = await axios.get('/users/me');
-        setUser(user.data.data);
-        dispatch({ SET_LOADING, payload: false });
+      const user = getUser();
+      const childName = user.children.find(
+        (child) => child.name.toLowerCase() === body.name.toLowerCase()
+      );
+
+      if (!childName) {
+        const res = await axios.post(`/users/${body.user}/children`, body);
+        if (res) {
+          const user = await axios.get('/users/me');
+          setUser(user.data.data);
+          dispatch({ SET_LOADING, payload: false });
+        }
+      } else {
+        alert('name exists in the system, please contact the admin');
       }
     } catch (err) {
       dispatch({ type: USER_ERROR, payload: err.response });

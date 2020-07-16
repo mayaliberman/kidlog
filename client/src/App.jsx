@@ -10,8 +10,8 @@ import PostState from './context/post/PostState';
 import AuthState from './context/auth/AuthState';
 import UserState from './context/user/UserState';
 import MyAccount from './components/user/MyAccount/MyAccount';
-import AddKid from './components/user/AddKid/AddKid';
-import EditKid from './components/user/EditKid/EditKid';
+import AddKid from './components/user/kid/AddKid/AddKid';
+import EditKid from './components/user/kid/EditKid/EditKid';
 import PrivateRoute from './components/PriveteRoute';
 
 const App = () => {

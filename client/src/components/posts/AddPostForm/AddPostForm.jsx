@@ -53,7 +53,9 @@ const AddPostForm = (props) => {
   };
 
   //{loading ? (loading) : <img}
-  let arrayOfData = user.children || [{ id: 1, name: 'no option' }];
+  let arrayOfData = user.children.filter(
+    (kid) => (kid = kid.active === true)
+  ) || [{ id: 1, name: 'no option' }];
   let options = arrayOfData.map((child) => (
     <option key={child.id} value={child.id}>
       {child.name}

@@ -9,9 +9,9 @@ import {
 } from './MyAccount.module.scss';
 import { Link } from 'react-router-dom';
 import exitIcon from '../../../assets/Exit_icon.svg';
-import KidContainer from '../KidContainer/KidContainer';
+import KidContainer from '../kid/KidContainer/KidContainer';
 import AccountForm from '../AccountForm/AccountForm';
-import KidForm from '../KidForm/KidForm';
+import KidForm from '../kid/KidForm/KidForm';
 import PlusIcon from '../../../assets/Plus_icon.svg';
 import { getUser } from '../../../services/cookies';
 import UserContext from '../../../context/user/userContext';

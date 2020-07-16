@@ -11,9 +11,9 @@ import {
 import { Link } from 'react-router-dom';
 import KidForm from '../KidForm/KidForm';
 import KidContainer from '../KidContainer/KidContainer';
-import logo from '../../../assets/logo-purple.svg';
-import PlusIcon from '../../../assets/Plus_icon.svg';
-import UserContext from '../../../context/user/userContext';
+import logo from '../../../../assets/logo-purple.svg';
+import PlusIcon from '../../../../assets/Plus_icon.svg';
+import UserContext from '../../../../context/user/userContext';
 const AddKid = () => {
   const userContext = useContext(UserContext);
   const { getUserData, user, loading } = userContext;
