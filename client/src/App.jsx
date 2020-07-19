@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home/Home';
-import SignIn from './components/user/SignIn/SignIn';
-import SignUp from './components/user/SignUp/SignUp';
+import SignIn from './components/auth/SignIn/SignIn';
+import SignUp from './components/auth/SignUp/SignUp';
+import ForgotPassword from './components/auth/ForgotPassword/ForgotPassword';
 import Header from './components/Header/Header';
 import PostsGallery from './components/posts/PostGallery/PostsGallery';
 import NotFound from './components/NotFound/NotFound';
@@ -25,6 +26,7 @@ const App = () => {
               <Route exact path='/' component={Home} />
               <Route exact path='/sign-in' component={SignIn} />
               <Route exact path='/sign-up' component={SignUp} />
+              <Route exact path='/forgot-password' component={ForgotPassword} />
               <Route exact path='/add-kid' component={AddKid} />
               <PrivateRoute path={'/posts'} exact component={PostsGallery} />
               <PrivateRoute exact path='/my-account' component={MyAccount} />

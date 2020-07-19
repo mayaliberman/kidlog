@@ -11,8 +11,11 @@ import {
   iconImage,
   iconImageFull,
   ratingBox,
+  radios,
+  easyIconImage,
 } from './PostFeedback.module.scss';
-import Rating from 'react-rating';
+import { Formik, Form, Field } from 'formik';
+
 import exitIcon from '../../../assets/Exit_icon.svg';
 import challengingIcon from '../../../assets/Challenging_icon.svg';
 import difficultIcon from '../../../assets/Difficult_icon.svg';
@@ -36,9 +39,7 @@ const PostFeedback = (props) => {
       props.submit();
     }
   };
-  const getTarget = (e) => {
-    console.log(console.log('working', (e.target.className = iconImageFull)));
-  };
+
   return (
     <div className={modal}>
       <div className={content}>
@@ -53,90 +54,82 @@ const PostFeedback = (props) => {
             our lesson plans
           </p>
           <h6 className={feedbackQuestion}>How difficult was the activity?</h6>
-          <Rating
-            onChange={(value) => console.log(value)}
-            initialRating={rating}
-            quiet={true}
-            emptySymbol={[
-              <div className={ratingBox}>
-                <img src={easyIcon} className={iconImage} alt='easy-icon' />{' '}
-                <span>Easy</span>
-              </div>,
-              <div className={ratingBox}>
-                <img
-                  src={justRightIcon}
-                  className={iconImage}
-                  alt='just-right-icon'
-                />{' '}
-                <span>Just Right</span>
-              </div>,
-              <div className={ratingBox}>
-                <img
-                  src={challengingIcon}
-                  className={iconImage}
-                  alt='difficult-icon'
-                />{' '}
-                <span>Challenging</span>
-              </div>,
-              <div className={ratingBox}>
-                <img
-                  src={difficultIcon}
-                  className={iconImage}
-                  alt='difficult-icon'
-                />{' '}
-                <span>Difficult</span>
-              </div>,
-              <div className={ratingBox}>
-                <img
-                  src={tooHardIcon}
-                  className={iconImage}
-                  alt='difficult-icon'
-                />{' '}
-                <span>Too hard!</span>
-              </div>,
-            ]}
-            fullSymbol={[
-              <div className={ratingBox} onClick={getTarget}>
-                <img src={easyIcon} className={iconImageFull} alt='easy-icon' />
-                <span>Easy</span>
-              </div>,
-              <div className={ratingBox} onClick={getTarget}>
-                <img
-                  src={justRightIcon}
-                  className={iconImageFull}
-                  alt='just-right-icon'
-                />
-                <span>Just Right</span>
-              </div>,
-              <div className={ratingBox} onClick={getTarget}>
-                <img
-                  src={challengingIcon}
-                  className={iconImageFull}
-                  alt='challenging-icon'
-                />
-                <span>Challenging</span>
-              </div>,
-              <div className={ratingBox} onClick={getTarget}>
-                <img
-                  src={difficultIcon}
-                  className={iconImage}
-                  alt='difficult-icon'
-                />
-                <span>Difficult</span>
-              </div>,
-              <div className={ratingBox} onClick={getTarget}>
-                <img
-                  src={tooHardIcon}
-                  className={iconImage}
-                  alt='too-hard-icon'
-                />
-                <span>Too Hard!</span>
-              </div>,
-            ]}
-          />
-          <button className={button} onClick={() => submitFeedback()}>
-            Send Feedback
-          </button>
+          <Formik
+            initialValues={{ difficultyLevel: 0 }}
+            onSubmit={async (values) => {
+              if (currentPost !== undefined) {
+                const requestBody = {
+                  difficultyLevel: parseInt(values.difficultyLevel),
+                };
+                await updatePost(currentPost._id, requestBody);
+                await getPosts();
+                console.log(requestBody);
+                props.submit();
+              }
+            }}
+          >
+            {({ values }) => (
+              <Form>
+                <div
+                  role='group'
+                  aria-labelledby='my-radio-group'
+                  className={radios}
+                >
+                  <label>
+                    <Field type='radio' name='difficultyLevel' value='1' />
+                    <span>
+                      <img
+                        src={easyIcon}
+                        alt='easy-icon'
+                        className={iconImage}
+                      />
+                      Easy
+                    </span>
+                  </label>
+
+                  <label>
+                    <img
+                      src={justRightIcon}
+                      alt='just-right-icon'
+                      className={iconImage}
+                    />
+                    <Field type='radio' name='difficultyLevel' value='2' />
+                    Just Right
+                  </label>
+                  <label>
+                    <img
+                      src={challengingIcon}
+                      alt='challenging-icon'
+                      className={iconImage}
+                    />
+                    <Field type='radio' name='difficultyLevel' value='3' />
+                    Challenging
+                  </label>
+                  <label>
+                    <img
+                      src={difficultIcon}
+                      alt='difficult-icon'
+                      className={iconImage}
+                    />
+                    <Field type='radio' name='difficultyLevel' value='4' />
+                    Difficult
+                  </label>
+                  <label>
+                    <img
+                      src={tooHardIcon}
+                      alt='too-hard-icon'
+                      className={iconImage}
+                    />
+                    <Field type='radio' name='difficultyLevel' value='5' />
+                    Too hard!
+                  </label>
+                </div>
+                <button type='submit' className={button}>
+                  Send Feedback
+                </button>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </div>

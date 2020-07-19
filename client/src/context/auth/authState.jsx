@@ -80,6 +80,14 @@ const AuthState = (props) => {
       console.error(err);
     }
   };
+
+  const forgotPassword = async (email) => {
+    try {
+      await axios.post(`http://localhost:5000/users/forgotPassword`, { email });
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const logout = () => {
     dispatch({ type: LOGOUT });
     cookies.remove('auth', { path: '/' });
@@ -95,6 +103,7 @@ const AuthState = (props) => {
         login,
         logout,
         signup,
+        forgotPassword,
       }}
     >
       {props.children}

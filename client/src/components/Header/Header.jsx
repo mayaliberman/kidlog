@@ -33,7 +33,8 @@ const Header = () => {
     location.pathname === '/' ||
     location.pathname === '/sign-in' ||
     location.pathname === '/sign-up' ||
-    location.pathname === '/add-kid'
+    location.pathname === '/add-kid' ||
+    location.pathname === '/forgot-password'
   )
     header = <></>;
   else

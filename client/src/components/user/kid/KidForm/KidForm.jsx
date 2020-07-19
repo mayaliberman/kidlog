@@ -60,7 +60,7 @@ const KidForm = (props) => {
             gender: values.gender,
             user: user.id,
           };
-          console.log(child);
+
           if (child.length > 0) {
             requestBody.id = child[0].id;
             await updateChild(requestBody);

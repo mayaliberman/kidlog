@@ -58,7 +58,7 @@ const SignIn = () => {
               {errors.password && touched.password && errors.password}
             </div>
 
-            <Link to='/sign-in' className={forgotPassword}>
+            <Link to='/forgot-password' className={forgotPassword}>
               Forgot Password?
             </Link>
             <button type='submit' disabled={isSubmitting} className={button}>
