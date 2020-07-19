@@ -13,6 +13,7 @@ import {
   ratingBox,
   radios,
   easyIconImage,
+  emojiBox,
 } from './PostFeedback.module.scss';
 import { Formik, Form, Field } from 'formik';
 
@@ -29,16 +30,6 @@ const PostFeedback = (props) => {
   const postContext = useContext(PostContext);
   const { posts, updatePost, getPosts } = postContext;
   const currentPost = posts[posts.length - 1];
-
-  const submitFeedback = async () => {
-    if (currentPost !== undefined) {
-      const requestBody = { difficultyLevel: rating };
-      await updatePost(currentPost._id, requestBody);
-      await getPosts();
-      setRating({ value: 0 });
-      props.submit();
-    }
-  };
 
   return (
     <div className={modal}>
@@ -77,51 +68,59 @@ const PostFeedback = (props) => {
                 >
                   <label>
                     <Field type='radio' name='difficultyLevel' value='1' />
-                    <span>
+                    <div className={emojiBox}>
                       <img
                         src={easyIcon}
                         alt='easy-icon'
                         className={iconImage}
                       />
-                      Easy
-                    </span>
+                      <span>Easy</span>
+                    </div>
                   </label>
 
                   <label>
-                    <img
-                      src={justRightIcon}
-                      alt='just-right-icon'
-                      className={iconImage}
-                    />
                     <Field type='radio' name='difficultyLevel' value='2' />
-                    Just Right
+                    <div className={emojiBox}>
+                      <img
+                        src={justRightIcon}
+                        alt='just-right-icon'
+                        className={iconImage}
+                      />
+                      <span> Just Right</span>
+                    </div>
                   </label>
                   <label>
-                    <img
-                      src={challengingIcon}
-                      alt='challenging-icon'
-                      className={iconImage}
-                    />
                     <Field type='radio' name='difficultyLevel' value='3' />
-                    Challenging
+                    <div className={emojiBox}>
+                      <img
+                        src={challengingIcon}
+                        alt='challenging-icon'
+                        className={iconImage}
+                      />
+                      <span> Challenging</span>
+                    </div>
                   </label>
                   <label>
-                    <img
-                      src={difficultIcon}
-                      alt='difficult-icon'
-                      className={iconImage}
-                    />
                     <Field type='radio' name='difficultyLevel' value='4' />
-                    Difficult
+                    <div className={emojiBox}>
+                      <img
+                        src={difficultIcon}
+                        alt='difficult-icon'
+                        className={iconImage}
+                      />
+                      <span>Difficult</span>
+                    </div>
                   </label>
                   <label>
-                    <img
-                      src={tooHardIcon}
-                      alt='too-hard-icon'
-                      className={iconImage}
-                    />
                     <Field type='radio' name='difficultyLevel' value='5' />
-                    Too hard!
+                    <div className={emojiBox}>
+                      <img
+                        src={tooHardIcon}
+                        alt='too-hard-icon'
+                        className={iconImage}
+                      />
+                      <span> Too hard!</span>
+                    </div>
                   </label>
                 </div>
                 <button type='submit' className={button}>
