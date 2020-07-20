@@ -26,7 +26,7 @@ const postSchema = new mongoose.Schema(
       required: [true, 'Please add a child Id'],
     },
     image: String,
-    video: String,
+
     createdAt: { type: Date, default: Date.now() },
   },
   { timestamps: true }

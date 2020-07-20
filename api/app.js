@@ -1,5 +1,6 @@
 const express = require('express');
 const morganBody = require('morgan-body');
+const fileUpload = require('express-fileupload');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -10,7 +11,6 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController.js');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
-
 const app = express();
 
 //CORS support cross-origin resource sharing or CORS
@@ -59,6 +59,10 @@ app.use(
 
 //Serving static files - add this then building the client
 // app.use(express.static(path.join(__dirname, '../client/build')));
+
+//Enabling file uploading
+
+app.use(fileUpload());
 
 //*****GENERAL ROUTEES*****
 app.get('/', (req, res) => {

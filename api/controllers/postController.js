@@ -3,6 +3,28 @@ const Lesson = require('../models/lesson');
 const Child = require('../models/child');
 const AppError = require('../utils/appError');
 const { asyncHandler } = require('../utils/asyncHanlder');
+require('dotenv').config();
+const multer = require('multer');
+const { multerUploads } = require('../utils/multer');
+const { parser } = require('../utils/cloudinaryConfig');
+// const cloudinary = require('cloudinary').v2;
+// const multer = require('multer');
+// const storage = require('../utils/multer');
+
+// cloudinary.config({
+//   cloud_name: process.env.CLOUDINDARY_CLOUD_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+//   api_seceret: process.env.CLOUDINARY_API_SECERT,
+// });
+
+// if (typeof process.env.CLOUDINARY_URL === 'undefined') {
+//   console.warn('!! cloudinary config is undefined !!');
+//   console.warn('export CLOUDINARY_URL or set dotenv file');
+// } else {
+//   // Must call config() to register env variables
+//   // don't log config in production environment
+//   console.log('cloudinary config:', cloudinary.config());
+// }
 
 exports.getPosts = asyncHandler(async (req, res, next) => {
   const posts = await Post.find();
@@ -23,7 +45,9 @@ exports.getUserPosts = asyncHandler(async (req, res, next) => {
     );
   }
 
-  const posts = await Post.find({ userId: req.user._id });
+  const posts = await Post.find({ userId: req.user._id }).sort({
+    createdAt: -1,
+  });
 
   return res.json({
     status: 'success',
@@ -50,7 +74,16 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 });
 
 exports.createPost = asyncHandler(async (req, res, next) => {
-  const { desc, image } = req.body;
+  // let file = null;
+  // if (req.file !== null) {
+  //   console.log(req.file, 'req.files');
+  // file = req.files.file;
+  // file.mv(`${__dirname}/api/uploads/${file.name}`, (err) => {
+  //   console.error(err);
+  //   return res.status(500).send(err);
+  // });
+  // }
+  const { desc } = req.body;
   const userId = req.user._id;
   const lesson = await Lesson.findOne({ lessonNum: req.body.lessonNum });
   const child = await Child.findById(req.body.childId);
@@ -59,7 +92,7 @@ exports.createPost = asyncHandler(async (req, res, next) => {
     lessonId: lesson._id,
     userId,
     childId: child._id,
-    image,
+    // image: file,
   };
   const post = await Post.create(newPost);
   return res.status(201).json({ status: 'success', data: post });
@@ -108,3 +141,12 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
   });
   res.status(204).json({ status: 'success', data: null });
 });
+
+exports.uploadImage = (req, res, next) => {
+  try {
+    console.log('req.file: ', req.file);
+    res.json(req.file);
+  } catch (err) {
+    res.status(500).json({ msg: err });
+  }
+};
