@@ -51,6 +51,9 @@ const AuthState = (props) => {
     password,
     passwordConfirm
   ) => {
+    dispatch({ type: LOGOUT });
+    cookies.remove('auth', { path: '/' });
+    cookies.remove('user', { path: '/' });
     try {
       const res = await axios.post(`http://localhost:5000/users/signup`, {
         firstName,
@@ -73,8 +76,8 @@ const AuthState = (props) => {
         });
 
         cookies.save('auth', res.data.token, { path: '/' });
-
-        props.history.push('/posts');
+        setUser(res.data.data.user);
+        props.history.push('/my-account');
       }
     } catch (err) {
       console.error(err);

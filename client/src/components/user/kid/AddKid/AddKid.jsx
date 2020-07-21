@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   content,
   logoIcon,
@@ -16,8 +16,10 @@ import PlusIcon from '../../../../assets/Plus_icon.svg';
 import UserContext from '../../../../context/user/userContext';
 const AddKid = () => {
   const userContext = useContext(UserContext);
-  const { getUserData, user, loading } = userContext;
+  const { user, loading } = userContext;
   const [showKidForm, setshowKidFormd] = useState(true);
+  useEffect(() => {}, [user]);
+  console.log(user);
   const toggleKidForm = () => {
     setshowKidFormd(!showKidForm);
   };

@@ -14,18 +14,11 @@ import { getUser } from '../../../../services/cookies';
 import UserContext from '../../../../context/user/userContext';
 const KidForm = (props) => {
   const userContext = useContext(UserContext);
-  const {
-    getUserData,
-    loading,
-    createChild,
-    isUpdated,
-    child,
-    updateChild,
-  } = userContext;
+  const { loading, createChild, isUpdated, child, updateChild } = userContext;
   let user = getUser();
   useEffect(() => {
     user = getUser();
-  }, [isUpdated, child]);
+  }, [isUpdated, child, user]);
   if (!user) {
     return <div>Loading</div>;
   } else {

@@ -1,7 +1,7 @@
 const express = require('express');
 const { protect, restrictTo } = require('../controllers/authController');
-const { multerUploads } = require('../utils/multer');
-const { parser } = require('../utils/cloudinaryConfig');
+// const { multerUploads } = require('../utils/multer');
+// const { parser } = require('../utils/cloudinaryConfig');
 const router = express.Router();
 
 const {
@@ -12,6 +12,7 @@ const {
   deletePost,
   getPosts,
   uploadImage,
+  uploadMulter,
 } = require('../controllers/postController');
 
 //***ROUTES */
@@ -34,6 +35,6 @@ router.patch('/:id', updatePost);
 router.delete('/:id', deletePost);
 //Return when posts are ready in client
 // router.get('/', restrictTo('admin'), getPosts);
-router.post('/upload', parser.single('image'), uploadImage);
-
+// router.post('/upload', parser.single('image'), uploadImage);
+// router.post('/upload-multer', uploadMulter);
 module.exports = router;

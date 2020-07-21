@@ -7,6 +7,7 @@ export default axios.create({
     'Cache-control': 'no-cache, no-store',
     Pragma: 'no-cache',
     'Content-Type': 'application/json',
+    // 'content-type': 'multipart/form-data',
   },
 
   transformRequest: [

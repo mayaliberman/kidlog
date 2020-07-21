@@ -5,8 +5,9 @@ const AppError = require('../utils/appError');
 const { asyncHandler } = require('../utils/asyncHanlder');
 require('dotenv').config();
 const multer = require('multer');
-const { multerUploads } = require('../utils/multer');
-const { parser } = require('../utils/cloudinaryConfig');
+const upload = multer({ dest: 'uploads/' });
+// const { multerUploads } = require('../utils/multer');
+// const { parser } = require('../utils/cloudinaryConfig');
 // const cloudinary = require('cloudinary').v2;
 // const multer = require('multer');
 // const storage = require('../utils/multer');
@@ -74,6 +75,7 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 });
 
 exports.createPost = asyncHandler(async (req, res, next) => {
+  // console.log(req.file);
   // let file = null;
   // if (req.file !== null) {
   //   console.log(req.file, 'req.files');
@@ -142,11 +144,15 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
   res.status(204).json({ status: 'success', data: null });
 });
 
-exports.uploadImage = (req, res, next) => {
+exports.uploadImage = asyncHandler(async (req, res, next) => {
   try {
-    console.log('req.file: ', req.file);
-    res.json(req.file);
+    console.log(req.file);
+    const image = {};
+    image.url = req.file.url;
+    image.id = req.file.public_id;
+    console.log(image);
+    res.status(201);
   } catch (err) {
     res.status(500).json({ msg: err });
   }
-};
+});

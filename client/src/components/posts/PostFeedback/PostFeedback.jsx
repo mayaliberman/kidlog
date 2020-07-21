@@ -9,10 +9,7 @@ import {
   subtext,
   feedbackQuestion,
   iconImage,
-  iconImageFull,
-  ratingBox,
   radios,
-  easyIconImage,
   emojiBox,
 } from './PostFeedback.module.scss';
 import { Formik, Form, Field } from 'formik';
@@ -54,10 +51,12 @@ const PostFeedback = (props) => {
                 };
                 await updatePost(currentPost._id, requestBody);
                 await getPosts();
-                console.log(requestBody);
                 props.submit();
               }
             }}
+            handleChange={async (values) =>
+              console.log('values', values.difficultyLevel)
+            }
           >
             {({ values }) => (
               <Form>

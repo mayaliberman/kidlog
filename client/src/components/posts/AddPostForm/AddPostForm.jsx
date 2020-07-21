@@ -10,6 +10,7 @@ import {
   inputSecondPart,
   inputErrors,
   selectInput,
+  filebutton,
 } from './AddPostForm.module.scss';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -21,6 +22,7 @@ const AddPostSchema = Yup.object().shape({
   desc: Yup.string().required('Required'),
   lessonNum: Yup.number().required('Required'),
   childId: Yup.string().required('Required'),
+  file: Yup.mixed(),
 });
 
 const AddPostForm = (props) => {
@@ -32,24 +34,34 @@ const AddPostForm = (props) => {
   useEffect(() => {
     user = getUser();
   }, [isUpdated]);
-  const [loadingPhoto, setLoadingPhoto] = useState(false);
+  const [loadingPhoto, setLoadingPhoto] = useState(null);
   const [image, setImage] = useState('');
 
+  const onChange = (e) => {
+    setImage({ file: e.target.files[0] });
+  };
   const uploadImage = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append('file', files[0]);
-    data.append('upload_preset', 'kidlogimages');
-    setLoadingPhoto(true);
-    const res = await fetch(CLOUDINARY_API_BASE_URL, {
-      method: 'POST',
-      body: data,
-      mode: 'no-cors',
-    });
+    const formData = new FormData();
+    formData.append('file', image);
+    const config = {
+      headers: {
+        ' content-type': 'multipart/form-data',
+      },
+    };
+    // const files = e.target.files;
+    // const data = new FormData();
+    // data.append('file', files[0]);
+    // data.append('myImage', 'kidlogimages');
+    // setLoadingPhoto(true);
+    // const res = await fetch(CLOUDINARY_API_BASE_URL, {
+    //   method: 'POST',
+    //   body: data,
+    //   mode: 'no-cors',
+    // });
 
-    const file = await res.json();
-    setImage(file.secure_url);
-    setLoadingPhoto(false);
+    // const file = await res.json();
+    // setImage(file.secure_url);
+    // setLoadingPhoto(false);
   };
 
   //{loading ? (loading) : <img}
@@ -79,7 +91,12 @@ const AddPostForm = (props) => {
                   childId: currentPost.childId.id,
                   lessonNum: currentPost.lessonId.lessonNum,
                 }
-              : { desc: '', childId: '', lessonNum: '' }
+              : {
+                  desc: '',
+                  childId: '',
+                  lessonNum: '',
+                  file: '',
+                }
           }
           validationSchema={AddPostSchema}
           onSubmit={async (values) => {
@@ -87,12 +104,24 @@ const AddPostForm = (props) => {
               desc: values.desc,
               childId: values.childId,
               lessonNum: values.lessonNum,
-              image: image,
+              image: values.file,
             };
 
+            const formData = new FormData();
+            formData.append('desc', values.desc);
+            formData.append('childId', values.childId);
+            formData.append('lessonNum', values.lessonNum);
+            formData.append('file', values.file);
+
+            // const config = {
+            //   headers: {
+            //     ' content-type': 'multipart/form-data',
+            //   },
+            // };
+            // console.log(formData);
             currentPost.childId
-              ? await updatePost(currentPost._id, requestBody)
-              : await createPost(requestBody);
+              ? await updatePost(currentPost._id, formData)
+              : await createPost(formData);
 
             props.submit();
           }}
@@ -104,6 +133,7 @@ const AddPostForm = (props) => {
             handleChange,
             handleBlur,
             isSubmitting,
+            setFieldValue,
           }) => (
             <Form className={postForm}>
               <div className={firstPartForm}>
@@ -117,18 +147,19 @@ const AddPostForm = (props) => {
                   value={values.desc}
                 />
 
-                {/* <label className={filebutton}>
+                <label className={filebutton}>
                   <span>
                     <input
                       type='file'
                       name='file'
                       id='file'
-                      name='file'
-                      onChange={uploadImage}
-                      // value={image}
+                      onChange={(e) => {
+                        setFieldValue('file', e.currentTarget.files[0]);
+                      }}
+                      // value={file}
                     />
                   </span>
-                </label> */}
+                </label>
                 {errors.desc && touched.desc ? (
                   <div className={inputErrors}>{errors.desc} </div>
                 ) : null}

@@ -42,7 +42,6 @@ const SignUp = () => {
       >
         {({ errors, touched, isSubmitting }) => (
           <>
-            {/* <ErrorMessages errors={errors} touched={touched} error={error} /> */}
             <div>
               <div
                 className={error}

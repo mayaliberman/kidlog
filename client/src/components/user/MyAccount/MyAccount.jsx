@@ -20,9 +20,9 @@ const MyAccount = () => {
   const userContext = useContext(UserContext);
   const { child } = userContext;
 
-  let user = getUser();
+  getUser();
   useEffect(() => {
-    user = getUser();
+    getUser();
   }, [child]);
   const [showEditChild, setShowEditChild] = useState(false);
   const toggleEditChild = () => {
@@ -55,7 +55,7 @@ const MyAccount = () => {
 
         {!showEditChild && (
           <button className={button} onClick={toggleEditChild}>
-            <img src={PlusIcon} />
+            <img src={PlusIcon} alt='add-child-icon' />
             <span>Add Kid</span>
           </button>
         )}

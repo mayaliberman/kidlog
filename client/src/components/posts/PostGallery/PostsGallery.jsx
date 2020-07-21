@@ -64,7 +64,7 @@ const PostsGallery = () => {
         />
       )}
 
-      <PostFeedback />
+      {/* <PostFeedback /> */}
       <PostsContainer />
     </div>
   );
