@@ -88,8 +88,7 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
   if (req.body.lessonNum) req.body.lessonId = lesson.id;
 
   const { desc, lessonId, childId } = req.body;
-  const { image } = req.file.path;
-
+  const image = req.file.path;
   const reqBody = { desc, lessonId, childId, image };
   const updatedPost = await Post.findByIdAndUpdate(req.params.id, reqBody, {
     new: true,
