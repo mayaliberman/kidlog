@@ -77,6 +77,12 @@
   }
 }
 
+.checked {
+  margin-bottom: 7px;
+  opacity: 1;
+  background-color: red;
+  padding: 20px;
+}
 .emojiBox {
   display: flex;
   flex-direction: column;

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   modal,
   content,
@@ -11,8 +11,8 @@ import {
   iconImage,
   radios,
   emojiBox,
+  checked,
 } from './PostFeedback.module.scss';
-import { Formik, Form, Field } from 'formik';
 
 import exitIcon from '../../../assets/Exit_icon.svg';
 import challengingIcon from '../../../assets/Challenging_icon.svg';
@@ -22,11 +22,30 @@ import justRightIcon from '../../../assets/Just_right_icon.svg';
 import tooHardIcon from '../../../assets/Too_hard_icon.svg';
 import PostContext from '../../../context/post/postContext';
 const PostFeedback = (props) => {
-  const [rating, setRating] = useState({ value: 0 });
-
+  const [difficultyLevel, setDifficultLevel] = useState(0);
+  const [levelValue, setLevelValue] = useState(0);
+  useEffect(() => {}, [difficultyLevel]);
   const postContext = useContext(PostContext);
   const { posts, updatePost, getPosts } = postContext;
   const currentPost = posts[posts.length - 1];
+
+  const formSubmit = async (event) => {
+    event.preventDefault();
+    const requestBody = {
+      difficultyLevel: parseInt(difficultyLevel),
+    };
+    if (currentPost !== undefined) {
+      await updatePost(currentPost._id, requestBody);
+      await getPosts();
+      props.submit();
+    }
+  };
+  const handleChange = (e) => {
+    setDifficultLevel(e.target.value);
+    setLevelValue(e.target.value);
+  };
+
+  console.log(levelValue, 'levelValue');
 
   return (
     <div className={modal}>
@@ -42,92 +61,106 @@ const PostFeedback = (props) => {
             our lesson plans
           </p>
           <h6 className={feedbackQuestion}>How difficult was the activity?</h6>
-          <Formik
-            initialValues={{ difficultyLevel: 0 }}
-            onSubmit={async (values) => {
-              if (currentPost !== undefined) {
-                const requestBody = {
-                  difficultyLevel: parseInt(values.difficultyLevel),
-                };
-                await updatePost(currentPost._id, requestBody);
-                await getPosts();
-                props.submit();
-              }
-            }}
-            handleChange={async (values) =>
-              console.log('values', values.difficultyLevel)
-            }
-          >
-            {({ values }) => (
-              <Form>
-                <div
-                  role='group'
-                  aria-labelledby='my-radio-group'
-                  className={radios}
-                >
-                  <label>
-                    <Field type='radio' name='difficultyLevel' value='1' />
-                    <div className={emojiBox}>
-                      <img
-                        src={easyIcon}
-                        alt='easy-icon'
-                        className={iconImage}
-                      />
-                      <span>Easy</span>
-                    </div>
-                  </label>
-
-                  <label>
-                    <Field type='radio' name='difficultyLevel' value='2' />
-                    <div className={emojiBox}>
-                      <img
-                        src={justRightIcon}
-                        alt='just-right-icon'
-                        className={iconImage}
-                      />
-                      <span> Just Right</span>
-                    </div>
-                  </label>
-                  <label>
-                    <Field type='radio' name='difficultyLevel' value='3' />
-                    <div className={emojiBox}>
-                      <img
-                        src={challengingIcon}
-                        alt='challenging-icon'
-                        className={iconImage}
-                      />
-                      <span> Challenging</span>
-                    </div>
-                  </label>
-                  <label>
-                    <Field type='radio' name='difficultyLevel' value='4' />
-                    <div className={emojiBox}>
-                      <img
-                        src={difficultIcon}
-                        alt='difficult-icon'
-                        className={iconImage}
-                      />
-                      <span>Difficult</span>
-                    </div>
-                  </label>
-                  <label>
-                    <Field type='radio' name='difficultyLevel' value='5' />
-                    <div className={emojiBox}>
-                      <img
-                        src={tooHardIcon}
-                        alt='too-hard-icon'
-                        className={iconImage}
-                      />
-                      <span> Too hard!</span>
-                    </div>
-                  </label>
+          <form onSubmit={formSubmit}>
+            <div className={radios}>
+              <label>
+                <input
+                  type='radio'
+                  name='difficultyLevel'
+                  value={1}
+                  checked={difficultyLevel === 1}
+                  onChange={handleChange}
+                  onClick={handleChange}
+                />
+                <div className={emojiBox}>
+                  <img
+                    src={easyIcon}
+                    alt='easy-icon'
+                    className={levelValue !== 1 ? iconImage : checked}
+                  />
+                  <span>Easy</span>
                 </div>
-                <button type='submit' className={button}>
-                  Send Feedback
-                </button>
-              </Form>
-            )}
-          </Formik>
+              </label>
+
+              <label>
+                <input
+                  type='radio'
+                  value={2}
+                  name='difficultyLevel'
+                  checked={difficultyLevel === 2}
+                  onChange={handleChange}
+                  onClick={handleChange}
+                />
+                <div className={emojiBox}>
+                  <img
+                    src={justRightIcon}
+                    alt='easy-icon'
+                    className={
+                      difficultyLevel === 2 ? iconImage + checked : iconImage
+                    }
+                  />
+                  <span>Just Right</span>
+                </div>
+              </label>
+
+              <label>
+                <input
+                  type='radio'
+                  name='difficultyLevel'
+                  value={3}
+                  checked={difficultyLevel === 3}
+                  onChange={handleChange}
+                />
+                <div className={emojiBox}>
+                  <img
+                    src={difficultIcon}
+                    alt='easy-icon'
+                    className={iconImage}
+                  />
+                  <span>Difficult</span>
+                </div>
+              </label>
+
+              <label>
+                <input
+                  type='radio'
+                  name='difficultyLevel'
+                  value={4}
+                  checked={difficultyLevel === 4}
+                  onChange={handleChange}
+                />
+                <div className={emojiBox}>
+                  <img
+                    src={challengingIcon}
+                    alt='easy-icon'
+                    className={iconImage}
+                  />
+                  <span>Challenging</span>
+                </div>
+              </label>
+
+              <label>
+                <input
+                  type='radio'
+                  name='difficultyLevel'
+                  value={5}
+                  checked={difficultyLevel === 5}
+                  onChange={handleChange}
+                />
+                <div className={emojiBox}>
+                  <img
+                    src={tooHardIcon}
+                    alt='easy-icon'
+                    className={iconImage}
+                  />
+                  <span>Too hard!</span>
+                </div>
+              </label>
+            </div>
+            <button type='submit' className={button}>
+              Send Feedback
+            </button>
+          </form>
         </div>
       </div>
     </div>

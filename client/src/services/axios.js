@@ -12,6 +12,7 @@ export default axios.create({
 
   transformRequest: [
     function (data, headers) {
+      console.log(data);
       const token = getToken();
 
       if (token) headers['Authorization'] = `Bearer ` + token;

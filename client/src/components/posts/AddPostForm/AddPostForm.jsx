@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-
+import axios from 'axios';
 import { CLOUDINARY_API_BASE_URL } from '../../../config';
 import {
   desc,
@@ -14,7 +14,7 @@ import {
 } from './AddPostForm.module.scss';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { getUser } from '../../../services/cookies';
+import { getUser, getToken } from '../../../services/cookies';
 import PostContext from '../../../context/post/postContext';
 import UserContext from '../../../context/user/userContext';
 
@@ -104,21 +104,15 @@ const AddPostForm = (props) => {
               desc: values.desc,
               childId: values.childId,
               lessonNum: values.lessonNum,
-              image: values.file,
+              file: values.file,
             };
 
             const formData = new FormData();
-            formData.append('desc', values.desc);
-            formData.append('childId', values.childId);
-            formData.append('lessonNum', values.lessonNum);
-            formData.append('file', values.file);
+            formData.set('desc', values.desc);
+            formData.set('childId', values.childId);
+            formData.set('lessonNum', values.lessonNum);
+            formData.append('image', values.file);
 
-            // const config = {
-            //   headers: {
-            //     ' content-type': 'multipart/form-data',
-            //   },
-            // };
-            // console.log(formData);
             currentPost.childId
               ? await updatePost(currentPost._id, formData)
               : await createPost(formData);

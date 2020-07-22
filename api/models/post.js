@@ -25,7 +25,7 @@ const postSchema = new mongoose.Schema(
       ref: 'Child',
       required: [true, 'Please add a child Id'],
     },
-    file: String,
+    image: { type: String },
 
     createdAt: { type: Date, default: Date.now() },
   },

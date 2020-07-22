@@ -30,6 +30,9 @@ const PostsContainer = () => {
     return (
       <div>
         {posts.map((post, index) => {
+          let photo = results
+            ? results[Math.floor(Math.random() * results.length)].urls.regular
+            : Image;
           return (
             <PostCard
               key={post._id}
@@ -40,12 +43,7 @@ const PostsContainer = () => {
               childId={post.childId._id}
               childName={post.childId.name}
               postData={post}
-              defaultPhoto={
-                results
-                  ? results[Math.floor(Math.random() * results.length)].urls
-                      .regular
-                  : Image
-              }
+              defaultPhoto={post.image || photo || Image}
             />
           );
         })}

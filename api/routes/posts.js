@@ -1,7 +1,27 @@
 const express = require('express');
 const { protect, restrictTo } = require('../controllers/authController');
-// const { multerUploads } = require('../utils/multer');
-// const { parser } = require('../utils/cloudinaryConfig');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const multer = require('multer');
+require('dotenv').config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINDARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECERT,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'kidlog',
+    allowedFormats: ['jpg', 'jpeg', 'png'], // supports promises as well
+    // public_id: (req, file) => 'computed-filename-using-request',
+    type: 'authenticated',
+  },
+});
+
+const parser = multer({ storage: storage });
 const router = express.Router();
 
 const {
@@ -26,15 +46,14 @@ router.get('/myposts', getUserPosts);
 router.get('/:id', getPost);
 
 // create a new post
-router.post('/', createPost);
+router.post('/', parser.single('image'), createPost);
 
 //update a post
-router.patch('/:id', updatePost);
+router.patch('/:id', parser.single('image'), updatePost);
 
 //delete a post
 router.delete('/:id', deletePost);
 //Return when posts are ready in client
 // router.get('/', restrictTo('admin'), getPosts);
-// router.post('/upload', parser.single('image'), uploadImage);
-// router.post('/upload-multer', uploadMulter);
+
 module.exports = router;

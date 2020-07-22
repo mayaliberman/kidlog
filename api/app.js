@@ -11,26 +11,8 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController.js');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
-// const cloudinary = require('cloudinary').v2;
-// const cloudinaryStorage = require('multer-storage-cloudinary');
-// const multer = require('multer');
-// const upload = multer({ dest: 'uploads/' });
+
 const app = express();
-// cloudinary.config({
-//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-//   api_key: process.env.CLOUDINARY_API_KEY,
-//   api_secret: process.env.CLOUDINARY_API_SECRET,
-// });
-
-// const storage = cloudinaryStorage({
-//   cloudinary,
-
-//   folder: 'kidlog',
-//   allowedFormats: ['jpg', 'png'],
-//   transformation: [{ width: 500, height: 500, crop: 'limit' }],
-// });
-// console.log(storage);
-// const parser = multer({ storage });
 
 //CORS support cross-origin resource sharing or CORS
 app.use(cors());
@@ -81,8 +63,6 @@ app.use(
 
 //Enabling file uploading
 
-// app.use(fileUpload());
-
 //*****GENERAL ROUTEES*****
 app.get('/', (req, res) => {
   res.json({
@@ -90,10 +70,6 @@ app.get('/', (req, res) => {
   });
 });
 
-// app.post('/image', upload.single('demo_image'), (req, res, next) => {
-//   console.log(req.file);
-//   res.send(req.file);
-// });
 //*****OTHER ROUTEES*****
 app.use('/posts', postsRouter);
 app.use('/users', usersRouter);

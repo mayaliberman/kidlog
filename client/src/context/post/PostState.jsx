@@ -14,7 +14,7 @@ import {
   CLEAR_CURRENT_POST,
 } from '../types';
 import axios from '../../services/axios';
-// import { getUser } from '../../services/cookies';
+import { getUser, getToken } from '../../services/cookies';
 
 const unsplash = new Unsplash({
   accessKey: UNSPLASH_ACESS_KEY,
@@ -47,7 +47,15 @@ const PostState = (props) => {
   const createPost = async (body) => {
     setLoading();
     try {
-      await axios.post('/posts', body);
+      await fetch('http://localhost:5000/posts', {
+        method: 'POST',
+        body,
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      // await axios.post('/posts', body);
       await getPosts();
       await getUnsplashPhoto();
     } catch (err) {
@@ -84,11 +92,20 @@ const PostState = (props) => {
   const updatePost = async (postId, body) => {
     setLoading();
     try {
-      const res = await axios.patch(`/posts/${postId}`, body);
+      // const res = await axios.patch(`/posts/${postId}`, body);
+      const res = await fetch(`http://localhost:5000/posts/${postId}`, {
+        method: 'PATCH',
+        body,
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      console.log(res);
       if (res) {
         dispatch({ UPDATE_POST, payload: true });
-        getPosts();
-        getUnsplashPhoto();
+        await getPosts();
+        await getUnsplashPhoto();
         clearCurrentPost();
         dispatch({ UPDATE_POST, payload: false });
       }
