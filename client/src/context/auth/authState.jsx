@@ -91,6 +91,7 @@ const AuthState = (props) => {
       console.error(err);
     }
   };
+
   const logout = () => {
     dispatch({ type: LOGOUT });
     cookies.remove('auth', { path: '/' });

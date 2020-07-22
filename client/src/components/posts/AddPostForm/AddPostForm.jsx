@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
-import { CLOUDINARY_API_BASE_URL } from '../../../config';
 import {
   desc,
   button,
@@ -34,37 +32,7 @@ const AddPostForm = (props) => {
   useEffect(() => {
     user = getUser();
   }, [isUpdated]);
-  const [loadingPhoto, setLoadingPhoto] = useState(null);
-  const [image, setImage] = useState('');
 
-  const onChange = (e) => {
-    setImage({ file: e.target.files[0] });
-  };
-  const uploadImage = async (e) => {
-    const formData = new FormData();
-    formData.append('file', image);
-    const config = {
-      headers: {
-        ' content-type': 'multipart/form-data',
-      },
-    };
-    // const files = e.target.files;
-    // const data = new FormData();
-    // data.append('file', files[0]);
-    // data.append('myImage', 'kidlogimages');
-    // setLoadingPhoto(true);
-    // const res = await fetch(CLOUDINARY_API_BASE_URL, {
-    //   method: 'POST',
-    //   body: data,
-    //   mode: 'no-cors',
-    // });
-
-    // const file = await res.json();
-    // setImage(file.secure_url);
-    // setLoadingPhoto(false);
-  };
-
-  //{loading ? (loading) : <img}
   let arrayOfData = user.children.filter(
     (kid) => (kid = kid.active === true)
   ) || [{ id: 1, name: 'no option' }];
@@ -77,7 +45,7 @@ const AddPostForm = (props) => {
   if (loading) {
     return (
       <div>
-        <h2>Loading...</h2>
+        <h2 style={{ textAlign: 'center' }}>Loading...</h2>
       </div>
     );
   } else {
@@ -90,6 +58,7 @@ const AddPostForm = (props) => {
                   desc: currentPost.desc,
                   childId: currentPost.childId.id,
                   lessonNum: currentPost.lessonId.lessonNum,
+                  image: currentPost.image || null,
                 }
               : {
                   desc: '',
@@ -141,7 +110,26 @@ const AddPostForm = (props) => {
                   value={values.desc}
                 />
 
-                <label className={filebutton}>
+                <label
+                  className={currentPost.childId ? null : filebutton}
+                  style={
+                    currentPost.childId
+                      ? {
+                          backgroundImage: `url(${currentPost.image})`,
+                          backgroundRepeat: 'no-repeat',
+                          backgroundSize: 'contain',
+
+                          width: '10%',
+                          height: '40px',
+                          // borderRadius: '5px',
+                          overflow: 'hidden',
+                          position: 'relative',
+                          opacity: '0.5',
+                          objectFit: 'cover',
+                        }
+                      : null
+                  }
+                >
                   <span>
                     <input
                       type='file'

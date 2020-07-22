@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import Unsplash, { toJson } from 'unsplash-js';
-import { UNSPLASH_ACESS_KEY, UNSPLAH_SECRET_KEY } from '../../config';
+import { UNSPLASH_ACESS_KEY, UNSPLAH_SECRET_KEY, BASE_URL } from '../../config';
 import PostContext from './postContext';
 import postReducer from './postReducer';
 import {
@@ -47,7 +47,7 @@ const PostState = (props) => {
   const createPost = async (body) => {
     setLoading();
     try {
-      await fetch('http://localhost:5000/posts', {
+      await fetch(`${BASE_URL}/posts`, {
         method: 'POST',
         body,
         headers: {
@@ -93,7 +93,7 @@ const PostState = (props) => {
     setLoading();
     try {
       // const res = await axios.patch(`/posts/${postId}`, body);
-      const res = await fetch(`http://localhost:5000/posts/${postId}`, {
+      const res = await fetch(`${BASE_URL}/posts/${postId}`, {
         method: 'PATCH',
         body,
         headers: {
@@ -101,7 +101,7 @@ const PostState = (props) => {
           Authorization: `Bearer ${getToken()}`,
         },
       });
-      console.log(res);
+
       if (res) {
         dispatch({ UPDATE_POST, payload: true });
         await getPosts();
