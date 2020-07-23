@@ -14,7 +14,7 @@ import {
   CLEAR_CURRENT_POST,
 } from '../types';
 import axios from '../../services/axios';
-import { getUser, getToken } from '../../services/cookies';
+import { getToken } from '../../services/cookies';
 
 const unsplash = new Unsplash({
   accessKey: UNSPLASH_ACESS_KEY,
@@ -51,7 +51,6 @@ const PostState = (props) => {
         method: 'POST',
         body,
         headers: {
-          // 'content-type': 'multipart/form-data',
           Authorization: `Bearer ${getToken()}`,
         },
       });
@@ -92,12 +91,10 @@ const PostState = (props) => {
   const updatePost = async (postId, body) => {
     setLoading();
     try {
-      // const res = await axios.patch(`/posts/${postId}`, body);
       const res = await fetch(`${BASE_URL}/posts/${postId}`, {
         method: 'PATCH',
         body,
         headers: {
-          // 'content-type': 'multipart/form-data',
           Authorization: `Bearer ${getToken()}`,
         },
       });
@@ -114,6 +111,27 @@ const PostState = (props) => {
     }
   };
 
+  const updateDifficult = async (postId, body) => {
+    try {
+      const res = await fetch(`${BASE_URL}/posts/update-difficult/${postId}`, {
+        method: 'PATCH',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+
+      if (res) {
+        dispatch({ UPDATE_POST, payload: true });
+        await getPosts();
+        await getUnsplashPhoto();
+        dispatch({ UPDATE_POST, payload: false });
+      }
+    } catch (err) {
+      dispatch({ type: POST_ERROR, payload: err.response });
+    }
+  };
   const clearCurrentPost = () => {
     dispatch({ type: CLEAR_CURRENT_POST });
   };
@@ -129,7 +147,9 @@ const PostState = (props) => {
       dispatch({ type: POST_ERROR, payload: err.response });
     }
   };
+
   const setLoading = () => dispatch({ type: SET_LOADING });
+
   return (
     <PostContext.Provider
       value={{
@@ -142,7 +162,7 @@ const PostState = (props) => {
         currentPost: state.currentPost,
         getUnsplashPhoto,
         getPosts,
-
+        updateDifficult,
         createPost,
         updatePost,
         deletePost,

@@ -31,8 +31,7 @@ const {
   updatePost,
   deletePost,
   getPosts,
-  uploadImage,
-  uploadMulter,
+  updateDifficultyLevel,
 } = require('../controllers/postController');
 
 //***ROUTES */
@@ -50,6 +49,10 @@ router.post('/', parser.single('image'), createPost);
 
 //update a post
 router.patch('/:id', parser.single('image'), updatePost);
+
+//update difficultyLevel
+
+router.patch('/update-difficult/:id', updateDifficultyLevel);
 
 //delete a post
 router.delete('/:id', deletePost);

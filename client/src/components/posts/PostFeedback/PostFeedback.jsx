@@ -26,7 +26,7 @@ const PostFeedback = (props) => {
   const [levelValue, setLevelValue] = useState(0);
   useEffect(() => {}, [difficultyLevel]);
   const postContext = useContext(PostContext);
-  const { posts, updatePost, getPosts } = postContext;
+  const { posts, updatePost, getPosts, updateDifficult } = postContext;
   const currentPost = posts[posts.length - 1];
 
   const formSubmit = async (event) => {
@@ -34,9 +34,10 @@ const PostFeedback = (props) => {
     const requestBody = {
       difficultyLevel: parseInt(difficultyLevel),
     };
-    if (currentPost !== undefined) {
-      await updatePost(currentPost._id, requestBody);
-      await getPosts();
+    console.log(requestBody);
+    if (posts[0]._id !== undefined) {
+      await updateDifficult(posts[0]._id, requestBody);
+      // await getPosts();
       props.submit();
     }
   };
@@ -44,8 +45,6 @@ const PostFeedback = (props) => {
     setDifficultLevel(e.target.value);
     setLevelValue(e.target.value);
   };
-
-  console.log(levelValue, 'levelValue');
 
   return (
     <div className={modal}>

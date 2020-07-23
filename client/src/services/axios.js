@@ -7,12 +7,10 @@ export default axios.create({
     'Cache-control': 'no-cache, no-store',
     Pragma: 'no-cache',
     'Content-Type': 'application/json',
-    // 'content-type': 'multipart/form-data',
   },
 
   transformRequest: [
     function (data, headers) {
-      console.log(data);
       const token = getToken();
 
       if (token) headers['Authorization'] = `Bearer ` + token;
