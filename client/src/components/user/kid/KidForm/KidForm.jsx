@@ -38,10 +38,12 @@ const KidForm = (props) => {
               }
         }
         validationSchema={Yup.object().shape({
-          name: Yup.string().required('* Name is Required'),
+          name: Yup.string()
+            .matches(/[a-zA-Z]/, 'Please write only letters without numbers')
+            .required('* Name is Required'),
           birthYear: Yup.number()
             .max(new Date().getFullYear())
-            .required('* Last Name is Required'),
+            .required('* Birth year is Required'),
           gender: Yup.string()
             .oneOf(['male', 'female', 'other'], 'Invalid Gender Type')
             .required('* Gender is Required'),
@@ -55,9 +57,11 @@ const KidForm = (props) => {
           };
           if (child.length > 0) {
             requestBody.id = child[0].id;
+            console.log(child.length);
 
             await updateChild(requestBody);
           } else {
+            console.log(requestBody);
             await createChild(requestBody);
           }
           props.cancel();
@@ -71,12 +75,7 @@ const KidForm = (props) => {
           />
 
           <label htmlFor='name'>First Name</label>
-          <Field
-            name='name'
-            type='text'
-            className={input}
-            // placeholder={user.firstName}
-          />
+          <Field name='name' type='text' className={input} />
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div className={formSecondPart}>
               <ErrorMessage

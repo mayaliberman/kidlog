@@ -46,24 +46,23 @@ const UserState = (props) => {
     setLoading();
     try {
       const user = getUser();
-      let childName;
+      // let childName;
+      // if (user.children.length > 0) {
+      //   childName = user.children.find(
+      //     (child) => child.name.toLowerCase() === body.name.toLowerCase()
+      //   );
+      //   if (childName) {
+      //     alert(
+      //       'name exists in the system, please contact the admin or choose another name'
+      //     );
+      //   }
+      // }
 
-      console.log(user);
-      if (user.children.length > 0) {
-        childName = user.children.find(
-          (child) => child.name.toLowerCase() === body.name.toLowerCase()
-        );
-      }
-
-      if (!childName) {
-        const res = await axios.post(`/users/${body.user}/children`, body);
-        if (res) {
-          const user = await axios.get('/users/me');
-          setUser(user.data.data);
-          dispatch({ SET_LOADING, payload: false });
-        }
-      } else {
-        alert('name exists in the system, please contact the admin');
+      const res = await axios.post(`/users/${body.user}/children`, body);
+      if (res) {
+        const user = await axios.get('/users/me');
+        setUser(user.data.data);
+        dispatch({ SET_LOADING, payload: false });
       }
     } catch (err) {
       dispatch({ type: USER_ERROR, payload: err.response });

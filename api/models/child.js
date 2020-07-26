@@ -5,7 +5,8 @@ const childSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, 'A child must have a name'],
-      unique: true,
+      unique: false,
+      index: false,
     },
     birthYear: { type: Number, required: true },
     gender: { type: String, required: true },

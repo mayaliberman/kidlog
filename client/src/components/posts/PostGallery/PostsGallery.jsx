@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PostsContainer from '../PostsContainer';
 import { postGallery } from './PostGallery.module.scss';
 import AddPostButton from '../AddPostButton/AddPostButton';
@@ -6,6 +6,9 @@ import AddPost from '../AddPost/AddPost';
 import PostFeedback from '../PostFeedback/PostFeedback';
 import FeedBackThankYou from '../FeedBackThankYou/FeedBackThankYou';
 import PostContext from '../../../context/post/postContext';
+import { getUser } from '../../../services/cookies';
+import { useHistory } from 'react-router-dom';
+
 const PostsGallery = () => {
   const postContext = useContext(PostContext);
   const { currentPost, clearCurrentPost } = postContext;
@@ -13,7 +16,17 @@ const PostsGallery = () => {
   const [addButtonPopup, setAddButtonPopup] = useState(false);
   const [feedbackPost, setFeedbackPost] = useState(false);
   const [ThankYouPopup, setThankYouPopup] = useState(false);
+  const history = useHistory();
+  let user = getUser();
+  useEffect(() => {
+    user = getUser();
+  }, [user]);
 
+  console.log(user);
+  if (!user.children.length > 0) {
+    console.log('no kids');
+    history.push('/add-kid');
+  }
   const addPostButtonTogglePop = () => {
     setAddButtonPopup(true);
   };

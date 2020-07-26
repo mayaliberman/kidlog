@@ -14,12 +14,16 @@ import KidContainer from '../KidContainer/KidContainer';
 import logo from '../../../../assets/logo-purple.svg';
 import PlusIcon from '../../../../assets/Plus_icon.svg';
 import UserContext from '../../../../context/user/userContext';
+import { getUser } from '../../../../services/cookies';
 const AddKid = () => {
   const userContext = useContext(UserContext);
-  const { user } = userContext;
+  const { isUpdated, child } = userContext;
   const [showKidForm, setshowKidFormd] = useState(true);
-  useEffect(() => {}, [user]);
-  console.log(user);
+  let user = getUser();
+  useEffect(() => {
+    user = getUser();
+  }, [isUpdated, child, user]);
+
   const toggleKidForm = () => {
     setshowKidFormd(!showKidForm);
   };
