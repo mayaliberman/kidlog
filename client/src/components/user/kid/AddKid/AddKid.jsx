@@ -16,7 +16,7 @@ import PlusIcon from '../../../../assets/Plus_icon.svg';
 import UserContext from '../../../../context/user/userContext';
 const AddKid = () => {
   const userContext = useContext(UserContext);
-  const { user, loading } = userContext;
+  const { user } = userContext;
   const [showKidForm, setshowKidFormd] = useState(true);
   useEffect(() => {}, [user]);
   console.log(user);

@@ -64,6 +64,7 @@ const AuthState = (props) => {
       });
       if (res) {
         const user = JSON.parse(atob(res.data.token.split('.')[1]));
+
         const id = user.user.id;
         dispatch({
           type: REGISTER_SUCCESS,
@@ -72,12 +73,11 @@ const AuthState = (props) => {
         dispatch({
           type: USER_LOADED,
           payload: { user: id },
-          // payload: { user: JSON.parse(atob(res.data.token.split('.')[1])) },
         });
 
         cookies.save('auth', res.data.token, { path: '/' });
         setUser(res.data.data.user);
-        props.history.push('/my-account');
+        props.history.push('/add-kid');
       }
     } catch (err) {
       console.error(err);

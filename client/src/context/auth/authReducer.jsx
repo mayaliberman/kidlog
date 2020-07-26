@@ -18,6 +18,7 @@ export default (state, action) => {
       return {
         ...state,
         isLogged: true,
+        token: action.payload,
       };
 
     case LOGOUT: {

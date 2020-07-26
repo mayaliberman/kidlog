@@ -3,8 +3,6 @@ TODO refactor NotFound component to render conditionally if logged (to posts) or
 
 TODO Create filter in client for lessons tags, child, and ascending/descending posts maybe to do filter with API Feature (check course)
 
-TODO Updload image photos
-
 TODO Upload image videos
 
 TODO authentication with gmail

@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import {
   nav,
   logoIcon,
-  headerTitle,
   avatar,
   account,
   accountName,
@@ -21,7 +20,7 @@ const Header = () => {
   const userContext = useContext(UserContext);
   const { isUpdated } = userContext;
   const authContext = useContext(AuthContext);
-  const { logout, isLogged } = authContext;
+  const { logout } = authContext;
   let header = null;
   const location = useLocation();
   let user = getUser();

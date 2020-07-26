@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   desc,
   button,
@@ -12,7 +12,7 @@ import {
 } from './AddPostForm.module.scss';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { getUser, getToken } from '../../../services/cookies';
+import { getUser } from '../../../services/cookies';
 import PostContext from '../../../context/post/postContext';
 import UserContext from '../../../context/user/userContext';
 

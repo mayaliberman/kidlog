@@ -8,7 +8,7 @@ import Header from './components/Header/Header';
 import PostsGallery from './components/posts/PostGallery/PostsGallery';
 import NotFound from './components/NotFound/NotFound';
 import PostState from './context/post/PostState';
-import AuthState from './context/auth/AuthState';
+import AuthState from './context/auth/authState';
 import UserState from './context/user/UserState';
 import MyAccount from './components/user/MyAccount/MyAccount';
 import AddKid from './components/user/kid/AddKid/AddKid';

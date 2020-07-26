@@ -1,13 +1,4 @@
-import {
-  GET_CHILD,
-  CREACT_CHILD,
-  UPDATE_CHILD,
-  DELETE_CHILD,
-  DELETE_ME,
-  SET_LOADING,
-  GET_USER_DATA,
-  UPDATE_USER,
-} from '../types';
+import { GET_CHILD, SET_LOADING, UPDATE_USER } from '../types';
 
 export default (state, action) => {
   switch (action.type) {

@@ -46,9 +46,14 @@ const UserState = (props) => {
     setLoading();
     try {
       const user = getUser();
-      const childName = user.children.find(
-        (child) => child.name.toLowerCase() === body.name.toLowerCase()
-      );
+      let childName;
+
+      console.log(user);
+      if (user.children.length > 0) {
+        childName = user.children.find(
+          (child) => child.name.toLowerCase() === body.name.toLowerCase()
+        );
+      }
 
       if (!childName) {
         const res = await axios.post(`/users/${body.user}/children`, body);

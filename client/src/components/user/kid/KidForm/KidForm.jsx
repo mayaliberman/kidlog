@@ -14,7 +14,7 @@ import { getUser } from '../../../../services/cookies';
 import UserContext from '../../../../context/user/userContext';
 const KidForm = (props) => {
   const userContext = useContext(UserContext);
-  const { loading, createChild, isUpdated, child, updateChild } = userContext;
+  const { createChild, isUpdated, child, updateChild } = userContext;
   let user = getUser();
   useEffect(() => {
     user = getUser();
@@ -53,9 +53,9 @@ const KidForm = (props) => {
             gender: values.gender,
             user: user.id,
           };
-
           if (child.length > 0) {
             requestBody.id = child[0].id;
+
             await updateChild(requestBody);
           } else {
             await createChild(requestBody);

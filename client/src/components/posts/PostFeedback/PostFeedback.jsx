@@ -26,18 +26,16 @@ const PostFeedback = (props) => {
   const [levelValue, setLevelValue] = useState(0);
   useEffect(() => {}, [difficultyLevel]);
   const postContext = useContext(PostContext);
-  const { posts, updatePost, getPosts, updateDifficult } = postContext;
-  const currentPost = posts[posts.length - 1];
+  const { posts, updateDifficult } = postContext;
 
   const formSubmit = async (event) => {
     event.preventDefault();
     const requestBody = {
       difficultyLevel: parseInt(difficultyLevel),
     };
-    console.log(requestBody);
+
     if (posts[0]._id !== undefined) {
       await updateDifficult(posts[0]._id, requestBody);
-      // await getPosts();
       props.submit();
     }
   };
