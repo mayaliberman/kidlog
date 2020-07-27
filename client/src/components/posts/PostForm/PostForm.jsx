@@ -31,11 +31,12 @@ const AddPostForm = (props) => {
 
   const [loadingImage, setLoadingImage] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
-
+  let uploadImageIcon;
   let user = getUser();
   useEffect(() => {
     user = getUser();
     updateImagePreview();
+    updateEditedPostImage();
   }, [isUpdated, previewImage, loadingImage, currentPost]);
 
   const handleFileUpload = (event) => {
@@ -50,36 +51,41 @@ const AddPostForm = (props) => {
   };
 
   const updateImagePreview = () => {
-    const file = document.getElementById('file');
+    uploadImageIcon = document.getElementById('uploadImageIcon');
+
+    if (currentPost.childId) {
+      uploadImageIcon.style.backgroundImage = `url(${currentPost.image})`;
+      uploadImageIcon.style.width = '60px';
+      uploadImageIcon.style.height = '40px';
+      uploadImageIcon.style.borderRadius = '5px';
+    } else if (previewImage !== '') {
+      uploadImageIcon.style.backgroundImage = `url(${previewImage})`;
+      uploadImageIcon.style.width = '60px';
+      uploadImageIcon.style.height = '40px';
+      uploadImageIcon.style.borderRadius = '5px';
+    } else {
+      uploadImageIcon.style.backgroundImage = `url(${uploadIcon})`;
+    }
+
+    uploadImageIcon.style.backgroundSize = 'cover';
+    uploadImageIcon.style.objectFit = 'scale-down';
+  };
+
+  const updateEditedPostImage = () => {
+    const file = document.getElementById('uploadImageIcon');
     if (currentPost.childId && previewImage !== '') {
       file.style.backgroundImage = `url(${previewImage})`;
-      file.style.width = '10%';
+      file.style.width = '40px';
       file.style.height = '40px';
-      file.style.borderRadius = '5px';
-    }
-    if (currentPost.childId) {
-      file.style.backgroundImage = `url(${currentPost.image})`;
-      file.style.width = '10%';
-      file.style.height = '40px';
-      file.style.borderRadius = '5px';
-    } else if (previewImage !== '') {
-      file.style.backgroundImage = `url(${previewImage})`;
-      file.style.width = '10%';
-      file.style.height = '40px';
-      file.style.borderRadius = '5px';
+      file.style.objectFit = 'cover';
+      file.style.objectFit = 'scale-down';
     } else {
       file.style.backgroundImage = `url(${uploadIcon})`;
       file.style.width = '15px';
       file.style.height = '15px';
+      // file.style.objectFit = 'cover';
+      // file.style.objectFit = 'scale-down';
     }
-
-    file.style.backgroundRepeat = 'no-repeat';
-    file.style.backgroundSize = 'contain';
-
-    file.style.overflow = 'hidden';
-    file.style.position = 'relative';
-    file.style.opacity = '0.5';
-    file.style.objectFit = 'cover';
   };
 
   let arrayOfData = user.children.filter(
@@ -159,27 +165,7 @@ const AddPostForm = (props) => {
                   value={values.desc}
                 />
 
-                <label
-                  id='file'
-                  className={currentPost.childId ? null : filebutton}
-                  style={
-                    currentPost.childId
-                      ? {
-                          backgroundImage: `url(${currentPost.image})`,
-                          backgroundRepeat: 'no-repeat',
-                          backgroundSize: 'contain',
-
-                          width: '10%',
-                          height: '40px',
-                          // borderRadius: '5px',
-                          overflow: 'hidden',
-                          position: 'relative',
-                          opacity: '0.5',
-                          objectFit: 'cover',
-                        }
-                      : null
-                  }
-                >
+                <label className={filebutton} id='uploadImageIcon'>
                   <span>
                     <input
                       type='file'

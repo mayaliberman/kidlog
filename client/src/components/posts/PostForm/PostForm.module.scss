@@ -114,13 +114,15 @@
 }
 
 label.filebutton {
-  background-image: url('../../../assets/add-photo.svg');
+  opacity: 0.5;
   background-repeat: no-repeat;
   background-size: auto;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   overflow: hidden;
   position: relative;
+  padding: 3px;
+  border-radius: 5px;
 }
 
 label span input {
