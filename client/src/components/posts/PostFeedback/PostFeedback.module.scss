@@ -78,18 +78,21 @@
 }
 
 .checked {
-  margin-bottom: 7px;
   opacity: 1;
-  background-color: red;
-  padding: 20px;
+  margin-bottom: 7px;
 }
 .emojiBox {
   display: flex;
   flex-direction: column;
+  & span {
+    margin-top: 10px;
+  }
 }
 
 .radios {
   display: flex;
+  flex-direction: row;
+  border: none;
 
   margin-top: 30px;
   & label {

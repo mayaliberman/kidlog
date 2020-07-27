@@ -9,7 +9,7 @@ import {
   inputErrors,
   selectInput,
   filebutton,
-} from './AddPostForm.module.scss';
+} from './PostForm.module.scss';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { getUser } from '../../../services/cookies';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { content, header, modal } from './AddPost.module.scss';
 import exitIcon from '../../../assets/Exit_icon.svg';
-import AddPostForm from '../AddPostForm/AddPostForm';
+import PostForm from '../PostForm/PostForm';
 import { Link } from 'react-router-dom';
 
 const AddPost = (props) => {
@@ -22,7 +22,7 @@ const AddPost = (props) => {
             </Link>
           </div>
           <div>
-            <AddPostForm submit={submit} submitButton={submitButton} />
+            <PostForm submit={submit} submitButton={submitButton} />
           </div>
         </div>
       </div>

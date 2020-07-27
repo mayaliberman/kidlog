@@ -22,7 +22,6 @@ const PostsGallery = () => {
     user = getUser();
   }, [user]);
 
-  console.log(user);
   if (!user.children.length > 0) {
     console.log('no kids');
     history.push('/add-kid');
@@ -77,7 +76,6 @@ const PostsGallery = () => {
         />
       )}
 
-      {/* <PostFeedback /> */}
       <PostsContainer />
     </div>
   );

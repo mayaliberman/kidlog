@@ -40,10 +40,10 @@ const PostFeedback = (props) => {
     }
   };
   const handleChange = (e) => {
+    console.log(e.target.value);
     setDifficultLevel(e.target.value);
     setLevelValue(e.target.value);
   };
-
   return (
     <div className={modal}>
       <div className={content}>
@@ -64,8 +64,8 @@ const PostFeedback = (props) => {
                 <input
                   type='radio'
                   name='difficultyLevel'
-                  value={1}
-                  checked={difficultyLevel === 1}
+                  value='1'
+                  checked={difficultyLevel === '1'}
                   onChange={handleChange}
                   onClick={handleChange}
                 />
@@ -73,7 +73,7 @@ const PostFeedback = (props) => {
                   <img
                     src={easyIcon}
                     alt='easy-icon'
-                    className={levelValue !== 1 ? iconImage : checked}
+                    className={levelValue !== '1' ? iconImage : checked}
                   />
                   <span>Easy</span>
                 </div>
@@ -82,9 +82,9 @@ const PostFeedback = (props) => {
               <label>
                 <input
                   type='radio'
-                  value={2}
+                  value='2'
                   name='difficultyLevel'
-                  checked={difficultyLevel === 2}
+                  checked={difficultyLevel === '2'}
                   onChange={handleChange}
                   onClick={handleChange}
                 />
@@ -92,9 +92,7 @@ const PostFeedback = (props) => {
                   <img
                     src={justRightIcon}
                     alt='easy-icon'
-                    className={
-                      difficultyLevel === 2 ? iconImage + checked : iconImage
-                    }
+                    className={difficultyLevel !== '2' ? iconImage : checked}
                   />
                   <span>Just Right</span>
                 </div>
@@ -104,15 +102,15 @@ const PostFeedback = (props) => {
                 <input
                   type='radio'
                   name='difficultyLevel'
-                  value={3}
-                  checked={difficultyLevel === 3}
+                  value='3'
+                  checked={difficultyLevel === '3'}
                   onChange={handleChange}
                 />
                 <div className={emojiBox}>
                   <img
                     src={difficultIcon}
                     alt='easy-icon'
-                    className={iconImage}
+                    className={difficultyLevel !== '3' ? iconImage : checked}
                   />
                   <span>Difficult</span>
                 </div>
@@ -122,15 +120,15 @@ const PostFeedback = (props) => {
                 <input
                   type='radio'
                   name='difficultyLevel'
-                  value={4}
-                  checked={difficultyLevel === 4}
+                  value='4'
+                  checked={difficultyLevel === '4'}
                   onChange={handleChange}
                 />
                 <div className={emojiBox}>
                   <img
                     src={challengingIcon}
                     alt='easy-icon'
-                    className={iconImage}
+                    className={levelValue !== '4' ? iconImage : checked}
                   />
                   <span>Challenging</span>
                 </div>
@@ -140,15 +138,15 @@ const PostFeedback = (props) => {
                 <input
                   type='radio'
                   name='difficultyLevel'
-                  value={5}
-                  checked={difficultyLevel === 5}
+                  value='5'
+                  checked={difficultyLevel === '5'}
                   onChange={handleChange}
                 />
                 <div className={emojiBox}>
                   <img
                     src={tooHardIcon}
                     alt='easy-icon'
-                    className={iconImage}
+                    className={levelValue !== '5' ? iconImage : checked}
                   />
                   <span>Too hard!</span>
                 </div>

@@ -27,7 +27,7 @@ const App = () => {
               <Route exact path='/sign-in' component={SignIn} />
               <Route exact path='/sign-up' component={SignUp} />
               <Route exact path='/forgot-password' component={ForgotPassword} />
-              <Route exact path='/add-kid' component={AddKid} />
+              <PrivateRoute exact path='/add-kid' component={AddKid} />
               <PrivateRoute path={'/posts'} exact component={PostsGallery} />
               <PrivateRoute exact path='/my-account' component={MyAccount} />
               <PrivateRoute exact path='/edit-kid' component={EditKid} />

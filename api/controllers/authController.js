@@ -32,16 +32,22 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 exports.signup = asyncHandler(async (req, res, next) => {
-  const newUser = await User.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
-    role: req.body.role,
-  });
-
-  createSendToken(newUser, 201, res);
+  try {
+    const newUser = await User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      passwordConfirm: req.body.passwordConfirm,
+      role: req.body.role,
+    });
+    createSendToken(newUser, 201, res);
+  } catch (err) {
+    err.status = 'email';
+    err.statusCode = 400;
+    err.message = 'Email already exists';
+    next(err);
+  }
 });
 
 exports.signin = asyncHandler(async (req, res, next) => {
@@ -121,9 +127,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   // 3) Send it to user's email
-  const resetURL = `${req.protocol}://${req.get(
-    'host'
-  )}/users/resetPassword/${resetToken}`;
+  const resetURL = `${process.env.CLIENT_DEV_URL}/users/resetPassword/${resetToken}`;
 
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
 

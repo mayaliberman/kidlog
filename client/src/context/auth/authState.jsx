@@ -81,6 +81,7 @@ const AuthState = (props) => {
       }
     } catch (err) {
       console.error(err);
+      // throw new Error(err);
     }
   };
 
