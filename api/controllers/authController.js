@@ -31,6 +31,20 @@ const createSendToken = (user, statusCode, res) => {
     data: { user: user },
   });
 };
+
+exports.validateEmail = asyncHandler(async (req, res, next) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      return res.json({ status: 'failed', msg: 'username already been taken' });
+    }
+    return res.json({ status: 'sucess', msg: 'user available' });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json('Error: ' + err);
+  }
+});
 exports.signup = asyncHandler(async (req, res, next) => {
   try {
     const newUser = await User.create({

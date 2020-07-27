@@ -83,8 +83,6 @@ const AddPostForm = (props) => {
       file.style.backgroundImage = `url(${uploadIcon})`;
       file.style.width = '15px';
       file.style.height = '15px';
-      // file.style.objectFit = 'cover';
-      // file.style.objectFit = 'scale-down';
     }
   };
 

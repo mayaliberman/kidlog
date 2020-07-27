@@ -20,6 +20,7 @@ const {
   forgotPassword,
   resetPassword,
   updatePassword,
+  validateEmail,
 } = require('../controllers/authController');
 
 //****ROUTES  */
@@ -28,6 +29,7 @@ const {
 
 router.post('/signup', signup);
 router.post('/signin', signin);
+router.post('/validateEmail', validateEmail);
 
 router.post('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:token', resetPassword);
@@ -39,7 +41,7 @@ router.get('/me', getMe, getUser);
 router.patch('/updateMe', updateMe);
 router.patch('/updateMyPassword', updatePassword);
 router.delete('/deleteMe', deleteMe);
-router.use('/:id/children/',  childrenRouter);
+router.use('/:id/children/', childrenRouter);
 
 //Admin routes Don't forger to put restictTo and protect in production
 router.get('/:id', getUser);
