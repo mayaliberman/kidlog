@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   desc,
   button,
@@ -15,7 +15,7 @@ import * as Yup from 'yup';
 import { getUser } from '../../../services/cookies';
 import PostContext from '../../../context/post/postContext';
 import UserContext from '../../../context/user/userContext';
-
+import uploadIcon from '../../../assets/add-photo.svg';
 const AddPostSchema = Yup.object().shape({
   desc: Yup.string().required('Required'),
   lessonNum: Yup.number().required('Required'),
@@ -28,10 +28,59 @@ const AddPostForm = (props) => {
   const userContext = useContext(UserContext);
   const { createPost, loading, currentPost, updatePost } = postContext;
   const { isUpdated } = userContext;
+
+  const [loadingImage, setLoadingImage] = useState(false);
+  const [previewImage, setPreviewImage] = useState('');
+
   let user = getUser();
   useEffect(() => {
     user = getUser();
-  }, [isUpdated]);
+    updateImagePreview();
+  }, [isUpdated, previewImage, loadingImage, currentPost]);
+
+  const handleFileUpload = (event) => {
+    setLoadingImage(true);
+    let reader = new FileReader();
+    let file = event.target.files[0];
+    reader.onloadend = () => {
+      setLoadingImage(false);
+      setPreviewImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const updateImagePreview = () => {
+    const file = document.getElementById('file');
+    if (currentPost.childId && previewImage !== '') {
+      file.style.backgroundImage = `url(${previewImage})`;
+      file.style.width = '10%';
+      file.style.height = '40px';
+      file.style.borderRadius = '5px';
+    }
+    if (currentPost.childId) {
+      file.style.backgroundImage = `url(${currentPost.image})`;
+      file.style.width = '10%';
+      file.style.height = '40px';
+      file.style.borderRadius = '5px';
+    } else if (previewImage !== '') {
+      file.style.backgroundImage = `url(${previewImage})`;
+      file.style.width = '10%';
+      file.style.height = '40px';
+      file.style.borderRadius = '5px';
+    } else {
+      file.style.backgroundImage = `url(${uploadIcon})`;
+      file.style.width = '15px';
+      file.style.height = '15px';
+    }
+
+    file.style.backgroundRepeat = 'no-repeat';
+    file.style.backgroundSize = 'contain';
+
+    file.style.overflow = 'hidden';
+    file.style.position = 'relative';
+    file.style.opacity = '0.5';
+    file.style.objectFit = 'cover';
+  };
 
   let arrayOfData = user.children.filter(
     (kid) => (kid = kid.active === true)
@@ -111,6 +160,7 @@ const AddPostForm = (props) => {
                 />
 
                 <label
+                  id='file'
                   className={currentPost.childId ? null : filebutton}
                   style={
                     currentPost.childId
@@ -137,8 +187,8 @@ const AddPostForm = (props) => {
                       id='file'
                       onChange={(e) => {
                         setFieldValue('file', e.currentTarget.files[0]);
+                        handleFileUpload(e);
                       }}
-                      // value={file}
                     />
                   </span>
                 </label>
@@ -193,3 +243,17 @@ const AddPostForm = (props) => {
   }
 };
 export default AddPostForm;
+
+{
+  /* <input type="file" accept="image/*" onchange="loadFile(event)">
+<img id="output"/>
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+</script> */
+}

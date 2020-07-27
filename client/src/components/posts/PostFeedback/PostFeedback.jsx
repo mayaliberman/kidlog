@@ -40,7 +40,6 @@ const PostFeedback = (props) => {
     }
   };
   const handleChange = (e) => {
-    console.log(e.target.value);
     setDifficultLevel(e.target.value);
     setLevelValue(e.target.value);
   };
