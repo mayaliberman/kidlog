@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -8,7 +8,7 @@ import {
   password,
   button,
   forgotPassword,
-  error,
+  errorMessage,
 } from './SignIn.module.scss';
 import logo from '../../../assets/Logo_white_splash.svg';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,13 @@ const SignInSchema = Yup.object().shape({
 });
 const SignIn = () => {
   const authContext = useContext(AuthContext);
+  const { login, error, clearErrors } = authContext;
 
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => clearErrors(), 3500);
+    }
+  }, [error]);
   return (
     <div className={content}>
       <img alt='company logo' src={logo} />
@@ -28,15 +34,20 @@ const SignIn = () => {
         initialValues={{ email: '', password: '' }}
         validationSchema={SignInSchema}
         onSubmit={(values) => {
-          return authContext.login(values.email, values.password);
+          return login(values.email, values.password);
         }}
       >
         {({ errors, touched, isSubmitting }) => (
           <Form className={form}>
+            {error ? (
+              <div className={errorMessage}>{error.data.message}</div>
+            ) : null}
             <Field placeholder='Email' name='email' className={input} />
             <div
               className={
-                errors.email && touched.email && errors.email ? error : null
+                errors.email && touched.email && errors.email
+                  ? errorMessage
+                  : null
               }
             >
               {errors.email && touched.email && errors.email}
@@ -51,7 +62,7 @@ const SignIn = () => {
             <div
               className={
                 errors.password && touched.password && errors.password
-                  ? error
+                  ? errorMessage
                   : null
               }
             >

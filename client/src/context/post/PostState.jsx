@@ -26,10 +26,10 @@ const PostState = (props) => {
     posts: [],
     loading: true,
     photos: [],
-
     currentPost: {},
     isDeleted: false,
     isUpdated: false,
+    error: {},
   };
 
   const [state, dispatch] = useReducer(postReducer, initialState);

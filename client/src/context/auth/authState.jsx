@@ -3,7 +3,15 @@ import axios from 'axios';
 import authReducer from './authReducer';
 import AuthContext from './authContext';
 import cookies from 'react-cookies';
-import { LOGIN_SUCCESS, USER_LOADED, LOGOUT, REGISTER_SUCCESS } from '../types';
+import {
+  LOGIN_SUCCESS,
+  USER_LOADED,
+  LOGOUT,
+  REGISTER_SUCCESS,
+  LOGIN_FAIL,
+  REGISTER_FAIL,
+  CLEAR_ERRORS,
+} from '../types';
 import { withRouter } from 'react-router-dom';
 import { setUser } from '../../services/cookies';
 const AuthState = (props) => {
@@ -11,6 +19,7 @@ const AuthState = (props) => {
     isLogged: false,
     token: {},
     user: null,
+    error: null,
   };
   const [state, dispatch] = useReducer(authReducer, initialState);
 
@@ -30,7 +39,6 @@ const AuthState = (props) => {
         dispatch({
           type: USER_LOADED,
           payload: {
-            // user: JSON.parse(atob(res.data.token.split('.')[1])),
             user: id,
           },
         });
@@ -40,7 +48,7 @@ const AuthState = (props) => {
         props.history.push('/posts');
       }
     } catch (err) {
-      console.error(err);
+      dispatch({ type: LOGIN_FAIL, payload: err.response });
     }
   };
 
@@ -80,8 +88,7 @@ const AuthState = (props) => {
         props.history.push('/add-kid');
       }
     } catch (err) {
-      console.error(err);
-      // throw new Error(err);
+      dispatch({ type: REGISTER_FAIL, payload: err.response });
     }
   };
 
@@ -97,18 +104,23 @@ const AuthState = (props) => {
     dispatch({ type: LOGOUT });
     cookies.remove('auth', { path: '/' });
     cookies.remove('user', { path: '/' });
+
     props.history.push('/');
   };
+
+  const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
   return (
     <AuthContext.Provider
       value={{
         isLogged: state.isLogged,
         token: state.token,
         user: state.user,
+        error: state.error,
         login,
         logout,
         signup,
         forgotPassword,
+        clearErrors,
       }}
     >
       {props.children}
