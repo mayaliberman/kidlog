@@ -29,7 +29,7 @@ const PostState = (props) => {
     currentPost: {},
     isDeleted: false,
     isUpdated: false,
-    error: {},
+    error: null,
   };
 
   const [state, dispatch] = useReducer(postReducer, initialState);
@@ -54,7 +54,7 @@ const PostState = (props) => {
           Authorization: `Bearer ${getToken()}`,
         },
       });
-      // await axios.post('/posts', body);
+
       await getPosts();
       await getUnsplashPhoto();
     } catch (err) {

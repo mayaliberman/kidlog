@@ -36,54 +36,44 @@ const AddPostForm = (props) => {
   useEffect(() => {
     user = getUser();
     updateImagePreview();
-    updateEditedPostImage();
   }, [isUpdated, previewImage, loadingImage, currentPost]);
 
-  const handleFileUpload = (event) => {
+  const handleFileUpload = async (event) => {
     setLoadingImage(true);
     let reader = new FileReader();
     let file = event.target.files[0];
-    reader.onloadend = () => {
+    reader.onloadend = async () => {
       setLoadingImage(false);
-      setPreviewImage(reader.result);
+      await setPreviewImage(reader.result);
     };
-    reader.readAsDataURL(file);
+    await reader.readAsDataURL(file);
+    setLoadingImage(false);
   };
 
   const updateImagePreview = () => {
     uploadImageIcon = document.getElementById('uploadImageIcon');
 
-    if (currentPost.childId) {
+    if (currentPost.image) {
       uploadImageIcon.style.backgroundImage = `url(${currentPost.image})`;
-      uploadImageIcon.style.width = '60px';
-      uploadImageIcon.style.height = '40px';
-      uploadImageIcon.style.borderRadius = '5px';
-    } else if (previewImage !== '') {
-      uploadImageIcon.style.backgroundImage = `url(${previewImage})`;
       uploadImageIcon.style.width = '60px';
       uploadImageIcon.style.height = '40px';
       uploadImageIcon.style.borderRadius = '5px';
     } else {
       uploadImageIcon.style.backgroundImage = `url(${uploadIcon})`;
     }
+    if (previewImage) {
+      uploadImageIcon.style.backgroundImage = `url(${previewImage})`;
+      uploadImageIcon.style.width = '60px';
+      uploadImageIcon.style.height = '40px';
+      uploadImageIcon.style.borderRadius = '5px';
+    }
+
+    if (!previewImage && !currentPost.childId) {
+      uploadImageIcon.style.backgroundImage = `url(${uploadIcon})`;
+    }
 
     uploadImageIcon.style.backgroundSize = 'cover';
     uploadImageIcon.style.objectFit = 'scale-down';
-  };
-
-  const updateEditedPostImage = () => {
-    const file = document.getElementById('uploadImageIcon');
-    if (currentPost.childId && previewImage !== '') {
-      file.style.backgroundImage = `url(${previewImage})`;
-      file.style.width = '40px';
-      file.style.height = '40px';
-      file.style.objectFit = 'cover';
-      file.style.objectFit = 'scale-down';
-    } else {
-      file.style.backgroundImage = `url(${uploadIcon})`;
-      file.style.width = '15px';
-      file.style.height = '15px';
-    }
   };
 
   let arrayOfData = user.children.filter(
