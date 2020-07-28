@@ -101,6 +101,10 @@
     border: none;
     padding-top: 0.6em;
     width: 70px;
+    // border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: $bx-shadow-soft;
   }
 }
 
@@ -153,6 +157,12 @@ label span input {
 .inputErrors {
   color: $error;
   font-size: 10px;
+}
+
+.descError {
+  color: $error;
+  font-size: 10px;
+  margin: 20px 0 0 20px;
 }
 
 .selectInput {

@@ -9,6 +9,7 @@ import {
   inputErrors,
   selectInput,
   filebutton,
+  descError,
 } from './PostForm.module.scss';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -142,6 +143,9 @@ const AddPostForm = (props) => {
             setFieldValue,
           }) => (
             <Form className={postForm}>
+              {errors.desc && touched.desc ? (
+                <span className={descError}>{errors.desc} </span>
+              ) : null}
               <div className={firstPartForm}>
                 <Field
                   as='textarea'
@@ -166,9 +170,9 @@ const AddPostForm = (props) => {
                     />
                   </span>
                 </label>
-                {errors.desc && touched.desc ? (
+                {/* {errors.desc && touched.desc ? (
                   <div className={inputErrors}>{errors.desc} </div>
-                ) : null}
+                ) : null} */}
               </div>
 
               <div className={secondPartForm}>

@@ -3,7 +3,7 @@ import PostCard from './PostCard/PostCard.jsx';
 import Image from '../../assets/welcome-bg.png';
 import Spinner from '../../components/ui/Spinner';
 import PostContext from '../../context/post/postContext';
-
+import LazyLoad from 'react-lazyload';
 const PostsContainer = () => {
   const postContext = useContext(PostContext);
   const { posts, photos, loading, getUnsplashPhoto, getPosts } = postContext;
@@ -34,17 +34,19 @@ const PostsContainer = () => {
             ? results[Math.floor(Math.random() * results.length)].urls.regular
             : Image;
           return (
-            <PostCard
-              key={post._id}
-              desc={post.desc}
-              lessonNum={post.lessonId.lessonNum}
-              date={post.createdAt}
-              lessonTags={post.lessonId.tags}
-              childId={post.childId._id}
-              childName={post.childId.name}
-              postData={post}
-              defaultPhoto={post.image || photo || Image}
-            />
+            <LazyLoad key={post._id} placeholder={<Spinner />}>
+              <PostCard
+                key={post._id}
+                desc={post.desc}
+                lessonNum={post.lessonId.lessonNum}
+                date={post.createdAt}
+                lessonTags={post.lessonId.tags}
+                childId={post.childId._id}
+                childName={post.childId.name}
+                postData={post}
+                defaultPhoto={post.image || photo || Image}
+              />
+            </LazyLoad>
           );
         })}
       </div>

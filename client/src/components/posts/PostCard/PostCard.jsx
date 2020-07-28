@@ -14,7 +14,7 @@ import {
 } from './PostCard.module.scss';
 import avatarIcon from '../../../assets/image-4.svg';
 import moreInfo from '../../../assets/moreInfo.svg';
-
+import LazyLoad from 'react-lazyload';
 const PostCard = ({
   desc,
   photoTitle,
@@ -73,11 +73,19 @@ const PostCard = ({
           className={more}
           onClick={toggleHidden}
         />
+
         {!toggleMenu && <PostMenu postData={postData} />}
       </div>
       <div>
         <figure className={photoFigure}>
-          <img alt={photoTitle} src={defaultPhoto} className={postPhoto} />
+          <LazyLoad
+            once={true}
+            placeholder={
+              <img alt={photoTitle} src={defaultPhoto} className={postPhoto} />
+            }
+          >
+            <img alt={photoTitle} src={defaultPhoto} className={postPhoto} />
+          </LazyLoad>
         </figure>
         <p className={description}>{desc}</p>
       </div>

@@ -6,7 +6,8 @@ import SignUp from './components/auth/SignUp/SignUp';
 import ForgotPassword from './components/auth/ForgotPassword/ForgotPassword';
 import Header from './components/Header/Header';
 import PostsGallery from './components/posts/PostGallery/PostsGallery';
-import NotFound from './components/NotFound/NotFound';
+import NotFound from './components/errors/NotFound/NotFound';
+import Forbidden from './components/errors/Forbidden/Forbidden';
 import PostState from './context/post/PostState';
 import AuthState from './context/auth/authState';
 import UserState from './context/user/UserState';
@@ -31,6 +32,7 @@ const App = () => {
               <PrivateRoute path={'/posts'} exact component={PostsGallery} />
               <PrivateRoute exact path='/my-account' component={MyAccount} />
               <PrivateRoute exact path='/edit-kid' component={EditKid} />
+              <Route exact path='/forbidden' component={Forbidden} />
               <Route component={NotFound} />
             </Switch>
           </PostState>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/Logo_white_splash.svg';
+import logo from '../../../assets/Logo_white_splash.svg';
 import { content, title, subtitle, button } from './NotFound.module.scss';
 //In case the route was not found (status 404) this component will be rendered.
 const NotFound = () => {
