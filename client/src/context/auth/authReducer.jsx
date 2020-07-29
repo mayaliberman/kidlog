@@ -7,6 +7,7 @@ import {
   REGISTER_FAIL,
   UPDATE_PASSWORD,
   CLEAR_ERRORS,
+  SET_UPDATING,
   UPDATE_PASSWORD_FAIL,
 } from '../types';
 
@@ -49,6 +50,13 @@ export default (state, action) => {
         isLogged: false,
         user: null,
         error: action.payload,
+      };
+    }
+
+    case SET_UPDATING: {
+      return {
+        ...state,
+        updating: true,
       };
     }
     case CLEAR_ERRORS: {

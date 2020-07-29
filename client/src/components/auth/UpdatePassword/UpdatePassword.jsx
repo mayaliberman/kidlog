@@ -11,6 +11,7 @@ import {
   error,
   cancelButton,
   forgotPassword,
+  updatingButton,
 } from './UpdatePassword.module.scss';
 
 import AuthContext from '../../../context/auth/authContext';
@@ -18,7 +19,7 @@ import { UpdatePasswordSchema } from './UpdatePasswordUtils';
 
 const UpdatePassword = () => {
   const authContext = useContext(AuthContext);
-
+  const { updating } = authContext;
   return (
     <div className={content}>
       <h4 className={subtitle}>Update your password</h4>
@@ -104,8 +105,16 @@ const UpdatePassword = () => {
               <Link to='/forgot-password' className={forgotPassword}>
                 Forgot Password?
               </Link>
-              <button type='submit' disabled={isSubmitting} className={button}>
-                Submit
+              <button
+                type='submit'
+                disabled={isSubmitting}
+                className={updating ? updatingButton : button}
+              >
+                {updating ? (
+                  <span>Updating Password...</span>
+                ) : (
+                  <span>Submit</span>
+                )}
               </button>
               <Link to='my-account'>
                 <button className={cancelButton}>Cancel</button>

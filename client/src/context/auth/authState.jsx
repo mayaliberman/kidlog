@@ -13,6 +13,7 @@ import {
   REGISTER_FAIL,
   CLEAR_ERRORS,
   UPDATE_PASSWORD,
+  SET_UPDATING,
   UPDATE_PASSWORD_FAIL,
 } from '../types';
 import { withRouter } from 'react-router-dom';
@@ -23,6 +24,7 @@ const AuthState = (props) => {
     token: {},
     user: null,
     error: null,
+    updating: false,
   };
   const [state, dispatch] = useReducer(authReducer, initialState);
 
@@ -96,6 +98,7 @@ const AuthState = (props) => {
   };
 
   const updatePassword = async (passwordCurrent, password, passwordConfirm) => {
+    setUpdating();
     try {
       const res = await axiosService.patch(
         `http://localhost:5000/users/updateMyPassword`,
@@ -117,7 +120,7 @@ const AuthState = (props) => {
         });
         cookies.save('auth', res.data.token, { path: '/' });
         setUser(res.data.data.user);
-
+        dispatch({ SET_UPDATING, payload: false });
         props.history.push('/my-account');
       }
     } catch (err) {
@@ -141,6 +144,8 @@ const AuthState = (props) => {
     props.history.push('/');
   };
 
+  const setUpdating = () => dispatch({ type: SET_UPDATING });
+
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
   return (
     <AuthContext.Provider
@@ -149,12 +154,14 @@ const AuthState = (props) => {
         token: state.token,
         user: state.user,
         error: state.error,
+        updating: state.updating,
         login,
         logout,
         signup,
         updatePassword,
         forgotPassword,
         clearErrors,
+        setUpdating,
       }}
     >
       {props.children}
