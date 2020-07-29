@@ -21,6 +21,7 @@ const {
   resetPassword,
   updatePassword,
   validateEmail,
+  validateCurrentPassword,
 } = require('../controllers/authController');
 
 //****ROUTES  */
@@ -40,6 +41,7 @@ router.use(protect);
 router.get('/me', getMe, getUser);
 router.patch('/updateMe', updateMe);
 router.patch('/updateMyPassword', updatePassword);
+router.post('/validateCurrentPassword', validateCurrentPassword);
 router.delete('/deleteMe', deleteMe);
 router.use('/:id/children/', childrenRouter);
 

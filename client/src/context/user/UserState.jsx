@@ -7,7 +7,7 @@ import { setUser, getUser } from '../../services/cookies';
 
 const UserState = (props) => {
   const initialState = {
-    loading: true,
+    loading: false,
     photos: [],
     isUpdated: false,
     user: {},
@@ -46,18 +46,6 @@ const UserState = (props) => {
     setLoading();
     try {
       const user = getUser();
-      // let childName;
-      // if (user.children.length > 0) {
-      //   childName = user.children.find(
-      //     (child) => child.name.toLowerCase() === body.name.toLowerCase()
-      //   );
-      //   if (childName) {
-      //     alert(
-      //       'name exists in the system, please contact the admin or choose another name'
-      //     );
-      //   }
-      // }
-
       const res = await axios.post(`/users/${body.user}/children`, body);
       if (res) {
         const user = await axios.get('/users/me');

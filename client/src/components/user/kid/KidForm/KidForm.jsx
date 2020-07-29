@@ -57,7 +57,6 @@ const KidForm = (props) => {
           };
           if (child.length > 0) {
             requestBody.id = child[0].id;
-            console.log(child.length);
 
             await updateChild(requestBody);
           } else {

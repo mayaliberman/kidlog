@@ -5,11 +5,14 @@ import {
   REGISTER_SUCCESS,
   LOGIN_FAIL,
   REGISTER_FAIL,
+  UPDATE_PASSWORD,
   CLEAR_ERRORS,
+  UPDATE_PASSWORD_FAIL,
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
+    case UPDATE_PASSWORD:
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -37,6 +40,7 @@ export default (state, action) => {
         user: null,
       };
     }
+    case UPDATE_PASSWORD_FAIL:
     case REGISTER_FAIL:
     case LOGIN_FAIL: {
       return {

@@ -73,3 +73,9 @@
     font-weight: bold;
   }
 }
+
+.passwordButton {
+  @include button;
+  background-color: $secondary-dark;
+  margin-top: 0px;
+}

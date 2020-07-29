@@ -198,7 +198,9 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
 });
 
 exports.updatePassword = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.user.id).select('+password');
+  const user = await User.findById(req.user.id)
+    .select('+password')
+    .populate({ path: 'children' });
 
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
     return next(new AppError('Your current password is wrong.', 401));
@@ -209,4 +211,22 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
   await user.save();
 
   createSendToken(user, 200, res);
+});
+
+exports.validateCurrentPassword = asyncHandler(async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id).select('+password');
+
+    if (
+      !(await user.correctPassword(req.body.passwordCurrent, user.password))
+    ) {
+      return res.json({
+        status: 'failed',
+        msg: 'Your current password is wrong',
+      });
+    }
+    return res.json({ status: 'sucess', msg: 'Current password is correct' });
+  } catch (err) {
+    res.status(400).json({ status: 'failed', msg: err.message });
+  }
 });

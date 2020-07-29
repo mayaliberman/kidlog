@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home/Home';
 import SignIn from './components/auth/SignIn/SignIn';
 import SignUp from './components/auth/SignUp/SignUp';
+import UpdatePassword from './components/auth/UpdatePassword/UpdatePassword';
 import ForgotPassword from './components/auth/ForgotPassword/ForgotPassword';
 import Header from './components/Header/Header';
 import PostsGallery from './components/posts/PostGallery/PostsGallery';
@@ -28,6 +29,11 @@ const App = () => {
               <Route exact path='/sign-in' component={SignIn} />
               <Route exact path='/sign-up' component={SignUp} />
               <Route exact path='/forgot-password' component={ForgotPassword} />
+              <PrivateRoute
+                exact
+                path='/update-password'
+                component={UpdatePassword}
+              />
               <PrivateRoute exact path='/add-kid' component={AddKid} />
               <PrivateRoute path={'/posts'} exact component={PostsGallery} />
               <PrivateRoute exact path='/my-account' component={MyAccount} />

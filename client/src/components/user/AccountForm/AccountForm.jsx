@@ -1,7 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { form, input, button, error } from './AccountForm.module.scss';
+import {
+  form,
+  input,
+  button,
+  error,
+  buttonUpdating,
+} from './AccountForm.module.scss';
 import UserContext from '../../../context/user/userContext';
 import { getUser } from '../../../services/cookies';
 const AccountForm = () => {
@@ -10,7 +16,7 @@ const AccountForm = () => {
   let user = getUser();
   useEffect(() => {
     user = getUser();
-  }, [isUpdated]);
+  }, [isUpdated, loading]);
 
   if (isUpdated) {
     return <div>Loading</div>;
@@ -39,8 +45,8 @@ const AccountForm = () => {
             lastName: values.lastName,
             email: values.email,
           };
+          updateUser(requestBody);
 
-          await updateUser(requestBody);
           getUser();
         }}
       >
@@ -79,8 +85,8 @@ const AccountForm = () => {
             placeholder='Email'
             className={input}
           />
-          <button type='submit' className={button}>
-            Update
+          <button type='submit' className={loading ? buttonUpdating : button}>
+            {loading ? <span>Updating...</span> : <span>Update</span>}
           </button>
         </Form>
       </Formik>
