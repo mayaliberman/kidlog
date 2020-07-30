@@ -5,6 +5,7 @@ import SignIn from './components/auth/SignIn/SignIn';
 import SignUp from './components/auth/SignUp/SignUp';
 import UpdatePassword from './components/auth/UpdatePassword/UpdatePassword';
 import ForgotPassword from './components/auth/ForgotPassword/ForgotPassword';
+import ResetPassword from './components/auth/ResetPassword/ResetPassword';
 import Header from './components/Header/Header';
 import PostsGallery from './components/posts/PostGallery/PostsGallery';
 import NotFound from './components/errors/NotFound/NotFound';
@@ -29,6 +30,11 @@ const App = () => {
               <Route exact path='/sign-in' component={SignIn} />
               <Route exact path='/sign-up' component={SignUp} />
               <Route exact path='/forgot-password' component={ForgotPassword} />
+              <Route
+                exact
+                path='/reset-password/:token'
+                component={ResetPassword}
+              />
               <PrivateRoute
                 exact
                 path='/update-password'

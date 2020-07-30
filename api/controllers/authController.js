@@ -141,7 +141,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   // 3) Send it to user's email
-  const resetURL = `${process.env.CLIENT_DEV_URL}/users/resetPassword/${resetToken}`;
+  const resetURL = `http://localhost:3000/reset-password/${resetToken}`;
 
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
 
@@ -181,7 +181,7 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
     passwordResetExpires: {
       $gt: Date.now(),
     },
-  });
+  }).populate({ path: 'children' });
 
   //update changedPasswordAt property for the user
   if (!user) {

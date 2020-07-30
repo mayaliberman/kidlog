@@ -16,6 +16,7 @@ import {
   SET_UPDATING,
   UPDATE_PASSWORD_FAIL,
   FORGOT_PASSWORD_FAIL,
+  RESET_PASSWORD_FAIL,
 } from '../types';
 import { withRouter } from 'react-router-dom';
 import { setUser } from '../../services/cookies';
@@ -140,6 +141,35 @@ const AuthState = (props) => {
     }
   };
 
+  const resetPassword = async (token, password, passwordConfirm) => {
+    try {
+      const res = await axios.patch(
+        `http://localhost:5000/users/resetPassword/${token}`,
+        { password, passwordConfirm }
+      );
+      if (res) {
+        const user = JSON.parse(atob(res.data.token.split('.')[1]));
+        const id = user.user.id;
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: res.data.token,
+        });
+        dispatch({
+          type: USER_LOADED,
+          payload: {
+            user: id,
+          },
+        });
+        cookies.save('auth', res.data.token, { path: '/' });
+        setUser(res.data.data.user);
+
+        props.history.push('/posts');
+      }
+    } catch (err) {
+      dispatch({ type: RESET_PASSWORD_FAIL, payload: err.response });
+    }
+  };
+
   const logout = () => {
     dispatch({ type: LOGOUT });
     cookies.remove('auth', { path: '/' });
@@ -164,6 +194,7 @@ const AuthState = (props) => {
         signup,
         updatePassword,
         forgotPassword,
+        resetPassword,
         clearErrors,
         setUpdating,
       }}
