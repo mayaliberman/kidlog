@@ -143,7 +143,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   // 3) Send it to user's email
   const resetURL = `http://localhost:3000/reset-password/${resetToken}`;
 
-  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
+  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to:${resetURL}\nIf you didn't forget your password, please ignore this email!`;
 
   try {
     await sendEmail({

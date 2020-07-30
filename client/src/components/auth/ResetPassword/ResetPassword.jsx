@@ -21,7 +21,7 @@ const ResetPassword = () => {
   const authContext = useContext(AuthContext);
   const { updating, resetPassword } = authContext;
   const { token } = useParams();
-  console.log(token);
+
   return (
     <div className={content}>
       <img alt='company logo' src={logo} className={logoIcon} />
