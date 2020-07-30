@@ -15,6 +15,7 @@ import {
   UPDATE_PASSWORD,
   SET_UPDATING,
   UPDATE_PASSWORD_FAIL,
+  FORGOT_PASSWORD_FAIL,
 } from '../types';
 import { withRouter } from 'react-router-dom';
 import { setUser } from '../../services/cookies';
@@ -130,9 +131,12 @@ const AuthState = (props) => {
 
   const forgotPassword = async (email) => {
     try {
-      await axios.post(`http://localhost:5000/users/forgotPassword`, { email });
+      const res = await axios.post(
+        `http://localhost:5000/users/forgotPassword`,
+        { email }
+      );
     } catch (err) {
-      console.error(err);
+      dispatch({ type: FORGOT_PASSWORD_FAIL, payload: err.response });
     }
   };
 

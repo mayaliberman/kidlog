@@ -9,6 +9,7 @@ import {
   CLEAR_ERRORS,
   SET_UPDATING,
   UPDATE_PASSWORD_FAIL,
+  FORGOT_PASSWORD_FAIL,
 } from '../types';
 
 export default (state, action) => {
@@ -41,6 +42,7 @@ export default (state, action) => {
         user: null,
       };
     }
+    case FORGOT_PASSWORD_FAIL:
     case UPDATE_PASSWORD_FAIL:
     case REGISTER_FAIL:
     case LOGIN_FAIL: {

@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   content,
   form,
   input,
-  error,
+  errorMessage,
   button,
   redirect,
+  messageSent,
 } from './ForgotPassword.module.scss';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -18,24 +19,48 @@ const ForgotPasswordSchema = Yup.object().shape({
 });
 
 const ForgotPassword = () => {
+  const [emailSent, setEmailSent] = useState(false);
+
   const authContext = useContext(AuthContext);
+  const { error, forgotPassword, clearErrors } = authContext;
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => clearErrors(), 3000);
+    }
+  }, [emailSent, error]);
   return (
     <div className={content}>
       <img alt='company logo' src={logo} />
       <h3>Please write your email to reset your password via email email</h3>
+      {emailSent ? (
+        <div className={messageSent}>
+          Please check your email for you new password
+        </div>
+      ) : null}
       <Formik
         initialValues={{ email: '' }}
         validationSchema={ForgotPasswordSchema}
-        onSubmit={(values) => {
-          return authContext.forgotPassword(values.email);
+        onSubmit={async (values) => {
+          await forgotPassword(values.email);
+          if (error) {
+            return;
+          } else {
+            setEmailSent(true);
+            setTimeout(() => setEmailSent(false), 3000);
+          }
         }}
       >
         {({ errors, touched, isSubmitting }) => (
           <Form className={form}>
+            {error ? (
+              <div className={errorMessage}>{error.data.message}</div>
+            ) : null}
             <Field placeholder='Email' name='email' className={input} />
             <div
               className={
-                errors.email && touched.email && errors.email ? error : null
+                errors.email && touched.email && errors.email
+                  ? errorMessage
+                  : null
               }
             >
               {errors.email && touched.email && errors.email}
