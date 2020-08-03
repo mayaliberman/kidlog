@@ -11,7 +11,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController.js');
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
-
+const sgMail = require('@sendgrid/mail');
 const app = express();
 
 //CORS support cross-origin resource sharing or CORS
@@ -45,24 +45,26 @@ app.use(mongoSanitize());
 app.use(xss());
 
 //Prevent parameter pollution
-app.use(
-  hpp()
-  // put this inside the app function{
-  // whitelist: [
-  //   'createdAt',
-  //   'tags',
-  //   'child',
-  //   'difficlutyLevel',
-  //
-  // ]
-  // }
-);
+app.use(hpp());
 
 //Serving static files - add this then building the client
 // app.use(express.static(path.join(__dirname, '../client/build')));
 
 //Enabling file uploading
-
+app.post('/send-mail', (req, res) => {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const msg = {
+    to: 'mayaliberman1@gmail.com',
+    from: 'mayaliberman1@gmail.com',
+    subject: 'Sending with Twilio SendGrid is Fun',
+    text: 'and easy to do anywhere, even with Node.js',
+    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+  };
+  res.json({
+    message: 'Mail send successfuly',
+  });
+  sgMail.send(msg);
+});
 //*****GENERAL ROUTEES*****
 app.get('/', (req, res) => {
   res.json({

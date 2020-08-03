@@ -5,7 +5,7 @@ const User = require('../models/user');
 const { asyncHandler } = require('../utils/asyncHanlder');
 const AppError = require('../utils/appError');
 const sendEmail = require('../utils/email');
-
+const sgMail = require('@sendgrid/mail');
 const signToken = (user) => {
   user.password = undefined;
   return jwt.sign({ user }, process.env.JWT_SECRET, {
@@ -143,14 +143,33 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   // 3) Send it to user's email
   const resetURL = `http://localhost:3000/reset-password/${resetToken}`;
 
-  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to:${resetURL}\nIf you didn't forget your password, please ignore this email!`;
+  const message = `<p>Forgot your password? Submit your new password and passwordConfirm here on our <p><a href=${resetURL}>Kidlog App</a>\n<p>If you didn't forget your password, please ignore this email!<p>`;
 
   try {
-    await sendEmail({
-      email: user.email,
-      subject: 'Your password reset token (valid for 10 min)',
-      message,
-    });
+    if (process.env.NODE_ENV === 'production') {
+      // sendgridEmail({
+      //   email: user.email,
+      //   subject: 'Your password reset token (valid for 10 min)',
+      //   message,
+      // });
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
+        to: user.email,
+        from: 'mayaliberman1@gmail.com',
+        subject: 'Your password reset token (valid for 10 min)',
+        text: 'and easy to do anywhere, even with Node.js',
+        html: message,
+      };
+
+      sgMail.send(msg);
+    }
+    if (process.env.NODE_ENV === 'development') {
+      await sendEmail({
+        email: user.email,
+        subject: 'Your password reset token (valid for 10 min)',
+        message,
+      });
+    }
 
     res.status(200).json({
       status: 'success',
