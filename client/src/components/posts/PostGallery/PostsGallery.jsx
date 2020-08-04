@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PostsContainer from '../PostsContainer';
-import { postGallery } from './PostGallery.module.scss';
+import { postGallery, container } from './PostGallery.module.scss';
 import AddPostButton from '../AddPostButton/AddPostButton';
 import AddPost from '../AddPost/AddPost';
 import PostFeedback from '../PostFeedback/PostFeedback';
@@ -51,33 +51,39 @@ const PostsGallery = () => {
   };
 
   return (
-    <div className={postGallery}>
-      <AddPostButton togglePop={addPostButtonTogglePop} />
-      {addButtonPopup && (
-        <AddPost
-          close={() => setAddButtonPopup(false)}
-          submit={submitAddPost}
-          headerTitle={'New Activity'}
-          submitButton='Add Post'
-        />
-      )}
-      {feedbackPost && (
-        <PostFeedback togglePop={feedbackToggle} submit={submitFeedback} />
-      )}
-      {ThankYouPopup && (
-        <FeedBackThankYou togglePop={() => setThankYouPopup(false)} />
-      )}
-      {currentPost.desc && (
-        <AddPost
-          submit={toggleEditPost}
-          close={() => clearCurrentPost()}
-          headerTitle={'Edit Post'}
-          submitButton='Edit Post'
-        />
-      )}
+    <main className={container}>
+      <div style={{ marginTop: '80px', color: 'black', width: '150px' }}>
+        <h1>Filter area</h1>
+      </div>
+      <div className={postGallery}>
+        <AddPostButton togglePop={addPostButtonTogglePop} />
+        {addButtonPopup && (
+          <AddPost
+            close={() => setAddButtonPopup(false)}
+            submit={submitAddPost}
+            headerTitle={'New Activity'}
+            submitButton='Add Post'
+          />
+        )}
+        {feedbackPost && (
+          <PostFeedback togglePop={feedbackToggle} submit={submitFeedback} />
+        )}
+        {ThankYouPopup && (
+          <FeedBackThankYou togglePop={() => setThankYouPopup(false)} />
+        )}
+        {currentPost.desc && (
+          <AddPost
+            submit={toggleEditPost}
+            close={() => clearCurrentPost()}
+            headerTitle={'Edit Post'}
+            submitButton='Edit Post'
+          />
+        )}
 
-      <PostsContainer />
-    </div>
+        <PostsContainer />
+      </div>
+      <div></div>
+    </main>
   );
 };
 

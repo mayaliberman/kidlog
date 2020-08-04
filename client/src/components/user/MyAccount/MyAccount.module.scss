@@ -79,3 +79,15 @@
   background-color: $secondary-dark;
   margin-top: 0px;
 }
+.exitButton {
+  @media (min-width: 768px) {
+    display: none;
+  }
+  display: flex;
+  justify-content: center;
+  @include button;
+  width: 45%;
+  & img {
+    margin-right: 10px;
+  }
+}

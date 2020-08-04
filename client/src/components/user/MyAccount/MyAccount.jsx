@@ -7,6 +7,7 @@ import {
   button,
   kidContainer,
   passwordButton,
+  exitButton,
 } from './MyAccount.module.scss';
 import { Link } from 'react-router-dom';
 
@@ -14,11 +15,14 @@ import KidContainer from '../kid/KidContainer/KidContainer';
 import AccountForm from '../AccountForm/AccountForm';
 import KidForm from '../kid/KidForm/KidForm';
 import PlusIcon from '../../../assets/Plus_icon.svg';
+import logoutIcon from '../../../assets/logout.svg';
 import { getUser } from '../../../services/cookies';
 import UserContext from '../../../context/user/userContext';
-
+import AuthContext from '../../../context/auth/authContext';
 const MyAccount = () => {
   const userContext = useContext(UserContext);
+  const authContext = useContext(AuthContext);
+  const { logout } = authContext;
   const { child } = userContext;
 
   let user = getUser();
@@ -57,6 +61,10 @@ const MyAccount = () => {
           </button>
         )}
       </div>
+      <button className={exitButton} onClick={logout}>
+        <img src={logoutIcon} />
+        <span>Logout</span>
+      </button>
     </div>
   );
 };

@@ -12,27 +12,25 @@
   background-color: $primary-main;
   @media (max-width: 768px) {
     height: 80px;
+    padding-right: 15px;
+    justify-content: space-between;
   }
 }
 .nav {
-  flex-grow: 12;
+  flex-grow: 2;
   // width: 65%;
   padding: 0px 10px;
   @include flexy($justify: center, $align: center, $wrap: nowrap);
 
-  // @include flexy($justify: center, $align: center);
-  @media (max-width: 768px) {
-    // width: 90%;
-  }
-  @media (max-width: 375px) {
-    // width: 90%;
+  @media (max-width: 1024px) {
+    display: none;
   }
 
   & a {
     padding: 20px 0px 17px 0px;
     margin-right: 10px;
 
-    min-width: 250px;
+    min-width: 200px;
     @include flexy($justify: center, $align: space-between); // $wrap: nowrap);
     text-decoration: none;
   }
@@ -50,12 +48,13 @@
 
 .logoIcon {
   padding-left: 30px;
-
+  // width: 70%;
   @media (max-width: 768px) {
-    width: 20%;
+    // width: 70%;
+    // width: 90%;
+    padding: 0 20px 0 20px;
   }
   @media (max-width: 375px) {
-    width: 30%;
   }
 }
 
@@ -69,6 +68,9 @@
 }
 
 .logoutSection {
+  @media (max-width: 1024px) {
+    display: none;
+  }
   flex-grow: 1;
   font-size: 12px;
   color: $bg-paper;
@@ -82,4 +84,19 @@
   height: 50%;
 
   // margin-right: 10px;
+}
+
+.filterImage {
+  padding-left: 30px;
+  @media (min-width: 1024px) {
+    visibility: hidden;
+  }
+}
+
+.myAccountMobile {
+  width: 50%;
+  padding-right: 30px;
+  @media (min-width: 1024px) {
+    visibility: hidden;
+  }
 }

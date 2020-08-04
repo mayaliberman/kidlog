@@ -6,14 +6,18 @@ import {
   logoutIcon,
   navHeader,
   logoutSection,
+  filterImage,
+  myAccountMobile,
+  mobileHomeLink,
 } from './Header.module.scss';
 import homePage from '../../assets/homepage.svg';
 import myAccount from '../../assets/my-account.svg';
 import logo from '../../assets/Logo_white_splash.svg';
 import LogoutIcon from '../../assets/logout.svg';
+import filterIcon from '../../assets/Filter.svg';
 import AuthContext from '../../context/auth/authContext';
 import { getUser } from '../../services/cookies';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 const Header = () => {
   const authContext = useContext(AuthContext);
   const { logout } = authContext;
@@ -27,7 +31,17 @@ const Header = () => {
   else
     header = (
       <div className={navHeader}>
-        <img alt='company logo' src={logo} className={logoIcon} />
+        <img alt='filter-icon' src={filterIcon} className={filterImage} />
+        <Link to='/posts' className={mobileHomeLink}>
+          <img alt='company logo' src={logo} className={logoIcon} />
+        </Link>
+        <Link to='/my-account'>
+          <img
+            alt='my-account-icon'
+            src={myAccount}
+            className={myAccountMobile}
+          />
+        </Link>
         <nav className={nav}>
           <NavLink
             to='/posts'
@@ -46,7 +60,7 @@ const Header = () => {
               borderBottom: '3px solid white',
             }}
           >
-            <img alt='home-page' src={myAccount} />
+            <img alt='my-account-icon' src={myAccount} />
             <span>My Account</span>
           </NavLink>
         </nav>
