@@ -9,7 +9,7 @@ import {
   passwordButton,
 } from './MyAccount.module.scss';
 import { Link } from 'react-router-dom';
-import exitIcon from '../../../assets/Exit_icon.svg';
+
 import KidContainer from '../kid/KidContainer/KidContainer';
 import AccountForm from '../AccountForm/AccountForm';
 import KidForm from '../kid/KidForm/KidForm';
@@ -32,13 +32,6 @@ const MyAccount = () => {
 
   return (
     <div className={content}>
-      <div className={header}>
-        <h6>My Account</h6>
-        <Link to='/posts'>
-          <img src={exitIcon} alt='exit-icon' />
-        </Link>
-      </div>
-
       <div className={text}>
         <div className={avatar}></div>
         <div>

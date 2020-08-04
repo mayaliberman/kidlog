@@ -24,17 +24,4 @@ const sendEmail = async (options) => {
   await transporter.sendMail(mailOptions);
 };
 
-// exports.sendgridEmail = async (options) => {
-//   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-//   const msg = {
-//     to: options.email,
-//     from: 'mayaliberman1@gmail.com',
-//     subject: options.subject,
-//     text: options.message,
-//     html: options.message,
-//   };
-
-//   await sgMail.send(msg);
-// };
-
 module.exports = sendEmail;

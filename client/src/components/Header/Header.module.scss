@@ -4,7 +4,7 @@
   width: 100%;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   z-index: 1000;
   top: 0;
@@ -15,19 +15,42 @@
   }
 }
 .nav {
-  width: 65%;
+  flex-grow: 12;
+  // width: 65%;
   padding: 0px 10px;
+  @include flexy($justify: center, $align: center, $wrap: nowrap);
 
-  @include flexy($justify: space-between, $align: center);
+  // @include flexy($justify: center, $align: center);
   @media (max-width: 768px) {
-    width: 90%;
+    // width: 90%;
   }
   @media (max-width: 375px) {
-    width: 90%;
+    // width: 90%;
+  }
+
+  & a {
+    padding: 20px 0px 17px 0px;
+    margin-right: 10px;
+
+    min-width: 250px;
+    @include flexy($justify: center, $align: space-between); // $wrap: nowrap);
+    text-decoration: none;
+  }
+  & span {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 12px;
+    color: white;
   }
 }
 
+.navImage {
+  height: 50%;
+}
+
 .logoIcon {
+  padding-left: 30px;
+
   @media (max-width: 768px) {
     width: 20%;
   }
@@ -45,29 +68,18 @@
   }
 }
 
-.account {
+.logoutSection {
+  flex-grow: 1;
+  font-size: 12px;
   color: $bg-paper;
   text-decoration: none;
-  @include flexy($justify: space-between, $align: center, $wrap: nowrap);
-}
-.avatar {
-  margin-right: 10px;
-  background-color: $bg-paper;
-  border-radius: 50px;
-  @media (max-width: 375px) {
-    width: 30%;
-  }
-}
-
-.accountName {
-  padding-right: 40px;
-  @media (max-width: 768px) {
-    font-size: 14px;
-    padding-right: 20px;
-  }
+  padding-right: 30px;
+  @include flexy($justify: flex-end, $align: center, $wrap: nowrap);
 }
 
 .logoutIcon {
+  margin-right: 10px;
   height: 50%;
+
   // margin-right: 10px;
 }

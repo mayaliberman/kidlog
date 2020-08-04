@@ -23,15 +23,11 @@ const ForgotPassword = () => {
 
   const authContext = useContext(AuthContext);
   const { error, forgotPassword, clearErrors } = authContext;
-  useEffect(() => {
-    if (error) {
-      setTimeout(() => clearErrors(), 3000);
-    }
-  }, [emailSent, error]);
+  useEffect(() => {}, [error]);
   return (
     <div className={content}>
       <img alt='company logo' src={logo} />
-      <h3>Please write your email to reset your password via email email</h3>
+      <h3>Please write your email to reset your password via email</h3>
       {emailSent ? (
         <div className={messageSent}>
           Please check your email for you new password
@@ -41,21 +37,26 @@ const ForgotPassword = () => {
         initialValues={{ email: '' }}
         validationSchema={ForgotPasswordSchema}
         onSubmit={async (values) => {
-          await forgotPassword(values.email);
-          if (error) {
-            return;
-          } else {
+          const res = await forgotPassword(values.email);
+          if (res) {
             setEmailSent(true);
-            setTimeout(() => setEmailSent(false), 3000);
           }
         }}
       >
-        {({ errors, touched, isSubmitting }) => (
+        {({ errors, touched, isSubmitting, handleChange }) => (
           <Form className={form}>
             {error ? (
               <div className={errorMessage}>{error.data.message}</div>
             ) : null}
-            <Field placeholder='Email' name='email' className={input} />
+            <Field
+              placeholder='Email'
+              name='email'
+              className={input}
+              onChange={(e) => {
+                clearErrors();
+                handleChange(e);
+              }}
+            />
             <div
               className={
                 errors.email && touched.email && errors.email

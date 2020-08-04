@@ -147,17 +147,11 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 
   try {
     if (process.env.NODE_ENV === 'production') {
-      // sendgridEmail({
-      //   email: user.email,
-      //   subject: 'Your password reset token (valid for 10 min)',
-      //   message,
-      // });
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
       const msg = {
         to: user.email,
         from: 'mayaliberman1@gmail.com',
         subject: 'Your password reset token (valid for 10 min)',
-        text: 'and easy to do anywhere, even with Node.js',
         html: message,
       };
 

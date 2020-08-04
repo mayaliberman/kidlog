@@ -134,10 +134,16 @@ const AuthState = (props) => {
     try {
       const res = await axios.post(
         `http://localhost:5000/users/forgotPassword`,
-        { email }
+        {
+          email,
+        }
       );
+      if (res.data.status === 'success') {
+        return true;
+      }
     } catch (err) {
       dispatch({ type: FORGOT_PASSWORD_FAIL, payload: err.response });
+      return false;
     }
   };
 
