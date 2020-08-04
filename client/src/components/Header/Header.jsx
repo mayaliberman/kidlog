@@ -17,12 +17,12 @@ import LogoutIcon from '../../assets/logout.svg';
 import filterIcon from '../../assets/Filter.svg';
 import AuthContext from '../../context/auth/authContext';
 import { getUser } from '../../services/cookies';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useRouteMatch } from 'react-router-dom';
 const Header = () => {
   const authContext = useContext(AuthContext);
   const { logout } = authContext;
   let header = null;
-
+  let match = useRouteMatch('/posts');
   let user = getUser();
   useEffect(() => {
     user = getUser();
@@ -31,7 +31,10 @@ const Header = () => {
   else
     header = (
       <div className={navHeader}>
-        <img alt='filter-icon' src={filterIcon} className={filterImage} />
+        {match ? (
+          <img alt='filter-icon' src={filterIcon} className={filterImage} />
+        ) : null}
+
         <Link to='/posts' className={mobileHomeLink}>
           <img alt='company logo' src={logo} className={logoIcon} />
         </Link>
