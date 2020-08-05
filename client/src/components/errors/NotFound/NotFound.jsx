@@ -7,7 +7,7 @@ const NotFound = () => {
   return (
     <div className={content}>
       <img alt='company logo' src={logo} />
-      <h1 className={title}>Error</h1>
+      <h1 className={title}>Page not Found</h1>
       <p className={subtitle}>
         Sorry! The page you are looking for is not exists.
       </p>

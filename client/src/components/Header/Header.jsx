@@ -6,15 +6,17 @@ import {
   logoutIcon,
   navHeader,
   logoutSection,
-  filterImage,
   myAccountMobile,
   mobileHomeLink,
+  backIcon,
 } from './Header.module.scss';
 import homePage from '../../assets/homepage.svg';
 import myAccount from '../../assets/my-account.svg';
 import logo from '../../assets/Logo_white_splash.svg';
 import LogoutIcon from '../../assets/logout.svg';
 import filterIcon from '../../assets/Filter.svg';
+import back from '../../assets/back.svg';
+import backButton from '../../assets/back-button-mobile.svg';
 import AuthContext from '../../context/auth/authContext';
 import { getUser } from '../../services/cookies';
 import { NavLink, Link, useRouteMatch } from 'react-router-dom';
@@ -22,7 +24,8 @@ const Header = () => {
   const authContext = useContext(AuthContext);
   const { logout } = authContext;
   let header = null;
-  let match = useRouteMatch('/posts');
+  const matchMyAccount = useRouteMatch('/my-account');
+
   let user = getUser();
   useEffect(() => {
     user = getUser();
@@ -31,10 +34,9 @@ const Header = () => {
   else
     header = (
       <div className={navHeader}>
-        {match ? (
-          <img alt='filter-icon' src={filterIcon} className={filterImage} />
-        ) : null}
-
+        <Link to={matchMyAccount ? '/posts' : '/'}>
+          <img alt='my-account-icon' src={back} className={backIcon} />
+        </Link>
         <Link to='/posts' className={mobileHomeLink}>
           <img alt='company logo' src={logo} className={logoIcon} />
         </Link>
@@ -77,22 +79,6 @@ const Header = () => {
           <span>Logout</span>
         </div>
       </div>
-      // <div className={navHeader}>
-      //   <div className={nav}>
-      //     <div className={account}>
-      //       <Link to='/my-account' className={account}>
-      //         <img alt='avatar' src={avatarIcon} className={avatar} />
-      //         <p className={accountName}>{user ? user.firstName : null}</p>
-      //       </Link>
-      //       <img
-      //         alt='logout'
-      //         src={LogoutIcon}
-      //         className={logoutIcon}
-      //         onClick={logout}
-      //       />
-      //     </div>
-      //   </div>
-      // </div>
     );
   return <>{header}</>;
 };

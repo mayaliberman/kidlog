@@ -52,9 +52,9 @@ const PostsGallery = () => {
 
   return (
     <main className={container}>
-      <div style={{ marginTop: '80px', color: 'black', width: '150px' }}>
+      {/* <div style={{ marginTop: '80px', color: 'black', width: '150px' }}>
         <h1>Filter area</h1>
-      </div>
+      </div> */}
       <div className={postGallery}>
         <AddPostButton togglePop={addPostButtonTogglePop} />
         {addButtonPopup && (

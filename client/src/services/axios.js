@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { getToken } from './cookies';
 import { BASE_URL } from '../config';
+import cookies from 'react-cookies';
 export default axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -30,3 +31,22 @@ export default axios.create({
     },
   ],
 });
+
+// axios.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     if (error?.response?.status === 403) {
+//       window.location.pathname = '/forbidden';
+//     }
+//     // if (error?.response?.status === 401) {
+//     //   cookies.remove('auth', { path: '/' });
+//     //   cookies.remove('user', { path: '/' });
+//     // }
+//     if (error?.response?.status === 500) {
+//       window.location.pathname = '/error';
+//     }
+//     throw new Error(error?.response?.status);
+//   }
+// );

@@ -33,6 +33,7 @@ const PostsContainer = () => {
           let photo = results
             ? results[Math.floor(Math.random() * results.length)].urls.regular
             : Image;
+
           return (
             <LazyLoad key={post._id} placeholder={<Spinner />}>
               <PostCard
