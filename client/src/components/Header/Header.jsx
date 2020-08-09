@@ -69,7 +69,7 @@ const Header = () => {
             <span>My Account</span>
           </NavLink>
         </nav>
-        <div className={logoutSection}>
+        <div className={logoutSection} onClick={logout}>
           <img
             alt='logout'
             src={LogoutIcon}

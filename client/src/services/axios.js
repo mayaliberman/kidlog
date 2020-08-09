@@ -32,21 +32,21 @@ export default axios.create({
   ],
 });
 
-// axios.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   (error) => {
-//     if (error?.response?.status === 403) {
-//       window.location.pathname = '/forbidden';
-//     }
-//     // if (error?.response?.status === 401) {
-//     //   cookies.remove('auth', { path: '/' });
-//     //   cookies.remove('user', { path: '/' });
-//     // }
-//     if (error?.response?.status === 500) {
-//       window.location.pathname = '/error';
-//     }
-//     throw new Error(error?.response?.status);
-//   }
-// );
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error?.response?.status === 403) {
+      window.location.pathname = '/forbidden';
+    }
+    if (error?.response?.status === 401) {
+      cookies.remove('auth', { path: '/' });
+      cookies.remove('user', { path: '/' });
+    }
+    if (error?.response?.status === 500) {
+      window.location.pathname = '/error';
+    }
+    throw error.response.data;
+  }
+);

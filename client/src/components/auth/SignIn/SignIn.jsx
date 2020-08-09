@@ -25,6 +25,7 @@ const SignIn = () => {
   useEffect(() => {
     if (error) {
       setTimeout(() => clearErrors(), 3500);
+      console.log(error);
     }
   }, [error]);
   return (
@@ -39,9 +40,7 @@ const SignIn = () => {
       >
         {({ errors, touched, isSubmitting }) => (
           <Form className={form}>
-            {error ? (
-              <div className={errorMessage}>{error.data.message}</div>
-            ) : null}
+            {error ? <div className={errorMessage}>{error.message}</div> : null}
             <Field placeholder='Email' name='email' className={input} />
             <div
               className={

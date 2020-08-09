@@ -55,7 +55,8 @@ const AuthState = (props) => {
         props.history.push('/posts');
       }
     } catch (err) {
-      dispatch({ type: LOGIN_FAIL, payload: err.response });
+      console.log('error at catach', err);
+      dispatch({ type: LOGIN_FAIL, payload: err });
     }
   };
 
